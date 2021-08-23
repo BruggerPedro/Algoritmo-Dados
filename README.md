@@ -40,7 +40,7 @@ Códigos de AED 1 utilizados no trabalho.
        Remover   no   fim:   remover   o   último   elemento   da   lista,   retornando   seu   valor   para   aaplicação.
        Remover vogais: remove todos os elementos da lista que são vogais.
       
-  6)Implementar o TAD lista não ordenada de números reais (double) usando alocação dinâmicacom encadeamento duplo. Além das operações vistas em sala, o TAD deve contemplar:
+  6) Implementar o TAD lista não ordenada de números reais (double) usando alocação dinâmicacom encadeamento duplo. Além das operações vistas em sala, o TAD deve contemplar:
        Remover todos: remove todas as ocorrências de um elemento da listaRemover maior: remove o maior elemento encontrado na lista, retornando seu valor. Nocaso de empate,           deve-se remover a primeira ocorrência encontrada.
        Inserir na posição: insira o elemento em uma posição indicada. A operação deve verificarse a posição desejada é válida.
        Inverter: recebe uma lista L e retorna uma nova lista L2, formada pelos elementos de L naordem inversa. A lista original não deve ser alterada
