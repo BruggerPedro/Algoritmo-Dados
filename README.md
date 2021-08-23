@@ -11,11 +11,11 @@ Códigos de AED 1 utilizados no trabalho.
 
  Antes de cada operação, deve-se colocar um comentário com a sua especificação.
 
-  ~1) Implementar o TAD listaordenada decrescente de números inteiros com no máximo 20 elementos, usando alocação estática/sequencial. Além das operações vistas em sala, o TAD         também deve contemplar:
+  1) Implementar o TAD listaordenada decrescente de números inteiros com no máximo 20 elementos, usando alocação estática/sequencial. Além das operações vistas em sala, o TAD         também deve contemplar:
        Remover negativos: remove todos os elementos negativos da lista.
        Remover pares: remove todos os elementos pares da lista.
        Tamanho: retorna o número de elementos da lista.
-       Intercalar: recebe duas listas ordenadas (L1 e L2) e retorna uma nova lista L3 formadapelos  elementos de L1 e L2 intercalados, mantendo o critério de ordenação. As listas       originais não devem ser alteradas.~
+       Intercalar: recebe duas listas ordenadas (L1 e L2) e retorna uma nova lista L3 formadapelos  elementos de L1 e L2 intercalados, mantendo o critério de ordenação. As listas       originais não devem ser alteradas.
       
   2) Implementar o TAD lista nãoordenada de strings com no máximo 10 elementos, cada um com até 15 caracteres, usando alocação estática/sequencial. Além das operações vistas em       sala,o TAD também deve contemplar:
        Remover todas: remove todas as strings da lista que começam com um dado caractere.
