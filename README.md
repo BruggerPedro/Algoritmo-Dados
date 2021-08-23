@@ -23,19 +23,19 @@ Códigos de AED 1 utilizados no trabalho.
        Tamanho: retorna o número de elementos da lista.
        Concatenar: recebe duas listas (L1 e L2) e retorna uma nova lista L3 com os elementos deL1 seguidos dos elementos de L2. As listas originais não devem ser alteradas.
       
-  3)Implementar o TAD listanão ordenada de números reais(float) usando alocaçãodinâmica/encadeada SEM cabeçalho. Além das operações vistas em sala, o TAD também deve contemplar:
+  3) Implementar o TAD listanão ordenada de números reais(float) usando alocaçãodinâmica/encadeada SEM cabeçalho. Além das operações vistas em sala, o TAD também deve contemplar:
        Tamanho: retorna o número de elementos da lista.
        Remover menor: remove e retornao menor número da lista. No caso de empate, deve-seremover a última ocorrência encontrada.
        Iguais: recebe duas listas ordenadas e verifica se elas são iguais.
        Intercalar: recebe duas listas ordenadas e retorna uma nova lista com os elementos dasduas listas de entrada intercalados. As listas originais não devem ser alteradas.
       
-  4)Implementar o TAD listaordenada crescente de números inteiros usando alocação dinâmica/encadeada COM cabeçalho. Além das operações vistas em sala, o TAD também devecontemplar:
+  4) Implementar o TAD listaordenada crescente de números inteiros usando alocação dinâmica/encadeada COM cabeçalho. Além das operações vistas em sala, o TAD também                 devecontemplar:
        Tamanho: retorna o número de elementos da lista
        Remover elemento da posição: remove o elemento que se encontra na posição indicada,retornando seu valor. Se a posição não existir na lista, a operação deve indicar falha.
        Inverter: recebe uma lista L e retorna uma nova lista L2, formada pelos elementos de L naordem inversa. A lista original não deve ser alterada.
        Intercalar: recebe duas listas ordenadas e retorna uma nova lista com os elementos dasduas listas de entrada intercalados, mantendo o critério de ordenação. As listas             originais não devem ser alteradas. 
       
-  5)Implementar   o   TAD  listanão  ordenada  de   caracteres   usando   alocação  dinâmica  comencadeamento   CÍCLICO.   Além   das   operações   vistas   em   sala,   o   TAD     também   devecontemplar:
+  5) Implementar   o   TAD  listanão  ordenada  de   caracteres   usando   alocação  dinâmica  comencadeamento   CÍCLICO.   Além   das   operações   vistas   em   sala,   o   TAD   também   devecontemplar:
        Inserir no início: inserir o elemento no início da listaInserir na posição: insira o elemento em uma posição indicada. A operação deve verificarse a posição desejada é           válida. 
        Remover   no   fim:   remover   o   último   elemento   da   lista,   retornando   seu   valor   para   aaplicação.
        Remover vogais: remove todos os elementos da lista que são vogais.
