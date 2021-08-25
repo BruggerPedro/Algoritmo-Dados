@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1627443170 source:c:\users\anderson alves\documents\codeblocks\temporario\main.c
+	<stdio.h>
+	<stdlib.h>
+
