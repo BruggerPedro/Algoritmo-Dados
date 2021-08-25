@@ -18,7 +18,7 @@ Lista l;
     do{ // Programa
         do{ //Menu
             //Obtem a opção do usuario
-            printf("\n-------------------MENU-------------------"\n);
+            printf("\n------------------- MENU -------------------\n");
             printf("\n [1] Criar uma lista");
             printf("\n [2] Esvaziar a lista");
             printf("\n [3] Apagar a lista");
