@@ -189,21 +189,22 @@ int intercala_listas(Lista l1, Lista l2){
     tamanho_lista(l2,tam2);
     tamt = tam1+tam2;
 
+    int i, j;
 
     // Preenchendo o "vetor" com todos os elementos das listas
-    for(int i=0; i< tam1;i++){
+    for(i=0; i< tam1;i++){
        vetor[i] = l1->no[i];
     }
 
-    for(int j = tam1; j < tam2 ;j++){
+    for(j = tam1; j < tam2 ;j++){
         vetor[j] = l2->no[j];
     }
 
     int aux = 0;
 
 
-    for(int i=0;i<40;i++){ //Percorrendo todos os indices do vetor
-        for(int j=i; j<40;j++){
+    for(i=0;i<40;i++){ //Percorrendo todos os indices do vetor
+        for(j=i; j<40;j++){
             if(vetor[i] < vetor[j]){
                 aux = vetor[i];
                 vetor[i] = vetor[j];
@@ -222,7 +223,7 @@ int intercala_listas(Lista l1, Lista l2){
     }
    l3 -> fim = 0; // O fim = 0 indica que a primeira posicao livre do vetor.
 
-   for(int i=0;i<tamt;i++){
+   for(i=0;i<tamt;i++){
     insere_elem(l3,vetor[i]);
    }
 
