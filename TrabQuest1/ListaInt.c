@@ -8,8 +8,6 @@
  Intercalar: recebe duas listas ordenadas (L1 e L2) e retorna uma nova lista L3 formadapelos elementos de L1 e L2 intercalados, mantendo o critério de ordenação. As listas originais não devem ser alteradas.
 */
 
-
-
 struct lista {
     int no[MAX];// Nó que vai ser limitado por MAX[20] posições(definido pelo programador).
     int fim; // O fim vai indicar qual é a próxima posição disponível.
@@ -77,25 +75,12 @@ int insere_elem(Lista lst, int elem){ //Insere o(s) elemento(s) de forma ordenad
     return 1; //Sucesso
 }
 
-//    9       7         5          3         1
-//
-
-// {4}
-
-//   Para L = {}, o primeiro elemento será inserido, não necessitando de ser percorrido
-
-//   Para L = {5}, e queremos inserir
-
-
-
-
 int remove_elem(Lista lst, int elem){
     if(lst == NULL || lista_vazia(lst) == 1 || elem > lst->no[0] || elem < lst->no[lst->fim-1])
     //Quando elem > lst->no[0], significa que se o elemento que eu quero apagar é o 9 e minha lista é composta por L = {7,5}, o 9 não existe na minha lista.
     //Quando , elem < lst->no[lst->fim-1], significa que se o elemento que eu quero apagar é o 3 e minha lista é composta por L = {7,5}, o 3 não existe na minha lista.
         return 0; //Falha
-
-    int i, aux = 0;
+        int i, aux = 0;
 
     // Percorre até ACHAR O ELEM OU NÓ MAIOR, ou final da lista
 
@@ -144,14 +129,7 @@ int get_elem_pos(Lista lst, int pos, int *elem){
     return 1; //Sucesso
 }
 
-
-
-
-//EXTRAAAAAAAAA
-
-
-
-
+//INCREMENTOS A +
 
 int remove_negativos(Lista x){ // Definimos a Lista como x para que não haja erro de interpretação do que estamos instanciando
 
@@ -206,16 +184,23 @@ int intercala_listas(Lista l1, Lista l2){
 
     int vetor[40];
 
+    int tam1,tam2,tamt;
+    tamanho_lista(l1,tam1);
+    tamanho_lista(l2,tam2);
+    tamt = tam1+tam2;
+
 
     // Preenchendo o "vetor" com todos os elementos das listas
-    for(int i=0; i< l1->fim ;i++){
+    for(int i=0; i< tam1;i++){
        vetor[i] = l1->no[i];
     }
-    for(int j= l1->fim; j< l2->fim ;j++){
+
+    for(int j = tam1; j < tam2 ;j++){
         vetor[j] = l2->no[j];
     }
 
     int aux = 0;
+
 
     for(int i=0;i<40;i++){ //Percorrendo todos os indices do vetor
         for(int j=i; j<40;j++){
@@ -237,22 +222,9 @@ int intercala_listas(Lista l1, Lista l2){
     }
    l3 -> fim = 0; // O fim = 0 indica que a primeira posicao livre do vetor.
 
-   int tam1,tam2,tamt;
-   tamanho_lista(l1,tam1);
-   tamanho_lista(l2,tam2);
-
-   tamt = tam1+tam2;
-
    for(int i=0;i<tamt;i++){
     insere_elem(l3,vetor[i]);
    }
 
    return 1;
 }
-
-
-
-
-
-
-
