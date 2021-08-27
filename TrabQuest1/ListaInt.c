@@ -1,258 +1,158 @@
+#include <stdio.h>
 #include <stdlib.h>
+
 #include "ListaInt.h"
-#define MAX 20
-/*Implementar o TAD lista ordenada decrescente de números inteiros com no máximo 20 elementos, usando alocação estática/sequencial. Além das operações vistas em sala, o TAD também deve contemplar:
+
+/*Implementar o TAD listaordenada decrescente de números inteiros com no máximo 20 elementos, usando alocação estática/sequencial. Além das operações vistas em sala, o TAD também deve contemplar:
  Remover negativos: remove todos os elementos negativos da lista.
  Remover pares: remove todos os elementos pares da lista.
  Tamanho: retorna o número de elementos da lista.
  Intercalar: recebe duas listas ordenadas (L1 e L2) e retorna uma nova lista L3 formadapelos elementos de L1 e L2 intercalados, mantendo o critério de ordenação. As listas originais não devem ser alteradas.
 */
 
+void imprime_lista(Lista);
 
+int main(){
+int op, flag = 0; //Flag contabiliza a quantidade de especificações da lista (0 - lista nao criada | 1 - Lista criada)
+Lista l; Lista l2;
+    do{ // Programa
+        do{ //Menu
+            //Obtem a opção do usuario
+            printf("\n------------------- MENU -------------------\n");
+            printf("\n [1] Criar uma lista");
+            printf("\n [2] Esvaziar a lista");
+            printf("\n [3] Apagar a lista");
+            printf("\n [4] Inserir um elemento na lista");
+            printf("\n [5] Remover um elemento na lista");
+            printf("\n [6] Imprimir a lista");
+            printf("\n [7] Remove negativos");
+            printf("\n [8] Remove par");
+            printf("\n [9] Intercala listas");
+            printf("\n [10] Sair do sistema");
+            printf("\n\n Digite a opcao desejada: ");
+            printf("\n\n------------------------------------------\n");
 
-struct lista {
-    int no[MAX];// Nó que vai ser limitado por MAX[20] posições(definido pelo programador).
-    int fim; // O fim vai indicar qual é a próxima posição disponível.
-};
+            scanf("%d", &op);
+            setbuf(stdin, NULL);
 
-struct listaIntercala{
-    int no[MAX*2];// Nó que vai ser limitado por MAX[20] posições(definido pelo programador).
-    int fim; // O fim vai indicar qual é a próxima posição disponível.
-};
+            if(op < 1 || op > 10)
+            printf("\n *** Opcao digitada invalida! As opcoes disponiveis são:");
 
-// Mesmo sendo Lista estática, precisamos alocar a estrutura.
+        } while(op < 1 || op > 10);
 
-Lista cria_lista() { // Alocar uma instancia da estrutura lista(malloc).
+        if (op == 10) break; //Sair do sistema
 
-    Lista lst; // Criando um ponteiro de lista.
-    lst = (Lista) malloc(sizeof (struct lista)); // Tamanho da Struct lista.
-
-    if (lst != NULL) { // Verifica se houve alocação bem sucedida.
-        lst -> fim = 0; // O fim = 0 indica que a primeira posicao livre do vetor.
-    }
-    return lst; // Retornamos o endereço de ponteiro(lst).
-}
-
-int lista_vazia(Lista lst) {
-    if (lst == NULL) {
-        return -1; // Ponteiro nao esta apontando pra lista valida/existente, entao declaramos como ERRO
-    }
-    if (lst->fim == 0)
-        return 1; // A lista esta vazia
-    else
-        return 0; // Ha elementos dentro da lista, portanto nao esta vazia
-}
-
-int lista_cheia(Lista lst) {
-    if (lst == NULL) {
-        return -1; // Ponteiro nao esta apontando pra lista valida/existente, então declaramos como ERRO
-    }
-    if ((lst -> fim == MAX)) { // Fim começa com 0, entao ele eh como um contador de elementos
-        return 1; // Quando fim == MAX significa que a lista esta cheia.
-    } else {
-        return 0; // A lista nao esta cheia.
-    }
-
-    // Pode se fazer tirando da linha 37 ate 40, apenas fazendo: return(lst->fim == MAX)
-}
-
-int insere_elem(Lista lst, int elem){ //Insere o(s) elemento(s) de forma ordenada
-
-    if (lst == NULL || lista_cheia(lst) == 1)
-    return 0; // Nao tem como inserir porque lst eh NULL OU ela esta cheia (lista_cheia) == 1)
-
-    // Trata lista vazia ou elemento >= ultimo da lista
-
-    if (lista_vazia(lst) == 1 || elem <= lst->no[lst->fim-1]){ // Enquanto a lista estiver vazia e o elemento inserido for menor ou igual ao já inserido antes
-        lst->no[lst->fim] = elem; // Inserção no final
-    }else{
-        int i, aux = 0;
-        while(elem <= lst->no[aux]) //Percorrendo
-            aux++;
-        for(i=lst->fim;i>aux;i--) //Deslocando
-            lst->no[i] = lst->no[i-1];
-        lst->no[aux] = elem; //Incluindo o elemento na lista
-    }
-    lst->fim++; //Avança o fim
-    return 1; //Sucesso
-}
-
-//    9       7         5          3         1
-//
-
-// {4}
-
-//   Para L = {}, o primeiro elemento será inserido, não necessitando de ser percorrido
-
-//   Para L = {5}, e queremos inserir
-
-
-
-
-int remove_elem(Lista lst, int elem){
-    if(lst == NULL || lista_vazia(lst) == 1 || elem > lst->no[0] || elem < lst->no[lst->fim-1])
-    //Quando elem > lst->no[0], significa que se o elemento que eu quero apagar é o 9 e minha lista é composta por L = {7,5}, o 9 não existe na minha lista.
-    //Quando , elem < lst->no[lst->fim-1], significa que se o elemento que eu quero apagar é o 3 e minha lista é composta por L = {7,5}, o 3 não existe na minha lista.
-        return 0; //Falha
-
-    int i, aux = 0;
-
-    // Percorre até ACHAR O ELEM OU NÓ MAIOR, ou final da lista
-
-    while(aux < lst->fim && lst->no[aux] > elem)
-    // Percorre com o aux enquanto o elemento que está no auxiliar for maior que o elemento digitado
-        aux++;
-
-//       7        5       3
-//      aux
-
-    if(aux == lst->fim || lst->no[aux] < elem)
-    // Elemento não vai existir quando o aux estiver no fim, e quando o elemento inserido for maior que o que está no auxiliar
-        return 0;
-
-    // Deslocamento a esq. do sucessor até o final da lista
-    for(i=aux+1; i<lst->fim;i++)
-        lst->no[i-1] = lst->no[i];
-        lst->fim--; // Decremento
-        return 1; // Sucesso
-}
-
-
-int apaga_lista(Lista *end_lst){
-    if(end_lst == NULL) //Se o ponteiro não aponta pra lista
-        return 0;
-
-    free(*end_lst); // Limpa a região da lista (liberando a memoria para o computador)
-    *end_lst = NULL; // apontar pra NULL para não conseguirem acessar aquela area novamente
-
-    return 1;
-}
-
-int esvazia_lista(Lista lst){
-     if(lst == NULL ){
-        return 0;
-     }
-    lst->fim = 0;
-    return 1;
-}
-
-int get_elem_pos(Lista lst, int pos, int *elem){
-        // pos = Posição do elemento na lista (começa com 1)
-    if(lst == NULL || lista_vazia(lst) || pos <= 0 || pos > lst->fim)
-        return 0; // FALHA
-    *elem = lst->no[pos-1]; // subtração pq temos que passar o indice real da lista
-    return 1; //Sucesso
-}
-
-
-
-
-//EXTRAAAAAAAAA
-
-
-
-
-
-int remove_negativos(Lista x){ // Definimos a Lista como x para que não haja erro de interpretação do que estamos instanciando
-
-    int i;
-
-    if(x == NULL || lista_vazia(x) == 1)
-    return 0;
-
-    for(i = 0; i < x->fim; i++){
-        if((int)x->no[i] < 0){
-            remove_elem(x, x->no[i]);
-            i--; //remove o elemento se for negativo e verifica o próximo
+        else if(op != 1 && flag == 0) {
+            printf("\n\n Antes de qualquer operacao, a lista precisa ser CRIADA.");
+            continue;
         }
-    }
-
-    return 1;
-
-}
-
-int remove_pares(Lista x){
-
-    int i;
-
-    if(x == NULL || lista_vazia(x) == 1)
-    return 0;
-
-    for(i = 0; i < x->fim; i++){
-        if((int)x->no[i] % 2 == 0){
-            remove_elem(x, x->no[i]);
-            i--; //remove o elemento se for par e verifica o próximo
-        }
-    }
-
-    return 1;
-
-}
-
-int tamanho_lista(Lista x, float *tamanho){
-
-    if(x == NULL)
-    return 0;
-
-    *tamanho = x->fim; // Recebe o ponteiro tamanho do tipo float e vai retornar o tamanho da lista(qtde de elem)
-
-    return 1;
-
-}
-int intercala_listas(Lista l1, Lista l2){
-
-    if(l1 == NULL || l2 == NULL)
-    return 0; //Uma das duas listas não existe, logo, não podemos seguir
-
-    int vetor[40];
-
-
-    // Preenchendo o "vetor" com todos os elementos das listas
-    for(int i=0; i< l1->fim ;i++){
-       vetor[i] = l1->no[i];
-    }
-    for(int j= l1->fim; j< l2->fim ;j++){
-        vetor[j] = l2->no[j];
-    }
-
-    int aux = 0;
-
-    for(int i=0;i<40;i++){ //Percorrendo todos os indices do vetor
-        for(int j=i; j<40;j++){
-            if(vetor[i] < vetor[j]){
-                aux = vetor[i];
-                vetor[i] = vetor[j];
-                vetor[j] = aux;
+        switch(op){
+        case 1: {
+                if(flag) { // verifica se a lista já existe (Flag == 1)
+                    if(apaga_lista(&l) == 0 ){
+                        printf("\n Já existe uma instancia de lista e houve falha ao tentar apaga-la");
+                    break;
+                    }
+                }
+                l = cria_lista();
+                if(l == NULL){
+                    printf("\n Falha na criacao da lista");
+                    return -1;
+                }
+                if (flag) // Se ao criar a lista, ela existisse outra, entra nesta cond
+                    printf("\n A lista foi REINICIALIZADA pela %d vez com sucesso!\n",flag);
+                else
+                    printf("\n A lista foi CRIADA com sucesso!");
+                flag++;
+                break;
             }
+
+        case 2:{
+        if(esvazia_lista(l) == 0 ){
+            printf("\n Nao foi possivel esvaziar a lista.");
+            return -1;
         }
-    }
+        printf("\n A lista foi ESVAZIADA com sucesso!");
+        break;
+        }
 
-// Como a alocação da lista 3 é o dobro da comum[20], teremos que faze-los aqui:
+        case 3:{
+        if(apaga_lista(&l) == 0){
+            printf("\n Nao foi possivel apagar a lista.");
+            return -1;
+        }
+        printf("\n lista foi APAGADA com sucesso!");
+        flag = 0;
+        break;
+        }
+        case 4:{
+            int n;
+            printf("\n Digite o elemento (int) a ser inserido na lista: ");
+            scanf("%d", &n);
 
- ListaIntercala l3; // Criando um ponteiro de lista.
-    l3 = (ListaIntercala) malloc(sizeof (struct listaIntercala)); // Tamanho da Struct lista.
+            if (insere_elem(l,n) == 0)
+                printf("\n A lista esta cheia! Nao foi possivel incluir o elemento %d. ",n);
+            else
+                printf("\n O elemento %d foi incluido com sucesso! ",n);
+            break;
+        }
 
-    if (l3 == NULL) { // Verifica se houve alocação bem sucedida.
-         return 0;
-    }
-   l3 -> fim = 0; // O fim = 0 indica que a primeira posicao livre do vetor.
+        case 5:{
+            int n;
+             printf("\n Digite o elemento (int) a ser excluido na lista: ");
+             scanf("%d", &n);
 
-   int tam1,tam2,tamt;
-   tamanho_lista(l1,tam1);
-   tamanho_lista(l2,tam2);
+            if(remove_elem(l,n) == 0){
+                if(lista_vazia(l) == 1)
+                    printf("\n A lista ja esta vazia!");
+                else
+                    printf("\n Nao existe o elemento %d na lista! ",n);
+            }
+            else
+                    printf("\n o elemento %d foi removido com sucesso! ",n);
+            break;
+        }
+        case 6:{
+            imprime_lista(l); // Interface não é feita no TAD.
+            break;
+        }
+        case 7:{
+            remove_negativos(l);
+            break;
+        }
+        case 8:{
+            remove_pares(l);
+            break;
+        }
+        case 9:{
+            intercala_listas(l,l2);
+            break;
+        }
+        }
 
-   tamt = tam1+tam2;
+        }while(op != 10);
 
-   for(int i=0;i<tamt;i++){
-    insere_elem(l3,vetor[i]);
-   }
-
-   return 1;
+        printf("\n\n\t\t FIM DE PROGRAMA! \n");
+        return 0;
 }
 
+void imprime_lista(Lista l){
+    if(lista_vazia(l) == 1){
+        printf("\n Lista VAZIA! ");
+        return;
+    }
 
+    printf("\n\n\n \t LISTA: ");
+    printf("\n\t {");
+    int i;
+    for(i=1;;i++){ //Não sei quantos elementos tem na lista
+        int n;
+        if(get_elem_pos(l,i,&n) == 0){ //Não existe a posição
+            break;
+        }
+        printf(" %d ",n);
+        //printf("O %d elemento da lista eh %d\n",i,n);
 
-
-
-
-
+    }
+    printf("} \n Existem %d elementos na lista. \n",i-1);
+}
