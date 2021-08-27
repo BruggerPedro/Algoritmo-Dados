@@ -13,8 +13,8 @@
 void imprime_lista(Lista);
 
 int main(){
-int op, flag = 0; //Flag contabiliza a quantidade de especificações da lista (0 - lista nao criada | 1 - Lista criada)
-Lista l; Lista l2;
+int op, flag = 0,resp, flag2 = 0; //Flag contabiliza a quantidade de especificações da lista (0 - lista nao criada | 1 - Lista criada)
+Lista l; Lista l2; Lista l3;
     do{ // Programa
         do{ //Menu
             //Obtem a opção do usuario
@@ -43,58 +43,136 @@ Lista l; Lista l2;
         if (op == 10) break; //Sair do sistema
 
         else if(op != 1 && flag == 0) {
-            printf("\n\n Antes de qualquer operacao, a lista precisa ser CRIADA.");
+            printf("\n\n Antes de qualquer operacao, a lista 1 precisa ser CRIADA.");
             continue;
-        }
+            }
+
+
+
+
         switch(op){
         case 1: {
-                if(flag) { // verifica se a lista já existe (Flag == 1)
-                    if(apaga_lista(&l) == 0 ){
+                if(flag == 1) { // verifica se a lista já existe (Flag == 1)
+                    if(apaga_lista(&l) == 0){
                         printf("\n Já existe uma instancia de lista e houve falha ao tentar apaga-la");
                     break;
                     }
                 }
-                l = cria_lista();
-                if(l == NULL){
-                    printf("\n Falha na criacao da lista");
-                    return -1;
+                if(flag2) { // verifica se a lista já existe (Flag == 1)
+                    if(apaga_lista(&l2) == 0){
+                        printf("\n Já existe uma instancia de lista e houve falha ao tentar apaga-la");
+                    break;
+                    }
                 }
-                if (flag) // Se ao criar a lista, ela existisse outra, entra nesta cond
-                    printf("\n A lista foi REINICIALIZADA pela %d vez com sucesso!\n",flag);
-                else
-                    printf("\n A lista foi CRIADA com sucesso!");
+
+                printf("\n Digite [1] para criar na lista 1 e [2] para criar na lista 2: \n");
+                scanf("%d", &resp);
+
+                if (resp == 1){
+                    l = cria_lista();
+                    if(l == NULL){
+                        printf("\n Falha na criacao da lista");
+                        return -1;
+                }
+                printf("\n A lista foi CRIADA com sucesso!");
                 flag++;
                 break;
-            }
+                }
+                else if(resp == 2){
+                    l2 = cria_lista();
+                    if(l2 == NULL){
+                        printf("\n Falha na criacao da lista");
+                        return -1;
+                }
+                printf("\n A lista foi CRIADA com sucesso!");
+                flag2++;
+                break;
+                }
+                else{
+                    printf("\n Opção inválida");
+                    break;
+                }
+        }
 
         case 2:{
-        if(esvazia_lista(l) == 0 ){
-            printf("\n Nao foi possivel esvaziar a lista.");
-            return -1;
-        }
-        printf("\n A lista foi ESVAZIADA com sucesso!");
-        break;
+            printf("\n Digite [1] para esvaziar a lista 1 e [2] para esvaziar a lista 2: \n");
+            scanf("%d", &resp);
+            if (resp == 1){
+                if(esvazia_lista(l) == 0){
+                    printf("\n Nao foi possivel esvaziar a lista.");
+                    return -1;
+            }
+            printf("\n A lista foi ESVAZIADA com sucesso!");
+            break;
+            }
+
+            else if(resp == 2){
+                if(esvazia_lista(l2) == 0){
+                printf("\n Nao foi possivel esvaziar a lista.");
+                return -1;
+            }
+            printf("\n A lista foi ESVAZIADA com sucesso!");
+            break;
+            }
+
+            else{
+                printf("\n Opção inválida");
+                break;
+            }
         }
 
         case 3:{
-        if(apaga_lista(&l) == 0){
-            printf("\n Nao foi possivel apagar a lista.");
-            return -1;
-        }
-        printf("\n lista foi APAGADA com sucesso!");
-        flag = 0;
-        break;
-        }
+            printf("\n Digite [1] para apagar na lista 1 e [2] para apagar na lista 2: \n");
+            scanf("%d", &resp);
+            if (resp == 1){
+                if(apaga_lista(&l) == 0){
+                    printf("\n Nao foi possivel apagar a lista 1.");
+                    return -1;
+                    }
+                    printf("\n lista 1 foi APAGADA com sucesso!");
+                    flag = 0;
+                    break;
+                }
+                else if(resp == 2){
+                    if(apaga_lista(&l2) == 0){
+                    printf("\n Nao foi possivel apagar a lista 2.");
+                    return -1;
+                    }
+                    printf("\n lista 2 foi APAGADA com sucesso!");
+                    flag2 = 0;
+                    break;
+                    }
+                    else{
+                        printf("\n Opção inválida");
+                        break;
+                        }
+                    }
         case 4:{
             int n;
             printf("\n Digite o elemento (int) a ser inserido na lista: ");
             scanf("%d", &n);
 
-            if (insere_elem(l,n) == 0)
+            printf("\n Digite [1] para inserir na lista 1 e [2] para inserir na lista 2: \n");
+            scanf("%d", &resp);
+
+            if (resp == 1){
+                if (insere_elem(l,n) == 0)
                 printf("\n A lista esta cheia! Nao foi possivel incluir o elemento %d. ",n);
             else
                 printf("\n O elemento %d foi incluido com sucesso! ",n);
             break;
+                }
+                else if(resp == 2){
+                if (insere_elem(l2,n) == 0)
+                    printf("\n A lista esta cheia! Nao foi possivel incluir o elemento %d. ",n);
+                    else
+                        printf("\n O elemento %d foi incluido com sucesso! ",n);
+                        break;
+                }
+                else{
+                    printf("\n Opção inválida");
+                    break;
+                    }
         }
 
         case 5:{
@@ -102,39 +180,86 @@ Lista l; Lista l2;
              printf("\n Digite o elemento (int) a ser excluido na lista: ");
              scanf("%d", &n);
 
-            if(remove_elem(l,n) == 0){
-                if(lista_vazia(l) == 1)
-                    printf("\n A lista ja esta vazia!");
+             printf("\n Digite [1] para remover na lista 1 e [2] para remover na lista 2: \n");
+             scanf("%d", &resp);
+
+                if (resp == 1){
+                if(remove_elem(l,n) == 0){
+                    if(lista_vazia(l) == 1)
+                        printf("\n A lista 1 ja esta vazia!");
+                    else
+                        printf("\n Nao existe o elemento %d na lista! ",n);
+                        }
                 else
-                    printf("\n Nao existe o elemento %d na lista! ",n);
+                    printf("\n o elemento %d foi removido com sucesso! ",n);
+                    break;
+                }
+                else if(resp == 2){
+                    if(remove_elem(l2,n) == 0){
+                        if(lista_vazia(l2) == 1)
+                            printf("\n A lista 2 ja esta vazia!");
+                    else
+                        printf("\n Nao existe o elemento %d na lista! ",n);
             }
             else
-                    printf("\n o elemento %d foi removido com sucesso! ",n);
-            break;
+                printf("\n o elemento %d foi removido com sucesso! ",n);
+                break;
+            }
+            else{
+                printf("\n Opção inválida");
+                break;
+                }
         }
         case 6:{
-            imprime_lista(l); // Interface não é feita no TAD.
+            imprime_lista(l);// Interface não é feita no TAD.
+            imprime_lista(l2);
             break;
         }
         case 7:{
-            remove_negativos(l);
-            break;
+            printf("\n Digite [1] para remover negativos da lista 1 e [2] para remover negativos da lista 2: \n");
+            scanf("%d", &resp);
+
+
+            if (resp == 1){
+                remove_negativos(l);
+                break;
+            }else if(resp == 2){
+                remove_negativos(l2);
+                break;
+            }else{
+                printf("\n Opção inválida");
+                break;
+        }
         }
         case 8:{
-            remove_pares(l);
-            break;
+            printf("\n Digite [1] para remover pares da lista 1 e [2] para remover pares da lista 2: \n");
+                scanf("%d", &resp);
+
+                if (resp == 1){
+                    remove_pares(l);
+                    break;
+                }else if(resp == 2){
+                    remove_pares(l2);
+                    break;
+                }else{
+                 printf("\n Opção inválida");
+                 break;
+                 }
         }
         case 9:{
-            intercala_listas(l,l2);
+           l3 =  intercala_listas(l,l2);
+            imprime_lista(l3);
             break;
         }
-        }
 
+
+        }
         }while(op != 10);
 
         printf("\n\n\t\t FIM DE PROGRAMA! \n");
         return 0;
 }
+
 
 void imprime_lista(Lista l){
     if(lista_vazia(l) == 1){
@@ -156,3 +281,4 @@ void imprime_lista(Lista l){
     }
     printf("} \n Existem %d elementos na lista. \n",i-1);
 }
+
