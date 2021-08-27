@@ -3,7 +3,7 @@
 
 
 typedef struct lista *Lista; //sempre do tipo ponteiro ao criar TAD
-
+typedef struct listaIntercala *ListaIntercala;
 
 Lista cria_lista();
 int lista_vazia(Lista lst);
@@ -16,5 +16,8 @@ int get_elem_pos(Lista lst, int pos, int *elem);
 int remove_negativos(Lista x);
 int remove_pares(Lista x);
 
+
+
+int intercala_listas(Lista l1, Lista l2);
 
 #endif // LISTAINT_H_INCLUDED
