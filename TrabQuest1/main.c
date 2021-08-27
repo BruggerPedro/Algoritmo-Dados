@@ -14,7 +14,7 @@ void imprime_lista(Lista);
 
 int main(){
 int op, flag = 0; //Flag contabiliza a quantidade de especificações da lista (0 - lista nao criada | 1 - Lista criada)
-Lista l;
+Lista l; Lista l2;
     do{ // Programa
         do{ //Menu
             //Obtem a opção do usuario
@@ -122,6 +122,10 @@ Lista l;
         }
         case 8:{
             remove_pares(l);
+            break;
+        }
+        case 9:{
+            intercala_listas(l,l2);
             break;
         }
         }
