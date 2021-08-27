@@ -15,6 +15,11 @@ struct lista {
     int fim; // O fim vai indicar qual é a próxima posição disponível.
 };
 
+struct listaIntercala{
+    int no[MAX*2];// Nó que vai ser limitado por MAX[20] posições(definido pelo programador).
+    int fim; // O fim vai indicar qual é a próxima posição disponível.
+};
+
 // Mesmo sendo Lista estática, precisamos alocar a estrutura.
 
 Lista cria_lista() { // Alocar uma instancia da estrutura lista(malloc).
@@ -194,6 +199,60 @@ int tamanho_lista(Lista x, float *tamanho){
     return 1;
 
 }
-/*int intercala_listas(){
+int intercala_listas(Lista l1, Lista l2){
 
-}*/
+    if(l1 == NULL || l2 == NULL)
+    return 0; //Uma das duas listas não existe, logo, não podemos seguir
+
+    int vetor[40];
+
+
+    // Preenchendo o "vetor" com todos os elementos das listas
+    for(int i=0; i< l1->fim ;i++){
+       vetor[i] = l1->no[i];
+    }
+    for(int j= l1->fim; j< l2->fim ;j++){
+        vetor[j] = l2->no[j];
+    }
+
+    int aux = 0;
+
+    for(int i=0;i<40;i++){ //Percorrendo todos os indices do vetor
+        for(int j=i; j<40;j++){
+            if(vetor[i] < vetor[j]){
+                aux = vetor[i];
+                vetor[i] = vetor[j];
+                vetor[j] = aux;
+            }
+        }
+    }
+
+// Como a alocação da lista 3 é o dobro da comum[20], teremos que faze-los aqui:
+
+ ListaIntercala l3; // Criando um ponteiro de lista.
+    l3 = (ListaIntercala) malloc(sizeof (struct listaIntercala)); // Tamanho da Struct lista.
+
+    if (l3 == NULL) { // Verifica se houve alocação bem sucedida.
+         return 0;
+    }
+   l3 -> fim = 0; // O fim = 0 indica que a primeira posicao livre do vetor.
+
+   int tam1,tam2,tamt;
+   tamanho_lista(l1,tam1);
+   tamanho_lista(l2,tam2);
+
+   tamt = tam1+tam2;
+
+   for(int i=0;i<tamt;i++){
+    insere_elem(l3,vetor[i]);
+   }
+
+   return 1;
+}
+
+
+
+
+
+
+
