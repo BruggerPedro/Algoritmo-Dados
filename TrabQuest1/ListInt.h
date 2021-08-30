@@ -3,7 +3,6 @@
 
 
 typedef struct lista *Lista; //sempre do tipo ponteiro ao criar TAD
-typedef struct listaIntercala *ListaIntercala;
 
 Lista cria_lista();
 int lista_vazia(Lista lst);
