@@ -257,6 +257,11 @@ Lista l; Lista l2; Lista l3;
         }while(op != 10);
 
         printf("\n\n\t\t FIM DE PROGRAMA! \n");
+     
+        libera(l); //Liberar o espaço alocado para as listas.
+        libera(l2);
+        libera(l3);
+
         return 0;
 }
 
