@@ -229,3 +229,12 @@ int intercala_listas(Lista l1, Lista l2){
 
    return 1;
 }
+
+
+void libera(Lista x){
+
+    if(x != NULL){
+        free(x);
+        x = NULL;
+    }
+}
