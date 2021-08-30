@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 #include "ListaInt.h"
 
 /*Implementar o TAD listaordenada decrescente de números inteiros com no máximo 20 elementos, usando alocação estática/sequencial. Além das operações vistas em sala, o TAD também deve contemplar:
@@ -211,9 +210,28 @@ Lista l; Lista l2; Lista l3;
                 }
         }
         case 6:{
-            imprime_lista(l);// Interface não é feita no TAD.
-            imprime_lista(l2);
-            break;
+             printf("\n Digite [1] para imprimir a lista 1 e [2] para imprimir a lista 2 e [3] para imprimir ambas as listas: \n");
+             scanf("%d", &resp);
+
+                if (resp == 1){
+                imprime_lista(l);// Interface não é feita no TAD.
+                break;
+                }
+                else if(resp == 2){
+                imprime_lista(l2);
+                break;
+            }
+
+            else if (resp == 3){
+                imprime_lista(l);
+                imprime_lista(l2);
+                break;
+            }else{
+               printf("\n Opcao invalida! Tente novamente");
+                break;
+            }
+
+
         }
         case 7:{
             printf("\n Digite [1] para remover negativos da lista 1 e [2] para remover negativos da lista 2: \n");
@@ -257,7 +275,7 @@ Lista l; Lista l2; Lista l3;
         }while(op != 10);
 
         printf("\n\n\t\t FIM DE PROGRAMA! \n");
-     
+
         libera(l); //Liberar o espaço alocado para as listas.
         libera(l2);
         libera(l3);
@@ -286,4 +304,3 @@ void imprime_lista(Lista l){
     }
     printf("} \n Existem %d elementos na lista. \n",i-1);
 }
-
