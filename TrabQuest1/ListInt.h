@@ -4,6 +4,7 @@
 
 typedef struct lista *Lista; //sempre do tipo ponteiro ao criar TAD
 
+
 Lista cria_lista();
 int lista_vazia(Lista lst);
 int lista_cheia(Lista lst);
@@ -15,7 +16,7 @@ int get_elem_pos(Lista lst, int pos, int *elem);
 int remove_negativos(Lista x);
 int remove_pares(Lista x);
 int tamanho_lista(Lista x, int *tamanho);
-int intercala_listas(Lista l1, Lista l2);
+Lista intercala_listas(Lista l1, Lista l2);
 void libera(Lista x);
 
 #endif // LISTAINT_H_INCLUDED
