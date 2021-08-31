@@ -162,10 +162,11 @@ Lista l; Lista l2; Lista l3;
             break;
                 }
                 else if(resp == 2){
-                if (insere_elem(l2,n) == 0)
+                if (insere_elem(l2,n) == 0){
                     printf("\n A lista esta cheia! Nao foi possivel incluir o elemento %d. ",n);
-                    else
+                    }else{
                         printf("\n O elemento %d foi incluido com sucesso! ",n);
+                }
                         break;
                 }
                 else{
