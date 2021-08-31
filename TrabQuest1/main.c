@@ -51,13 +51,14 @@ Lista l; Lista l2; Lista l3;
 
         switch(op){
         case 1: {
+
                 if(flag == 1) { // verifica se a lista já existe (Flag == 1)
                     if(apaga_lista(&l) == 0){
                         printf("\n Já existe uma instancia de lista e houve falha ao tentar apaga-la");
                     break;
                     }
                 }
-                if(flag2) { // verifica se a lista já existe (Flag == 1)
+                if(flag2 == 1) { // verifica se a lista já existe (Flag == 1)
                     if(apaga_lista(&l2) == 0){
                         printf("\n Já existe uma instancia de lista e houve falha ao tentar apaga-la");
                     break;
@@ -74,7 +75,7 @@ Lista l; Lista l2; Lista l3;
                         return -1;
                 }
                 printf("\n A lista foi CRIADA com sucesso!");
-                flag++;
+                flag++; //Quantidade de vezes que a lista 1 foi criada
                 break;
                 }
                 else if(resp == 2){
@@ -147,13 +148,14 @@ Lista l; Lista l2; Lista l3;
                         }
                     }
         case 4:{
-            int n;
+            int n; //Elemento digitado
             printf("\n Digite o elemento (int) a ser inserido na lista: ");
             scanf("%d", &n);
 
             printf("\n Digite [1] para inserir na lista 1 e [2] para inserir na lista 2: \n");
-            scanf("%d", &resp);
+            scanf("%d", &resp); // resposta da operação
 
+            // Tratamentos:
             if (resp == 1){
                 if (insere_elem(l,n) == 0)
                 printf("\n A lista esta cheia! Nao foi possivel incluir o elemento %d. ",n);
@@ -295,7 +297,7 @@ void imprime_lista(Lista l){
     printf("\n\t {");
     int i;
     for(i=1;;i++){ //Não sei quantos elementos tem na lista
-        int n;
+        int n; // N representa o elemento presente na lista
         if(get_elem_pos(l,i,&n) == 0){ //Não existe a posição
             break;
         }
@@ -303,5 +305,5 @@ void imprime_lista(Lista l){
         //printf("O %d elemento da lista eh %d\n",i,n);
 
     }
-    printf("} \n Existem %d elementos na lista. \n",i-1);
+    printf("} \n Existem %d elementos na lista. \n",i-1); // i-1 será pq o break está dentro do for.
 }
