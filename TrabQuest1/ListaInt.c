@@ -195,16 +195,19 @@ Lista intercala_listas(Lista l1, Lista l2){
     for(i=0; i< tam1;i++){
        vetor[i] = l1->no[i];
     }
+    int temp = 0;
 
-    for(j = tam1; j < tam2 ;j++){
-        vetor[j] = l2->no[j];
+    for(j = tam1; j < tamt ;j++){
+        vetor[j] = l2->no[temp];
+        temp++;
     }
 
     int aux = 0;
 
+    vetor[MAX*2];
 
-    for(i=0;i<MAX*2;i++){ //Percorrendo todos os indices do vetor e ordenando-os em ordem decrescente
-        for(j=i; j<MAX*2;j++){
+    for(i=0;i<=tamt-1;i++){ //Percorrendo todos os indices do vetor e ordenando-os em ordem decrescente
+        for(j=i; j<=tamt-1;j++){
             if(vetor[i] < vetor[j]){
                 aux = vetor[i];
                 vetor[i] = vetor[j];
