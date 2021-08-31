@@ -73,10 +73,11 @@ int insere_elem(Lista lst, int elem){ //Insere o(s) elemento(s) de forma ordenad
 }
 
 int remove_elem(Lista lst, int elem){
-    if(lst == NULL || lista_vazia(lst) == 1 || elem > lst->no[0] || elem < lst->no[lst->fim-1])
+    if(lst == NULL || lista_vazia(lst) == 1 || elem > lst->no[0] || elem < lst->no[lst->fim-1]){
     //Quando elem > lst->no[0], significa que se o elemento que eu quero apagar é o 9 e minha lista é composta por L = {7,5}, o 9 não existe na minha lista.
     //Quando , elem < lst->no[lst->fim-1], significa que se o elemento que eu quero apagar é o 3 e minha lista é composta por L = {7,5}, o 3 não existe na minha lista.
         return 0; //Falha
+        }
         int i, aux = 0;
 
     // Percorre até ACHAR O ELEM OU NÓ MAIOR, ou final da lista
@@ -93,8 +94,9 @@ int remove_elem(Lista lst, int elem){
         return 0;
 
     // Deslocamento a esq. do sucessor até o final da lista
-    for(i=aux+1; i<lst->fim;i++)
+    for(i=aux+1; i<lst->fim;i++){
         lst->no[i-1] = lst->no[i];
+    }
         lst->fim--; // Decremento
         return 1; // Sucesso
 }
@@ -164,7 +166,7 @@ int remove_pares(Lista x){
 
 }
 
-int tamanho_lista(Lista x, float *tamanho){
+int tamanho_lista(Lista x, int *tamanho){
 
     if(x == NULL)
     return 0;
@@ -183,8 +185,8 @@ int intercala_listas(Lista l1, Lista l2){
     int vetor[MAX*2];
 
     int tam1,tam2,tamt;
-    tamanho_lista(l1,tam1);
-    tamanho_lista(l2,tam2);
+    tamanho_lista(l1,&tam1);
+    tamanho_lista(l2,&tam2);
     tamt = tam1+tam2;
 
     int i, j;
