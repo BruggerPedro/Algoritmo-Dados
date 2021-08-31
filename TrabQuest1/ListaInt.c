@@ -204,8 +204,6 @@ Lista intercala_listas(Lista l1, Lista l2){
 
     int aux = 0;
 
-    vetor[MAX*2];
-
     for(i=0;i<=tamt-1;i++){ //Percorrendo todos os indices do vetor e ordenando-os em ordem decrescente
         for(j=i; j<=tamt-1;j++){
             if(vetor[i] < vetor[j]){
