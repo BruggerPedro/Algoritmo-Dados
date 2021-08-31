@@ -51,19 +51,17 @@ Lista l; Lista l2; Lista l3;
 
         switch(op){
         case 1: {
-
+/*
                 if(flag == 1) { // verifica se a lista já existe (Flag == 1)
-                    if(apaga_lista(&l) == 0){
-                        printf("\n Já existe uma instancia de lista e houve falha ao tentar apaga-la");
-                    break;
-                    }
-                }
+                  printf("\n Já existe uma instancia de lista.");
+                  break;
+                 }
+
                 if(flag2 == 1) { // verifica se a lista já existe (Flag == 1)
-                    if(apaga_lista(&l2) == 0){
-                        printf("\n Já existe uma instancia de lista e houve falha ao tentar apaga-la");
+                printf("\n Já existe uma instancia de lista.");
                     break;
                     }
-                }
+*/
 
                 printf("\n Digite [1] para criar na lista 1 e [2] para criar na lista 2: \n");
                 scanf("%d", &resp);
