@@ -14,7 +14,7 @@ int esvazia_lista(Lista lst);
 int get_elem_pos(Lista lst, int pos, int *elem);
 int remove_negativos(Lista x);
 int remove_pares(Lista x);
-int tamanho_lista(Lista x, float *tamanho);
+int tamanho_lista(Lista x, int *tamanho);
 int intercala_listas(Lista l1, Lista l2);
 void libera(Lista x);
 
