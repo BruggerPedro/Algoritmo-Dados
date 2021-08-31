@@ -177,7 +177,7 @@ int tamanho_lista(Lista x, int *tamanho){
 
 }
 
-int intercala_listas(Lista l1, Lista l2){
+Lista intercala_listas(Lista l1, Lista l2){
 
     if(l1 == NULL || l2 == NULL)
     return 0; //Uma das duas listas não existe, logo, não podemos seguir
@@ -219,7 +219,7 @@ int intercala_listas(Lista l1, Lista l2){
     l3 = (Lista) malloc(2* sizeof (struct lista)); // Tamanho da Struct lista.
 
     if (l3 == NULL) { // Verifica se houve alocação bem sucedida.
-         return 0;
+         return NULL;
     }
 
    l3 -> fim = 0; // O fim = 0 indica que a primeira posicao livre do vetor.
@@ -228,7 +228,7 @@ int intercala_listas(Lista l1, Lista l2){
     insere_elem(l3,vetor[i]);
    }
 
-   return 1;
+   return l3;
 }
 
 
