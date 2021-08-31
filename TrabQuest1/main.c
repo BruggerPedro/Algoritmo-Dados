@@ -28,8 +28,7 @@ Lista l; Lista l2; Lista l3;
             printf("\n [8] Remove par");
             printf("\n [9] Intercala listas");
             printf("\n [10] Sair do sistema");
-            printf("\n\n Digite a opcao desejada: ");
-            printf("\n\n------------------------------------------\n");
+            printf("\n\n Digite a opcao desejada: \n");
 
             scanf("%d", &op);
             setbuf(stdin, NULL);
@@ -51,20 +50,11 @@ Lista l; Lista l2; Lista l3;
 
         switch(op){
         case 1: {
-/*
-                if(flag == 1) { // verifica se a lista já existe (Flag == 1)
-                  printf("\n Já existe uma instancia de lista.");
-                  break;
-                 }
-
-                if(flag2 == 1) { // verifica se a lista já existe (Flag == 1)
-                printf("\n Já existe uma instancia de lista.");
-                    break;
-                    }
-*/
-
-                printf("\n Digite [1] para criar na lista 1 e [2] para criar na lista 2: \n");
+                printf("\n Digite:\n");
+                printf("\n [1] para criar na lista 1.");
+                printf("\n [2] para criar na lista 2.\n");
                 scanf("%d", &resp);
+
 
                 if (resp == 1){
                     l = cria_lista();
@@ -93,7 +83,9 @@ Lista l; Lista l2; Lista l3;
         }
 
         case 2:{
-            printf("\n Digite [1] para esvaziar a lista 1 e [2] para esvaziar a lista 2: \n");
+            printf("\n Digite:\n");
+            printf("\n [1] para esvaziar a lista 1.");
+            printf("\n [2] para esvaziar a lista 2.\n");
             scanf("%d", &resp);
             if (resp == 1){
                 if(esvazia_lista(l) == 0){
@@ -120,7 +112,9 @@ Lista l; Lista l2; Lista l3;
         }
 
         case 3:{
-            printf("\n Digite [1] para apagar na lista 1 e [2] para apagar na lista 2: \n");
+            printf("\n Digite:\n");
+            printf("\n [1] para apagar na lista 1.");
+            printf("\n [2] para apagar na lista 2.\n");
             scanf("%d", &resp);
             if (resp == 1){
                 if(apaga_lista(&l) == 0){
@@ -150,7 +144,9 @@ Lista l; Lista l2; Lista l3;
             printf("\n Digite o elemento (int) a ser inserido na lista: ");
             scanf("%d", &n);
 
-            printf("\n Digite [1] para inserir na lista 1 e [2] para inserir na lista 2: \n");
+            printf("\n Digite:\n");
+            printf("\n [1] para inserir na lista 1.");
+            printf("\n [2] para inserir na lista 2.\n");
             scanf("%d", &resp); // resposta da operação
 
             // Tratamentos:
@@ -180,7 +176,9 @@ Lista l; Lista l2; Lista l3;
              printf("\n Digite o elemento (int) a ser excluido na lista: ");
              scanf("%d", &n);
 
-             printf("\n Digite [1] para remover na lista 1 e [2] para remover na lista 2: \n");
+             printf("\n Digite:\n");
+             printf("\n [1] para remover na lista 1.");
+             printf("\n [2] para remover na lista 2.");
              scanf("%d", &resp);
 
                 if (resp == 1){
@@ -211,7 +209,10 @@ Lista l; Lista l2; Lista l3;
                 }
         }
         case 6:{
-             printf("\n Digite [1] para imprimir a lista 1 e [2] para imprimir a lista 2 e [3] para imprimir ambas as listas: \n");
+             printf("\n Digite:\n");
+             printf("\n [1] para imprimir a lista 1.");
+             printf("\n [2] para imprimir a lista 2.");
+             printf("\n [3] para imprimir ambas as listas.\n");
              scanf("%d", &resp);
 
                 if (resp == 1){
@@ -235,7 +236,9 @@ Lista l; Lista l2; Lista l3;
 
         }
         case 7:{
-            printf("\n Digite [1] para remover negativos da lista 1 e [2] para remover negativos da lista 2: \n");
+            printf("\n Digite:\n");
+            printf("\n [1] para remover negativos da lista 1.");
+            printf("\n [2] para remover negativos da lista 2.\n");
             scanf("%d", &resp);
 
 
@@ -251,7 +254,9 @@ Lista l; Lista l2; Lista l3;
         }
         }
         case 8:{
-            printf("\n Digite [1] para remover pares da lista 1 e [2] para remover pares da lista 2: \n");
+            printf("\n Digite:");
+            printf("\n [1] para remover pares da lista 1.");
+            printf("\n [2] para remover pares da lista 2.\n");
                 scanf("%d", &resp);
 
                 if (resp == 1){
