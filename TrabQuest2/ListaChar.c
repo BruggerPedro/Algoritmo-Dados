@@ -1,11 +1,15 @@
 #include <stdlib.h>
 #include "ListaChar.h"
 #define MAX 10
-/*Implementar o TAD lista ordenada decrescente de números inteiros com no máximo 20 elementos, usando alocação estática/sequencial. Além das operações vistas em sala, o TAD também deve contemplar:
- Remover negativos: remove todos os elementos negativos da lista.
- Remover pares: remove todos os elementos pares da lista.
+/*Implementar o TAD lista não ordenada de strings com no máximo 10 elementos, cada um
+com até 15 caracteres, usando alocação estática/sequencial. Além das operações vistas em sala,
+o TAD também deve contemplar:
+ Remover todas: remove todas as strings da lista que começam com um dado caractere.
+ Remover maior: remove e retorna a maior string da lista. No caso de empate, deve-se
+remover a primeira ocorrência encontrada.
  Tamanho: retorna o número de elementos da lista.
- Intercalar: recebe duas listas ordenadas (L1 e L2) e retorna uma nova lista L3 formadapelos elementos de L1 e L2 intercalados, mantendo o critério de ordenação. As listas originais não devem ser alteradas.
+ Concatenar: recebe duas listas (L1 e L2) e retorna uma nova lista L3 com os elementos de
+L1 seguidos dos elementos de L2. As listas originais não devem ser alteradas.
 */
 
 struct lista {
