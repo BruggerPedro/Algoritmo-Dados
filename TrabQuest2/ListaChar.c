@@ -130,7 +130,13 @@ int esvazia_lista(Lista lst){
     lst->fim = 0;
     return 1;
 }
+// n [0x19] = temp
 
+// b [0x49] -> [0x19]
+// *b = TEMP
+
+
+// [CASA] fim = 1
 int get_elem_pos(Lista lst, int pos, char *n[]){
         // pos = Posição do elemento na lista (começa com 1)
     if(lst == NULL || lista_vazia(lst) || pos >= lst->fim)
@@ -202,10 +208,6 @@ if(lst == NULL || lista_vazia(lst) == 1) //ponteiro nulo ou lista vazia
         return 1;
 }
 
-
-// l1[ZUMBIDO] l2[CARRO]
-// l3 [CASA CARRO]
-
 //Tamanho: retorna o número de elementos da lista.
 
 int tamanho_lista(Lista lst, int *tamanho){
@@ -220,56 +222,50 @@ int tamanho_lista(Lista lst, int *tamanho){
 }
 
 
+//Concatenar: recebe duas listas (L1 e L2) e retorna uma nova lista L3 com os elementos de
+//L1 seguidos dos elementos de L2. As listas originais não devem ser alteradas.
 
-void libera(Lista x){
+// l1[ZUMBIDO] l2[CARRO]
+// l3 [CASA CARRO]
 
-    if(x != NULL){
-        free(x);
-        x = NULL;
-    }
-}
-
-//---------------------------------------------------------------------
-/*
-
-Lista intercala_listas(Lista l1, Lista l2){
+Lista concatena_listas(Lista l1, Lista l2){
 
     if(l1 == NULL || l2 == NULL)
     return 0; //Uma das duas listas não existe, logo, não podemos seguir
 
-    int vetor[MAX*2];
+
+    int vetor[MAX*2][WORD]; // Vetor com o dobro de palavras
 
     int tam1,tam2,tamt;
-    tamanho_lista(l1,&tam1);
-    tamanho_lista(l2,&tam2);
+    tamanho_lista(l1,&tam1); //Verifica o tamanho de palavras no l1
+    tamanho_lista(l2,&tam2); //Verifica o tamanho de palavras no l2
     tamt = tam1+tam2;
 
-    int i, j;
+    int i, j,k; // Declarações para o for
+
+    // l1 [MARIA] tam1= 1
+    // l2[ANDERSON, PEDRO] tam2= 2
+    // tamt = 1+2
+
 
     // Preenchendo o "vetor" com todos os elementos das listas
-    for(i=0; i< tam1;i++){
-       vetor[i] = l1->no[i];
+
+    for(i=0; i< tam1;i++){ // Começando pela l1
+        for(j=0;l1->no[i][j] != '\0';j++){ //preencher cada letra da palavra l1 para o vetor
+        vetor[i][j] = l1->no[i][j];
+       }
     }
-    int temp = 0;
-
-    for(j = tam1; j < tamt ;j++){
-        vetor[j] = l2->no[temp];
-        temp++;
-    }
-
-    int aux = 0;
-
-    for(i=0;i<=tamt-1;i++){ //Percorrendo todos os indices do vetor e ordenando-os em ordem decrescente
-        for(j=i; j<=tamt-1;j++){
-            if(vetor[i] < vetor[j]){
-                aux = vetor[i];
-                vetor[i] = vetor[j];
-                vetor[j] = aux;
-            }
-        }
+    int temp = 0; //Temp começa com 0 para percorrermos desde o inicio, a l2.
+        // k= 2
+    for(k = tam1; k < tamt;k++){
+        for(j=0;l2->no[k-tam1][j] != '\0';j++){ //preencher cada letra da palavra l2 para o vetor
+        vetor[k][j] = l2->no[temp][j]; // Usando temp pra percorrer desde o inicio
+       }
+       temp++;
     }
 
-// Como a alocação da lista 3 é o dobro da comum[20], teremos que faze-los aqui:
+
+// Como a alocação da lista 3 é o dobro da comum[10], teremos que faze-los aqui:
 
  Lista l3; // Criando um ponteiro de lista.
     l3 = (Lista) malloc(2* sizeof (struct lista)); // Tamanho da Struct lista.
@@ -288,4 +284,13 @@ Lista intercala_listas(Lista l1, Lista l2){
 }
 
 
-*/
+void libera(Lista x){
+
+    if(x != NULL){
+        free(x);
+        x = NULL;
+    }
+}
+
+//---------------------------------------------------------------------
+
