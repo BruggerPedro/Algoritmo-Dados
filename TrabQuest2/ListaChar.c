@@ -138,12 +138,13 @@ int esvazia_lista(Lista lst){
 
 // [CASA] fim = 1
 int get_elem_pos(Lista lst, int pos, char *ponteiro){
+    int i;
         // pos = Posição do elemento na lista (começa com 1)
     if(lst == NULL || lista_vazia(lst) || pos >= lst->fim)
         return 0; // FALHA
 
 
-    for(int i=0;i<15;i++){
+    for(i=0;i<15;i++){
         ponteiro[i] = lst->no[pos][i];
     }
 
