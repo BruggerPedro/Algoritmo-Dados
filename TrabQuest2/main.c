@@ -240,8 +240,9 @@ Lista l; Lista l2; Lista l3;
         }
 
         case 7:{
-           l3 =  intercala_listas(l,l2);
+           /*l3 =  intercala_listas(l,l2);
             imprime_lista(l3);
+           */
             break;
         }
 
@@ -269,15 +270,16 @@ void imprime_lista(Lista l){
     printf("\n\t {");
     int i;
 
-    for(i=1;;i++){ //Não sei quantos elementos tem na lista
-    char n;// N representa o elemento presente na lista
-        if(get_elem_pos(l,i,&n) == 0){ //Não existe a posição
-            break;
-        }
-        printf("%c",n);
-        //printf("O %d elemento da lista eh %d\n",i,n);
 
+for(i=1;;i++){
+    char n;// N representa o elemento presente na lista
+    if(get_elem_pos(l,i,&n) == 0) //Não existe a posição
+    break;
+
+    printf("%s",n);
+
+ //printf("O %d elemento da lista eh %d\n",i,n);
     }
     printf("} \n Existem %d elementos na lista. \n",i-1); // i-1 será pq o break está dentro do for.
-}
 
+}
