@@ -348,6 +348,11 @@ Lista l; Lista l2; Lista l3;
 
 
 void imprime_lista(Lista l){
+    if (l == NULL){
+        printf("\n Ponteiro esta NULO");
+        return;
+    }
+
     if(lista_vazia(l) == 1){
         printf("\n Lista VAZIA! ");
         return;
@@ -358,15 +363,15 @@ void imprime_lista(Lista l){
     int i;
 
 
-for(i=1;;i++){
-    char n;// N representa o elemento presente na lista
-    if(get_elem_pos(l,i,&n) == 0) //Não existe a posição
+for(i=0;;i++){
+    char n[15];// N representa o elemento presente na lista
+    if(get_elem_pos(l,i,&n) == 0){ //Não existe a posição
     break;
-
+}
     printf("%s",n);
 
  //printf("O %d elemento da lista eh %d\n",i,n);
     }
-    printf("} \n Existem %d elementos na lista. \n",i-1); // i-1 será pq o break está dentro do for.
+    printf("} \n Existem %d elementos na lista. \n",i); // i-1 será pq o break está dentro do for.
 
 }
