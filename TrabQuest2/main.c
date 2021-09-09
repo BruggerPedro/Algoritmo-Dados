@@ -30,7 +30,7 @@ Lista l; Lista l2; Lista l3;
             printf("\n [5] Remover um elemento na lista");
             printf("\n [6] Remover todas as palavras da lista");
             printf("\n [7] Remove maior palavra da lista");
-            printf("\n [8] Imprimir o tamanho da lista");
+            printf("\n [8] Apresentar o tamanho da lista");
             printf("\n [9] Imprimir a lista");
             printf("\n [10] Intercala listas");
             printf("\n [11] Sair do sistema");
@@ -360,7 +360,25 @@ void imprime_lista(Lista l){
 
     printf("\n\n\n \t LISTA: ");
     printf("\n\t {");
-    int i;
+    int i,j;
+
+    char n[15]; //Vetor generico
+
+    int ret = -1;
+/*
+for(i=0;;i++){ //Palavra
+    ret = get_elem_pos(l,i,&n);
+    if(ret == 0)
+    break;
+        for(j=0;j<15;j++){ //Letra M A R I A
+        printf("%c",n[j]);
+      }
+
+}
+printf("} \n Existem %d elementos na lista. \n",i); // i-1 será pq o break está dentro do for.
+}
+
+*/
 
 
 for(i=0;;i++){
@@ -368,10 +386,11 @@ for(i=0;;i++){
     if(get_elem_pos(l,i,&n) == 0){ //Não existe a posição
     break;
 }
-    printf("%s",n);
+    printf("%s,",n);
 
  //printf("O %d elemento da lista eh %d\n",i,n);
     }
     printf("} \n Existem %d elementos na lista. \n",i); // i-1 será pq o break está dentro do for.
 
 }
+
