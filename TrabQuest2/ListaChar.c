@@ -60,9 +60,9 @@ int insere_elem(Lista lst, char elem[]){ //Insere o(s) elemento(s) de forma orde
 
     if (lst == NULL || lista_cheia(lst) == 1) //Possuimos 10 palavras
     return 0; // Nao tem como inserir porque lst eh NULL OU ela esta cheia (lista_cheia) == 1)
-
+    int i;
     // TEMPORARIAMENTE
-    for(int i=0;i<WORD;i++){
+    for(i=0;i<WORD;i++){
         lst->no[lst->fim][i] = elem[i];
     }
     lst->fim++; //Avança o fim
@@ -74,7 +74,7 @@ int remove_elem(Lista lst, char elem[]){
     return 0; //Falha
     }
 
-    int i, aux = 0;
+    int i, j, aux = 0;
 
     // elem ["AULA"]
     // lst = [ "PAO","BOLA", "PORTA"] fim = 3
@@ -87,7 +87,7 @@ int remove_elem(Lista lst, char elem[]){
        aux++;
     }else{
 
-    for(int j=0; elem[j] != '\0'; j++){ // Se letra existir
+    for(j=0; elem[j] != '\0'; j++){ // Se letra existir
             if (elem[j] != lst->no[aux][j]){    // se letra do elem for diferente da letra do nó
                 break;  // Quebra o for j
             }
@@ -292,5 +292,5 @@ void libera(Lista x){
     }
 }
 
-//---------------------------------------------------------------------
+
 
