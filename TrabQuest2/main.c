@@ -28,20 +28,23 @@ Lista l; Lista l2; Lista l3;
             printf("\n [3] Apagar a lista");
             printf("\n [4] Inserir um elemento na lista");
             printf("\n [5] Remover um elemento na lista");
-            printf("\n [6] Imprimir a lista");
-            printf("\n [7] Intercala listas");
-            printf("\n [8] Sair do sistema");
+            printf("\n [6] Remover todas as palavras da lista");
+            printf("\n [7] Remove maior palavra da lista");
+            printf("\n [8] Imprimir o tamanho da lista");
+            printf("\n [9] Imprimir a lista");
+            printf("\n [10] Intercala listas");
+            printf("\n [11] Sair do sistema");
             printf("\n\n Digite a opcao desejada: \n");
 
             scanf("%d", &op);
             setbuf(stdin, NULL);
 
-            if(op < 1 || op > 8)
+            if(op < 1 || op > 11)
             printf("\n *** Opcao digitada invalida! As opcoes disponiveis são:");
 
-        } while(op < 1 || op > 8);
+        } while(op < 1 || op > 11);
 
-        if (op == 8) break; //Sair do sistema
+        if (op == 11) break; //Sair do sistema
 
         else if(op != 1 && flag == 0) {
             printf("\n\n Antes de qualquer operacao, a lista 1 precisa ser CRIADA.");
@@ -212,6 +215,40 @@ Lista l; Lista l2; Lista l3;
                 }
         }
         case 6:{
+            printf("\n Digite:\n");
+            printf("\n [1] para remover todas as palavras da lista 1.");
+            printf("\n [2] para remover todas as palavras da lista 2.\n");
+            scanf("%d", &resp);
+
+
+            if (resp == 1){
+                l = remove_todas();
+                if(l == NULL){
+                    printf("\n Falha na remoção na lista");
+                    return -1;
+                }
+                printf("\n Todas as palavras foram removidas com sucesso!");
+                break;
+                }
+                else if(resp == 2){
+                    l2 = remove_todas();
+                    if(l2 == NULL){
+                        printf("\n Falha na remoção na lista");
+                        return -1;
+                }
+                printf("\n Todas as palavras foram removidas com sucesso!");
+                break;
+        }
+
+        case 7:{
+
+        }
+
+        case 8:{
+
+        }
+
+        case 9:{
              printf("\n Digite:\n");
              printf("\n [1] para imprimir a lista 1.");
              printf("\n [2] para imprimir a lista 2.");
@@ -235,20 +272,17 @@ Lista l; Lista l2; Lista l3;
                printf("\n Opcao invalida! Tente novamente");
                 break;
             }
-
-
         }
 
-        case 7:{
-           /*l3 =  intercala_listas(l,l2);
+        case 10:{
+            /*l3 =  intercala_listas(l,l2);
             imprime_lista(l3);
            */
             break;
         }
 
-
         }
-        }while(op != 8);
+        }while(op != 11);
 
         printf("\n\n\t\t FIM DE PROGRAMA! \n");
 
