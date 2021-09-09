@@ -28,7 +28,7 @@ Lista l; Lista l2; Lista l3;
             printf("\n [3] Apagar a lista");
             printf("\n [4] Inserir um elemento na lista");
             printf("\n [5] Remover um elemento na lista");
-            printf("\n [6] Remover todas as palavras da lista");
+            printf("\n [6] Remover todas as palavras da lista comecadas com a letra digitada");
             printf("\n [7] Remove maior palavra da lista");
             printf("\n [8] Apresentar o tamanho da lista");
             printf("\n [9] Imprimir a lista");
@@ -215,7 +215,7 @@ Lista l; Lista l2; Lista l3;
         case 6:{
             char n; //Elemento digitado
             printf("\n Digite a letra (char) a ser removido na lista: ");
-            scanf("%c",n);
+            scanf("%c",&n);
 
             printf("\n Digite:\n");
             printf("\n [1] para remover todas as palavras com a letra, na lista 1.");
