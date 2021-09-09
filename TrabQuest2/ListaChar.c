@@ -278,9 +278,12 @@ Lista concatena_listas(Lista l1, Lista l2){
 
    l3 -> fim = 0; // O fim = 0 indica que a primeira posicao livre do vetor.
 
+   char n[15];
    for(i=0;i<tamt;i++){
-
-    insere_elem(l3,vetor[i]);
+        for(j=0;vetor[i][j] != '\0';j++){
+            n[j] = vetor[i][j];
+        }
+   insere_elem(l3,n);
    }
 
    return l3;
