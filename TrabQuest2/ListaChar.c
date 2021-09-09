@@ -154,17 +154,19 @@ int remove_todas(Lista lst, char letra){ // C
 if(lst == NULL || lista_vazia(lst) == 1) //ponteiro nulo ou lista vazia
     return 0;
 
-int i,j; // variavel "generica" para o for
+int i,j; // variavel "generica" para os for´s
 char palavra[15]; // Guardar a palavra a ser removida.
 
+    // [CASA, BOLO]
     for(i=0;i<lst->fim;i++){ //Até a ultima "palavra" cadastrada
         if(lst->no[i][0] == letra){
-            for(j=0;j<15;j++){ // Copiando a "palavra" a ser excluida
+                for(j=0;lst->no[i][j] != '\0';j++){ // Copiando a "palavra" a ser excluida
             palavra[j] = lst->no[i][j]; //
-        }
+            }
         remove_elem(lst,palavra); // Remove a "palavra" do nó
     }
 }
+return 1;
 }
 
 //Remover maior: remove e retorna a maior string da lista.
@@ -176,21 +178,32 @@ if(lst == NULL || lista_vazia(lst) == 1) //ponteiro nulo ou lista vazia
     int maior = -1; //Possui o tamanho de letras da maior palavra
     int posmai = -1; // Guarda a posição do maior elemento no nó.
 
+    int cont = 0; //Contador de letras
 
+    int i,j; // variavel "generica" para os for´s
 
+    char palavra[15]; // Guardar a palavra a ser removida.
 
+    // [CASA,CARRO, XXXX] fim = 2
+    for(i=0;i<lst->fim;i++){ //Até a ultima "palavra" cadastrada
+        for(j=0;lst->no[i][j] != '\0';j++){ // Contar as letras da palavra
+            cont++;
+        }
+            if(cont > maior){
+                maior = cont; //maior = 5
+                posmai = i; // posmai = 1
+            }
+        }
+        for(j=0;lst->no[posmai][j] != '\0';j++){
+            palavra[j] = lst->no[posmai][j];
+        }
+        remove_elem(lst,palavra); // Remove a "palavra" do nó
 
- // ['casa', 'carro]
-
- // maior = 4 (casa)
- // posmai = 0
-
- // maior = 5 [carro]
-// posmai = 1
-
+        return 1;
 }
 
-// l1[CASA] l2[ CARRO]
+
+// l1[ZUMBIDO] l2[CARRO]
 // l3 [CASA CARRO]
 
 //Tamanho: retorna o número de elementos da lista.
@@ -200,10 +213,10 @@ int tamanho_lista(Lista lst, int *tamanho){
     if(lst == NULL)
     return 0;
     // 3 palavras no nó  lst->fim = 3 [0,1,2]
+   // [CASA, CARRO, BEBE,__] FIM = 3
     *tamanho = lst->fim; // Recebe o ponteiro tamanho do tipo float e vai retornar o tamanho da lista(qtde de elem)
 
     return 1;
-
 }
 
 
