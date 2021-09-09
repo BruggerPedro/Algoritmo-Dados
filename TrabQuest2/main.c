@@ -16,7 +16,7 @@ L1 seguidos dos elementos de L2. As listas originais não devem ser alteradas.
 void imprime_lista(Lista);
 
 int main(){
-int op, flag = 0,resp, flag2 = 0; //Flag contabiliza a quantidade de especificações da lista (0 - lista nao criada | 1 - Lista criada)
+int op, flag = 0,resp, flag2 = 0, tam=0; //Flag contabiliza a quantidade de especificações da lista (0 - lista nao criada | 1 - Lista criada)
 Lista l; Lista l2; Lista l3;
 
     do{ // Programa
@@ -50,8 +50,6 @@ Lista l; Lista l2; Lista l3;
             printf("\n\n Antes de qualquer operacao, a lista 1 precisa ser CRIADA.");
             continue;
             }
-
-
 
 
         switch(op){
@@ -147,7 +145,7 @@ Lista l; Lista l2; Lista l3;
                     }
         case 4:{
             char n[15]; //Elemento digitado
-            printf("\n Digite o elemento (char) a ser inserido na lista: ");
+            printf("\n Digite o termo a ser inserido na lista: ");
             gets(n);
 
             printf("\n Digite:\n");
@@ -179,12 +177,12 @@ Lista l; Lista l2; Lista l3;
 
         case 5:{
             char n[15];
-             printf("\n Digite o elemento (char) a ser excluido na lista: ");
+             printf("\n Digite o termo a ser excluido na lista: ");
              gets(n);
 
              printf("\n Digite:\n");
              printf("\n [1] para remover na lista 1.");
-             printf("\n [2] para remover na lista 2.");
+             printf("\n [2] para remover na lista 2.\n");
              scanf("%d", &resp);
 
                 if (resp == 1){
@@ -215,36 +213,89 @@ Lista l; Lista l2; Lista l3;
                 }
         }
         case 6:{
+            char n; //Elemento digitado
+            printf("\n Digite a letra (char) a ser removido na lista: ");
+            scanf("%c",n);
+
             printf("\n Digite:\n");
-            printf("\n [1] para remover todas as palavras da lista 1.");
-            printf("\n [2] para remover todas as palavras da lista 2.\n");
+            printf("\n [1] para remover todas as palavras com a letra, na lista 1.");
+            printf("\n [2] para remover todas as palavras com a letra, na lista 2.\n");
             scanf("%d", &resp);
 
 
             if (resp == 1){
-                l = remove_todas();
-                if(l == NULL){
-                    printf("\n Falha na remoção na lista");
+                if(remove_todas(l,n) == 0){
+                   printf("\n Falha na remoção na lista");
                     return -1;
                 }
-                printf("\n Todas as palavras foram removidas com sucesso!");
+                printf("\n Todas as palavras com a letra %c foram removidas com sucesso!",n);
                 break;
                 }
                 else if(resp == 2){
-                    l2 = remove_todas();
-                    if(l2 == NULL){
-                        printf("\n Falha na remoção na lista");
-                        return -1;
+                    if(remove_todas(l2,n) == 0){
+                   printf("\n Falha na remoção na lista");
+                    return -1;
                 }
-                printf("\n Todas as palavras foram removidas com sucesso!");
+                printf("\n Todas as palavras com a letra %c foram removidas com sucesso!",n);
                 break;
+        }else{
+                printf("\n Opção inválida");
+                break;
+            }
         }
 
         case 7:{
+            printf("\n Digite:\n");
+            printf("\n [1] para remover a maior palavra da lista 1.");
+            printf("\n [2] para remover a maior palavra da lista 2.\n");
+            scanf("%d", &resp);
 
+            if(resp == 1){
+                if(remove_maior(l) == 0){
+                 printf("\n Falha na remoção da maior palavra na lista");
+                    return -1;
+                }
+                printf("\n A maior palavra foi removida com sucesso!");
+                break;
+                } else if(resp == 2){
+                    if(remove_maior(l2) == 0){
+                   printf("\n Falha na remoção da maior palavra na lista");
+                    return -1;
+                }
+                printf("\n A maior palavra foi removida com sucesso!");
+                break;
+            }else{
+                printf("\n Opção inválida");
+                break;
+            }
         }
 
+
         case 8:{
+            printf("\n Digite:\n");
+            printf("\n [1] para verificar tamanho da lista 1.");
+            printf("\n [2] para verificar tamanho da lista 2.\n");
+            scanf("%d", &resp);
+
+            if(resp == 1){
+                if(tamanho_lista(l,&tam) == 0){
+                 printf("\n Falha ao obter o tamanho da lista 1");
+                    return -1;
+                }
+                printf("\n Existem %d palavras cadastradas!",tam);
+                break;
+                } else if(resp == 2){
+                    if(tamanho_lista(l2,&tam) == 0){
+                   printf("\n Falha ao obter o tamanho da lista 2");
+
+                    return -1;
+                }
+                printf("\n Existem %d palavras cadastradas!",tam);
+                break;
+            }else{
+                printf("\n Opção inválida");
+                break;
+            }
 
         }
 
@@ -275,9 +326,11 @@ Lista l; Lista l2; Lista l3;
         }
 
         case 10:{
-            /*l3 =  intercala_listas(l,l2);
+            l3 =  concatena_listas(l,l2);
+
+
+            // asasasasasas
             imprime_lista(l3);
-           */
             break;
         }
 
