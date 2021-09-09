@@ -231,19 +231,25 @@ int tamanho_lista(Lista lst, int *tamanho){
 // l3 [CASA CARRO]
 
 Lista concatena_listas(Lista l1, Lista l2){
-
+    int i,j;
     if(l1 == NULL || l2 == NULL)
     return 0; //Uma das duas listas não existe, logo, não podemos seguir
 
 
     int vetor[MAX*2][WORD]; // Vetor com o dobro de palavras
 
+    for(i=0; i< MAX*2;i++){ // Começando pela l1
+        for(j=0;j < WORD;j++){ //preencher cada letra da palavra l1 para o vetor
+        vetor[i][j] = 0;
+       }
+    }
+
     int tam1,tam2,tamt;
     tamanho_lista(l1,&tam1); //Verifica o tamanho de palavras no l1
     tamanho_lista(l2,&tam2); //Verifica o tamanho de palavras no l2
     tamt = tam1+tam2;
 
-    int i, j,k; // Declarações para o for
+    int k; // Declarações para o for
 
     // l1 [MARIA] tam1= 1
     // l2[ANDERSON, PEDRO] tam2= 2
@@ -288,6 +294,7 @@ Lista concatena_listas(Lista l1, Lista l2){
 
    return l3;
 }
+
 
 
 void libera(Lista x){
