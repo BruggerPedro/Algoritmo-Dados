@@ -137,13 +137,13 @@ int esvazia_lista(Lista lst){
 
 
 // [CASA] fim = 1
-int get_elem_pos(Lista lst, int pos, char *n[]){
+int get_elem_pos(Lista lst, int pos, char *ponteiro){
         // pos = Posição do elemento na lista (começa com 1)
     if(lst == NULL || lista_vazia(lst) || pos >= lst->fim)
         return 0; // FALHA
 
-    char palavra[15];
-    *n = lst->no[pos];
+    //char palavra[15];
+    *ponteiro = lst->no[pos];
 
 
     return 1; //Sucesso
@@ -291,6 +291,4 @@ void libera(Lista x){
         x = NULL;
     }
 }
-
-
 
