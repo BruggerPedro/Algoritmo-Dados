@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include "ListaChar.h"
 #define MAX 10
+#define WORD 15
 /*Implementar o TAD lista não ordenada de strings com no máximo 10 elementos, cada um
 com até 15 caracteres, usando alocação estática/sequencial. Além das operações vistas em sala,
 o TAD também deve contemplar:
@@ -13,7 +14,7 @@ L1 seguidos dos elementos de L2. As listas originais não devem ser alteradas.
 */
 
 struct lista {
-    char no[MAX];// Nó que vai ser limitado por MAX[20] posições(definido pelo programador).
+    char no[MAX][WORD];// Nó que vai ser limitado por MAX[10] posições(definido pelo programador). OBS: Colunas serão as Strings
     int fim; // O fim vai indicar qual é a próxima posição disponível.
 };
 
@@ -55,54 +56,60 @@ int lista_cheia(Lista lst) {
     // Pode se fazer tirando da linha 37 ate 40, apenas fazendo: return(lst->fim == MAX)
 }
 
-int insere_elem(Lista lst, char elem){ //Insere o(s) elemento(s) de forma ordenada
+int insere_elem(Lista lst, char elem[]){ //Insere o(s) elemento(s) de forma ordenada
 
-    if (lst == NULL || lista_cheia(lst) == 1)
+    if (lst == NULL || lista_cheia(lst) == 1) //Possuimos 10 palavras
     return 0; // Nao tem como inserir porque lst eh NULL OU ela esta cheia (lista_cheia) == 1)
 
-    // Trata lista vazia ou elemento >= ultimo da lista
-
-    if (lista_vazia(lst) == 1 || elem <= lst->no[lst->fim-1]){ // Enquanto a lista estiver vazia e o elemento inserido for menor ou igual ao já inserido antes
-        lst->no[lst->fim] = elem; // Inserção no final
-    }else{
-        int i, aux = 0;
-        while(elem <= lst->no[aux]) //Percorrendo
-            aux++;
-        for(i=lst->fim;i>aux;i--) //Deslocando
-            lst->no[i] = lst->no[i-1];
-        lst->no[aux] = elem; //Incluindo o elemento na lista
+    // TEMPORARIAMENTE
+    for(int i=0;i<WORD;i++){
+        lst->no[lst->fim][i] = elem[i];
     }
     lst->fim++; //Avança o fim
     return 1; //Sucesso
 }
 
-int remove_elem(Lista lst, char elem){
-    if(lst == NULL || lista_vazia(lst) == 1 || elem > lst->no[0] || elem < lst->no[lst->fim-1]){
-    //Quando elem > lst->no[0], significa que se o elemento que eu quero apagar é o 9 e minha lista é composta por L = {7,5}, o 9 não existe na minha lista.
-    //Quando , elem < lst->no[lst->fim-1], significa que se o elemento que eu quero apagar é o 3 e minha lista é composta por L = {7,5}, o 3 não existe na minha lista.
-        return 0; //Falha
-        }
-        int i, aux = 0;
+int remove_elem(Lista lst, char elem[]){
+    if(lst == NULL || lista_vazia(lst) == 1){
+    return 0; //Falha
+    }
 
-    // Percorre até ACHAR O ELEM OU NÓ MAIOR, ou final da lista
+    int i, aux = 0;
 
-    while(aux < lst->fim && lst->no[aux] > elem)
-    // Percorre com o aux enquanto o elemento que está no auxiliar for maior que o elemento digitado
-        aux++;
+    // elem ["AULA"]
+    // lst = [ "PAO","BOLA", "PORTA"] fim = 3
+    // lst = [ "PAO","BOLA","PORTA"]
 
-//       7        5       3
-//      aux
+    while(aux < lst->fim){
+      int tam = strcmp(elem,lst->no[aux]); // vetor elem[] possui o mesmo tamanho do nó
 
-    if(aux == lst->fim || lst->no[aux] < elem)
-    // Elemento não vai existir quando o aux estiver no fim, e quando o elemento inserido for maior que o que está no auxiliar
-        return 0;
+    if (tam != 0){ //Elemento e a palavra possuem tamanhos distintos
+       aux++;
+    }else{
 
-    // Deslocamento a esq. do sucessor até o final da lista
-    for(i=aux+1; i<lst->fim;i++){
-        lst->no[i-1] = lst->no[i];
+    for(int j=0; elem[j] != '\0'; j++){ // Se letra existir
+            if (elem[j] != lst->no[aux][j]){    // se letra do elem for diferente da letra do nó
+                break;  // Quebra o for j
+            }
+
+        // Deslocamento a esq. do sucessor até o final da lista
+       for(i=aux+1; i<lst->fim;i++){
+            for(j=0; j<15;j++){
+            lst->no[i-1][j] = lst->no[i][j];
+            }
     }
         lst->fim--; // Decremento
         return 1; // Sucesso
+    }
+    aux++;
+
+
+}
+}
+    if(aux == lst->fim)
+    // Elemento não vai existir quando o aux estiver no fim, e quando o elemento inserido for maior que o que está no auxiliar
+    return 0;
+
 }
 
 
@@ -124,16 +131,30 @@ int esvazia_lista(Lista lst){
     return 1;
 }
 
-int get_elem_pos(Lista lst, int pos, char *elem){
+int get_elem_pos(Lista lst, int pos, char *n[]){
         // pos = Posição do elemento na lista (começa com 1)
     if(lst == NULL || lista_vazia(lst) || pos >= lst->fim)
         return 0; // FALHA
 
-    *elem = lst->no[pos-1]; // subtração pq temos que passar o indice real da lista
+    char palavra[15];
+    *n = lst->no[pos];
+
+
     return 1; //Sucesso
 
 }
-int tamanho_lista(Lista x, int *tamanho){
+
+
+void libera(Lista x){
+
+    if(x != NULL){
+        free(x);
+        x = NULL;
+    }
+}
+
+//---------------------------------------------------------------------
+/*int tamanho_lista(Lista x, int *tamanho){
 
     if(x == NULL)
     return 0;
@@ -206,3 +227,4 @@ void libera(Lista x){
         x = NULL;
     }
 }
+*/
