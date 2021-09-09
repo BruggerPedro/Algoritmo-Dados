@@ -14,9 +14,15 @@ int esvazia_lista(Lista lst);
 int apaga_lista(Lista *end_lst);
 int get_elem_pos(Lista lst, int pos, char *elem[]);
 
-
 int tamanho_lista(Lista x, int *tamanho);
-Lista intercala_listas(Lista l1, Lista l2);
 void libera(Lista x);
+int get_elem_pos(Lista lst, int pos, char *n[]);
+int remove_todas(Lista lst, char letra);
+
+
+
+
+Lista intercala_listas(Lista l1, Lista l2);
+
 
 #endif // LISTACHAR_H_INCLUDED
