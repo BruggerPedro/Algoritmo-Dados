@@ -318,6 +318,7 @@ Lista l; Lista l2; Lista l3;
             else if (resp == 3){
                 imprime_lista(l);
                 imprime_lista(l2);
+
                 break;
             }else{
                printf("\n Opcao invalida! Tente novamente");
