@@ -230,16 +230,7 @@ void libera(Lista x){
 }
 
 //---------------------------------------------------------------------
-/*int tamanho_lista(Lista x, int *tamanho){
-
-    if(x == NULL)
-    return 0;
-
-    *tamanho = x->fim; // Recebe o ponteiro tamanho do tipo float e vai retornar o tamanho da lista(qtde de elem)
-
-    return 1;
-
-}
+/*
 
 Lista intercala_listas(Lista l1, Lista l2){
 
@@ -296,11 +287,5 @@ Lista intercala_listas(Lista l1, Lista l2){
    return l3;
 }
 
-void libera(Lista x){
 
-    if(x != NULL){
-        free(x);
-        x = NULL;
-    }
-}
 */
