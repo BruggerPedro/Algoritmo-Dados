@@ -142,8 +142,10 @@ int get_elem_pos(Lista lst, int pos, char *ponteiro){
     if(lst == NULL || lista_vazia(lst) || pos >= lst->fim)
         return 0; // FALHA
 
-    //char palavra[15];
-    *ponteiro = lst->no[pos];
+
+    for(int i=0;i<15;i++){
+        ponteiro[i] = lst->no[pos][i];
+    }
 
 
     return 1; //Sucesso
@@ -277,6 +279,7 @@ Lista concatena_listas(Lista l1, Lista l2){
    l3 -> fim = 0; // O fim = 0 indica que a primeira posicao livre do vetor.
 
    for(i=0;i<tamt;i++){
+
     insere_elem(l3,vetor[i]);
    }
 
