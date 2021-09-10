@@ -122,7 +122,7 @@ void apaga_lista(Lista *lst){
         Lista aux = *lst;
 
         while(*lst != NULL){
-            (*lst) = (*li)->prox;
+            (*lst) = (*lst)->prox;
             free(aux);
             aux = *lst;
         }
