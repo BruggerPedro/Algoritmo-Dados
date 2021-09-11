@@ -133,8 +133,8 @@ int get_elem_pos(Lista *lst, int pos, float *elem){
     if((*lst)->prox == NULL || lista_vazia(lst) || pos < 1)
         // lst aponta pra null? OU lista é vazia? OU pos <=0 OU pos > proximo?
      return 0; // FALHA
-
-    *elem = ((*lst)->prox)->info; // elem recebe aquela informação do nó atual
+    Lista aux = (*lst)->prox;
+    *elem = aux->info; // elem recebe aquela informação do nó atual
     return 1; //Sucesso
 }
 
