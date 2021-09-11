@@ -48,7 +48,10 @@ return 0;
 int insere_elem(Lista *lst, float elem){
     // Aloca um novo nó
     Lista N = (Lista) malloc(sizeof(struct no)); // N aloca um novo campo de lista
-    if (N == NULL){ return 0;} //Falha: Não conseguiu alocar o Nó
+    if (N == NULL) //Falha: Não conseguiu alocar o Nó
+        {
+            return 0;
+        }
     N->info = elem; //Insere o conteudo (valor de elem)
     N->prox = *lst; //Aponta para o 1° nó atual da lista
     *lst = N;       // Faz a lista apontar para o novo nó
@@ -56,7 +59,7 @@ int insere_elem(Lista *lst, float elem){
 }
 
 int remove_elem(Lista *lst, float elem){
-    if(lista_vazia(lst) == 1) //Se lista estiver vazia
+    if(lista_vazia(*lst) == 1) //Se lista estiver vazia
         return 0; //Falha
     Lista aux = *lst; //Ponteiro auxiliar para o 1° nó
     // Trata elemento = primeiro Nó da lista
@@ -114,13 +117,16 @@ void apaga_lista(Lista *lst){
         // liberamos tambem o lst (responsavel por apontar a primeira posição na lista)
     }
 }
-int get_elem_pos(Lista *lst, int pos, float *elem){
+
+
+
+int get_elem_pos(Lista lst, int pos, float *elem){
 
     if(lst == NULL || lista_vazia(lst) || pos < 0)
         // lst aponta pra null? OU lista é vazia? OU pos <=0 OU pos > proximo?
      return 0; // FALHA
 
-    *elem = (*lst)->info; // elem recebe aquela informação do nó atual
+    *elem = lst->info; // elem recebe aquela informação do nó atual
     return 1; //Sucesso
 }
 
@@ -158,7 +164,8 @@ int tamanho_lista(Lista *lst, int *tam){
 
 int remove_menor(Lista *lst, float *menor){
     // Se lst aponta pra null OU lista vazia, retornamos 0
-    if(lst == NULL || lista_vazia(*lst) == 1) return 0;
+    if(lst == NULL || lista_vazia(*lst) == 1)
+        return 0;
 
 
     *menor = (*lst)->info; // Começamos dizendo que o primeiro nó é o menor
@@ -232,7 +239,8 @@ int listas_iguais(Lista *l1, Lista *l2){
     // Como sabemos que o tamanho das duas listas são iguais, vamos usar qualquer uma delas de parametro para o for
 
     while (aux1 != NULL){
-     if(aux1->info != aux2->info){ // Se infos forem diferentes
+     if(aux1->info != aux2->info) // Se infos forem diferentes
+     {
         free(aux1); // Liberamos o aux1
         free(aux2); // Liberamos o aux2
         return 0; // Listas diferentes
@@ -320,4 +328,3 @@ void libera(Lista x){
         x = NULL;
     }
 }
-
