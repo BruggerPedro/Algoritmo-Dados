@@ -11,7 +11,7 @@ int insere_elem(Lista *lst, float elem);
 int remove_elem(Lista *lst, float elem);
 int esvazia_lista(Lista *lst);
 void apaga_lista(Lista *lst);
-int get_elem_pos(Lista *lst, int pos, float *elem);
+int get_elem_pos(Lista lst, int pos, float *elem);
 
 int tamanho_lista(Lista *lst, int *tam);
 int remove_menor(Lista *lst, float *menor);
