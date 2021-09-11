@@ -298,7 +298,7 @@ void imprime_lista(Lista *l) {
     int tam;
     tamanho_lista(&l,&tam);
 
-    for (i=0;i<tam; i++) { //Não sei quantos elementos tem na lista
+    for (i=1;i<=tam; i++) { //Não sei quantos elementos tem na lista
         int n; // N representa o elemento presente na lista
         get_elem_pos(&l, i, &n);
         printf(" %d ",n);
