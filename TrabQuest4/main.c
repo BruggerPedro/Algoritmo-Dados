@@ -43,7 +43,7 @@ int main() {
 
         } while (op < 1 || op > 11);
 
-        if (op == 10) break; //Sair do sistema
+        if (op == 11) break; //Sair do sistema
 
         else if (op != 1 && flag == 0) {
             printf("\n\n Antes de qualquer operacao, a lista 1 precisa ser CRIADA.");
