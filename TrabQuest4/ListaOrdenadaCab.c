@@ -1,4 +1,5 @@
 #include <stddef.h>
+#include <stdlib.h>
 #include "ListaOrdenadaCab.h"
 
 struct no{
@@ -67,7 +68,7 @@ int insere_ord(Lista *lst, int elem){
 }
 
 int remove_ord(Lista *lst, int elem){
-    if(lista_vazia(lst) == 1) // Se lista for vazia
+    if(lista_vazia(*lst) == 1) // Se lista for vazia
     return 0; //falha
 
     Lista aux = *lst; //Ponteiro auxiliar para o 1°  nó
@@ -130,8 +131,8 @@ void apaga_lista(Lista *lst){
 
 int get_elem_pos(Lista *lst, int pos, float *elem){
     // pos < 1 porque a pos=0 Seria o head
-    if((*lst)->prox == NULL || lista_vazia(lst) || pos < 1)
-        // lst aponta pra null? OU lista é vazia? OU pos <=0 OU pos > proximo?
+    if((*lst)->prox == NULL || lista_vazia(*lst) || pos < 1)
+        // lst aponta pra null? OU lista é vazia? OU pos <0
      return 0; // FALHA
     Lista aux = (*lst)->prox;
     *elem = aux->info; // elem recebe aquela informação do nó atual
@@ -143,24 +144,54 @@ int get_elem_pos(Lista *lst, int pos, float *elem){
 // Incrementos extras:
 
 int tamanho_lista(Lista *lst, int *tam){
+
+    if((*lst)->prox == NULL) {// Se o ponteiro estiver apontando NULL, a lista está vazia
+      return 0;
+        }
+
+    int contador = 0; // Variavel contadora
+
+    if(lista_vazia(*lst) == 1){ // Se lista estiver vazia
+        *tam = contador; //Basta atribuir ao tam o valor que está em contador(0)
+        return 1;
+    }
+
+
+    Lista aux = *lst; // Aux aponta pra inicio da lista
+
+    while(aux->prox != NULL){ // Enquanto "existir" proximo
+        contador++;
+        aux = aux->prox;
+    }
+
+    *tam = contador ; //Como o aux verifica uma posição "a frente" do nó, somamos o contador com +1 (Nó atual que não possui prox nó)
+
+    return 1;
+
+}
+
+/*
+int tamanho_lista(Lista *lst, int *tam){
     if((*lst)->prox == NULL)   // Se o ponteiro->prox estiver null, a lista tá vazia
         return 0;
 
     return((*lst)->info); // O info da cabeça já armazena o tamanho da lista.
 }
+*/
 
 
 
-
-int remove_pos(Lista *lst, int pos, int *valor){
+int remove_pos(Lista *lst, int pos, int *valor)
+{
     if((*lst)->prox == NULL)   // Se o ponteiro->prox estiver null, a lista tá vazia
         return 0;
 
 
-if(pos == 0){ // Se quiser remover a primeira posição, basta usar a função criada
+if(pos == 0) // Se quiser remover a primeira posição, basta usar a função criada
+ {
  int n = ((*lst)->prox)->info;
- int remove_ord(lst,n);
- valor = n;
+ remove_ord(lst,n);
+ (*valor) = n;
  return 1;
 }
 
@@ -182,11 +213,11 @@ while(aux->prox != NULL || contador < pos){
 
 if(contador == pos){
    int n = aux->info;
-   int remove_ord(lst,n);
-    valor = n;
-    return 1;
-}
+   remove_ord(lst,n);
+   (*valor) = n;
 
+}
+return 1;
 }
 
 Lista inverter_lista(Lista *l1){
@@ -198,13 +229,13 @@ Lista l2 = cria_lista(); // Cria a l2 (lista inversa)
 Lista aux = (*l1)->prox; // Aux Lista 1
 
 int tam;
-tamanho_lista((*l1),&tam);
+tamanho_lista(l1,&tam);
 
 int i;
 
 for(i=0;i<tam;i++){   // I percorre o tamanho da lista 1
 
-insere_elem(l2, aux->info);    // Pede para inserir
+insere_ord(&l2, aux->info);    // Pede para inserir
 aux = aux->prox;
 }
 free(aux);
@@ -232,14 +263,14 @@ Lista intercala(Lista *l1,Lista *l2){
     int i;
 
     for(i=0;i<tam1;i++){   // I percorre o tamanho da lista 1
-    insere_ord(l3, aux->info);    // Pede para inserir
+    insere_ord(&l3, aux->info);    // Pede para inserir
     aux = aux->prox;
     }
 
     aux = (*l2)->prox; // Aux agora é pra lista 2
 
     for(i=tam1;i<tamt;i++){
-    insere_ord(l3, aux->info);    // Pede para inserir
+    insere_ord(&l3, aux->info);    // Pede para inserir
     aux = aux->prox;
     }
 
@@ -251,10 +282,16 @@ return l3;
 
 // Funções extras:
 
-int insere_elem(Lista *lst, int elem){
+int insere_elem(Lista *lst, int elem)
+{
+
  // Aloca um novo nó
  Lista N = (Lista) malloc(sizeof(struct no));
- if(N==NULL){ return 0; } //Falha, alocação mal-sucedida
+
+ if(N==NULL) //Falha, alocação mal-sucedida
+    {
+        return 0;
+    }
 
  //Preenche os campos do novo nó
 
@@ -262,6 +299,7 @@ int insere_elem(Lista *lst, int elem){
  N->prox = (*lst)->prox;
  (*lst)->prox = N;
  (*lst)->info++; // Contador de nós
+
  return 1;
 }
 
