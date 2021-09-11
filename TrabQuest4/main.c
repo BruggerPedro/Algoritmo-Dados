@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "ListaFloat.h"
-
+#include "ListaOrdenadaCab.h"
 /*
 Implementar o TAD listanão ordenada de números reais(float) usando alocaçãodinâmica/encadeada SEM cabeçalho.
 Além das operações vistas em sala, o TAD também deve contemplar:
@@ -28,8 +27,8 @@ int main() {
             printf("\n [4] Inserir um elemento na lista");
             printf("\n [5] Remover um elemento na lista");
             printf("\n [6] Mostra o tamanho da lista");
-            printf("\n [7] Remove o menor elemento da lista");
-            printf("\n [8] Verifica a igualdade entre duas listas");
+            printf("\n [7] Remove a posicao da lista");
+            printf("\n [8] Criar lista inversa");
             printf("\n [9] Imprimir a lista");
             printf("\n [10] Intercala listas");
             printf("\n [11] Sair do sistema");
@@ -116,25 +115,25 @@ int main() {
                 }
             }
             case 4:{
-                float n; //Elemento digitado
-                printf("\n Digite o elemento (float) a ser inserido na lista: ");
-                scanf("%f", &n);
+                int n; //Elemento digitado
+                printf("\n Digite o elemento (int) a ser inserido na lista: ");
+                scanf("%d", &n);
 
                 printf("\n Digite [1] para inserir na lista 1 e [2] para inserir na lista 2: \n");
                 scanf("%d", &resp); // resposta da operação
 
                 // Tratamentos:
                 if (resp == 1) {
-                    if (insere_elem(&l, n) == 0)
-                        printf("\n A lista esta cheia! Nao foi possivel incluir o elemento %.2f . ", n);
+                    if (insere_ord(&l, n) == 0)
+                        printf("\n A lista esta cheia! Nao foi possivel incluir o elemento %d . ", n);
                     else
-                        printf("\n O elemento %.2f foi incluido com sucesso! ", n);
+                        printf("\n O elemento %d foi incluido com sucesso! ", n);
                     break;
                 } else if (resp == 2) {
                     if (insere_elem(&l2, n) == 0) {
-                        printf("\n A lista esta cheia! Nao foi possivel incluir o elemento %.2f . ", n);
+                        printf("\n A lista esta cheia! Nao foi possivel incluir o elemento %d . ", n);
                     } else {
-                        printf("\n O elemento %.2f foi incluido com sucesso! ", n);
+                        printf("\n O elemento %d foi incluido com sucesso! ", n);
                     }
                     break;
                 } else {
@@ -144,30 +143,30 @@ int main() {
             }
 
             case 5:{
-                float n;
+                int n;
                 printf("\n Digite o elemento (float) a ser excluido na lista: ");
-                scanf("%f", &n);
+                scanf("%d", &n);
 
                 printf("\n Digite [1] para remover na lista 1 e [2] para remover na lista 2: \n");
                 scanf("%d", &resp);
 
                 if (resp == 1) {
-                    if (remove_elem(&l, n) == 0) {
+                    if (remove_ord(&l, n) == 0) {
                         if (lista_vazia(l) == 1)
                             printf("\n A lista 1 ja esta vazia!");
                         else
-                            printf("\n Nao existe o elemento %f na lista! ", n);
+                            printf("\n Nao existe o elemento %d na lista! ", n);
                     } else
-                        printf("\n o elemento %.2f foi removido com sucesso! ", n);
+                        printf("\n o elemento %d foi removido com sucesso! ", n);
                     break;
                 } else if (resp == 2) {
-                    if (remove_elem(&l2, n) == 0) {
+                    if (remove_ord(&l2, n) == 0) {
                         if (lista_vazia(l2) == 1)
                             printf("\n A lista 2 ja esta vazia!");
                         else
-                            printf("\n Nao existe o elemento %f na lista! ", n);
+                            printf("\n Nao existe o elemento %d na lista! ", n);
                     } else
-                        printf("\n o elemento %.2f foi removido com sucesso! ", n);
+                        printf("\n o elemento %d foi removido com sucesso! ", n);
                     break;
                 } else {
                     printf("\n Opção inválida");
@@ -206,50 +205,42 @@ int main() {
             }
 
             case 7:{
-                float menor;
 
-                printf("\n Digite [1] para remover do menor da lista 1 e [2] para remover o menor da lista 2: \n");
+                int n;
+                printf("\n Digite a posição a ser excluido na lista: ");
+                scanf("%d", &n);
+
+                int valor; //Recebe o valor removido
+
+                printf("\n Digite [1] para remover da lista 1 e [2] para remover da lista 2: \n");
                 scanf("%d", &resp);
 
                 if (resp == 1) {
-                    if (remove_menor(&l, &menor) == -1) {
-                        printf("\n Conseguimos encontrar o menor valor, MAS, não conseguimos remove-lo");
-                        break;
-                    } else if (remove_menor(&l, &menor) == 0) {
-                        printf("\n A lista nao existe! Nao foi possivel remover o menor. ");
+                    if (remove_pos(&l,n,&valor)  == 0) {
+                        printf("\n A lista nao existe! Nao foi possivel remover. ");
                         break;
                     } else {
-                        printf("\n O menor valor era o %.2f e ja foi removido.", menor);
+                        printf("\n O valor era o %d e ja foi removido.", valor);
                         break;
                     }
-                } else if (resp == 2) {
-                    if (remove_menor(&l2, &menor) == -1) {
-                        printf("\n Conseguimos encontrar o menor valor, MAS, não conseguimos remove-lo");
-                        break;
-                    } else if (remove_menor(&l2, &menor) == 0) {
-                        printf("\n A lista nao existe! Nao foi possivel remover o menor. ");
+                }else if (resp == 2) {
+                    if (remove_pos(&l2,n,&valor)  == 0) {
+                        printf("\n A lista nao existe! Nao foi possivel remover. ");
                         break;
                     } else {
-                        printf("\n O menor valor era o %.2f e ja foi removido.", menor);
+                        printf("\n O valor era o %d e ja foi removido.", valor);
                         break;
                     }
-                } else {
+                    }else {
                     printf("\n Opcao invalida! Tente novamente");
                     break;
                 }
-
-            }
-            case 8:{
-                if (listas_iguais(&l, &l2) == 1) {
-                    printf("\n Uma das duas listas nao existe!");
-                    break;
-                } else if (listas_iguais(&l, &l2) == 0) {
-                    printf("\n As listas sao diferentes!");
-                    break;
-                } else {
-                    printf("\n As listas sao IGUAIS!");
                 }
-
+            case 8:{
+                l2 = inverter_lista(&l);
+                printf("\n A lista 2 (inversa) sera apresentada a seguir");
+                imprime_lista(l2);
+                break;
             }
 
             case 9:{
@@ -277,7 +268,7 @@ int main() {
             }
 
             case 10:{
-                l3 = intercala_listas(&l, &l2);
+                l3 = intercala(&l, &l2);
                 imprime_lista(l3);
                 break;
             }
@@ -308,12 +299,11 @@ void imprime_lista(Lista *l) {
     tamanho_lista(&l,&tam);
 
     for (i=0;i<tam; i++) { //Não sei quantos elementos tem na lista
-        float n; // N representa o elemento presente na lista
+        int n; // N representa o elemento presente na lista
         get_elem_pos(&l, i, &n);
-        printf(" %.2f ",n);
+        printf(" %d ",n);
         //printf("O %d elemento da lista eh %d\n",i,n);
 
     }
     printf("} \n Existem %d elementos na lista. \n", i - 1); // i-1 será pq o break está dentro do for.
 }
-
