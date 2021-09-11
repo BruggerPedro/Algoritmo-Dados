@@ -11,7 +11,7 @@ Além das operações vistas em sala, o TAD também deve contemplar:
  Intercalar: recebe duas listas ordenadas e retorna uma nova lista com os elementos dasduas listas de entrada intercalados.
 As listas originais não devem ser alteradas.
  */
-void imprime_lista(Lista *);
+void imprime_lista(Lista );
 
 int main() {
     int op, flag = 0, resp, flag2 = 0; //Flag contabiliza a quantidade de especificações da lista (0 - lista nao criada | 1 - Lista criada)
@@ -40,7 +40,7 @@ int main() {
             setbuf(stdin, NULL);
 
             if (op < 1 || op > 11)
-                printf("\n *** Opcao digitada invalida! As opcoes disponiveis são:");
+                printf("\n *** Opcao digitada invalida! As opcoes disponiveis sao:");
 
         } while (op < 1 || op > 11);
 
@@ -77,7 +77,7 @@ int main() {
                 printf("\n Digite [1] para esvaziar a lista 1 e [2] para esvaziar a lista 2: \n");
                 scanf("%d", &resp);
                 if (resp == 1) {
-                    if (esvazia_lista(l) == 0) {
+                    if (esvazia_lista(&l) == 0) {
                         printf("\n Nao foi possivel esvaziar a lista.");
                         return -1;
                     }
@@ -85,7 +85,7 @@ int main() {
                     break;
                 }
                 else if (resp == 2) {
-                    if (esvazia_lista(l2) == 0) {
+                    if (esvazia_lista(&l2) == 0) {
                         printf("\n Nao foi possivel esvaziar a lista.");
                         return -1;
                     }
@@ -101,12 +101,12 @@ int main() {
                 printf("\n Digite [1] para apagar a lista 1 e [2] para apagar a lista 2: \n");
                 scanf("%d", &resp);
                 if (resp == 1) {
-                    apaga_lista(l);
+                    apaga_lista(&l);
                     printf("\n lista 1 foi APAGADA com sucesso!");
                     flag = 0;
                     break;
                 } else if (resp == 2) {
-                    apaga_lista(l2);
+                    apaga_lista(&l2);
                     printf("\n lista 2 foi APAGADA com sucesso!");
                     flag2 = 0;
                     break;
@@ -294,7 +294,8 @@ int main() {
     }
 
 
-void imprime_lista(Lista *l) {
+
+void imprime_lista(Lista l) {
     if (lista_vazia(l) == 1) {
         printf("\n Lista VAZIA! ");
         return;
@@ -305,15 +306,17 @@ void imprime_lista(Lista *l) {
 
     int i;
     int tam;
+    float n; // N representa o elemento presente na lista
+
     tamanho_lista(&l,&tam);
 
+
     for (i=0;i<tam; i++) { //Não sei quantos elementos tem na lista
-        float n; // N representa o elemento presente na lista
-        get_elem_pos(&l, i, &n);
+
+        get_elem_pos(l, i, &n);
         printf(" %.2f ",n);
-        //printf("O %d elemento da lista eh %d\n",i,n);
+
 
     }
-    printf("} \n Existem %d elementos na lista. \n", i - 1); // i-1 será pq o break está dentro do for.
+    printf("} \n Existem %d elementos na lista. \n", i);
 }
-
