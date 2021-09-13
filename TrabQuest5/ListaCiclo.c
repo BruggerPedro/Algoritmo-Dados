@@ -166,3 +166,49 @@ int insere_inicio(Lista *lst, char elem){
     }
     return 1;
 }
+
+int insere_posicao(Lista *lst,int pos, char elem){
+
+
+if (lista_vazia(*lst) == 1){   // Se a lista estiver vazia
+ return 0; // Quer inserir na posição de uma lista vazia
+}
+
+int tamanho = 0; //Contador de nós da lista.
+Lista aux = (*lst)->prox; //Faz aux apontar para o 1° nó
+
+ while(aux != (*lst)){ // Enquanto ponteiro for != de NULL
+  tamanho++;
+  aux = aux->prox;
+}
+// chegando aqui, o aux tá na ultima posição, logo, só incrementamos mais uma vez.
+tamanho++;
+
+// Temos a quantidade de nós, basta verificar.
+
+if(pos<1 || pos > tamanho){ // Posição for menor que 1 e maior que tamanho
+  return 0; //Erro!
+}
+// Lembrando que posição 1 = primeiro elemento. Entao posição 0 não existe!
+
+
+int contador = 1; //Localizar a posição a se inserir na lista;
+aux = (*lst)->prox; //Faz aux apontar para o 1° nó
+
+while(contador<pos){    //Enquanto estivermos antes de pos
+    aux = aux->prox;
+    contador++;
+}
+
+// Aux aponta para o local a ser inserido.
+aux->info = elem; // Atribuimos ao info o elemento desejado.
+
+return 1; // Sucesso
+}
+
+
+/*Remover no fim: remover o último elemento da lista, retornando seu valor para a
+aplicação.*/
+
+/*Remover vogais: remove todos os elementos da lista que são vogais.
+*/
