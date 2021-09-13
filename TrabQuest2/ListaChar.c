@@ -2,16 +2,6 @@
 #include "ListaChar.h"
 #define MAX 10
 #define WORD 15
-/*Implementar o TAD lista não ordenada de strings com no máximo 10 elementos, cada um
-com até 15 caracteres, usando alocação estática/sequencial. Além das operações vistas em sala,
-o TAD também deve contemplar:
- Remover todas: remove todas as strings da lista que começam com um dado caractere.
- Remover maior: remove e retorna a maior string da lista. No caso de empate, deve-se
-remover a primeira ocorrência encontrada.
- Tamanho: retorna o número de elementos da lista.
- Concatenar: recebe duas listas (L1 e L2) e retorna uma nova lista L3 com os elementos de
-L1 seguidos dos elementos de L2. As listas originais não devem ser alteradas.
-*/
 
 struct lista {
     char no[MAX][WORD];// Nó que vai ser limitado por MAX[10] posições(definido pelo programador). OBS: Colunas serão as Strings
@@ -19,8 +9,16 @@ struct lista {
 };
 
 
+//_______________________________________________________________________________________________________________
 
-// Mesmo sendo Lista estática, precisamos alocar a estrutura.
+/*
+Operação: cria_lista
+- Entrada: Sem entrada.
+  Pré-Condição: Sem pré-condições.
+- Processo: Alocação e criação da lista e de seu ponteiro.
+- Saída: Ponteiro que referencia o local onde foi criada a lista(Podendo ser NULL quando mal-alocado).
+- Pós-condição: Sem pós-condição.
+*/
 
 Lista cria_lista() { // Alocar uma instancia da estrutura lista(malloc).
 
@@ -33,6 +31,17 @@ Lista cria_lista() { // Alocar uma instancia da estrutura lista(malloc).
     return lst; // Retornamos o endereço de ponteiro(lst).
 }
 
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: lista_vazia;
+- Entrada: Endereço de uma lista.
+- Pré-Condição: Lista existir (Endereço ser valido)
+- Processo: Verifica se a lista está vazia.
+- Saída: -1 (Lista não existe), 0 (Lista não está vazia), 1 (Lista vazia)
+- Pós-condição: Sem pós-condição.
+*/
+
 int lista_vazia(Lista lst) {
     if (lst == NULL) {
         return -1; // Ponteiro nao esta apontando pra lista valida/existente, entao declaramos como ERRO
@@ -43,6 +52,16 @@ int lista_vazia(Lista lst) {
         return 0; // Ha elementos dentro da lista, portanto nao esta vazia
 }
 
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: lista_cheia
+- Entrada: Endereço de uma lista.
+- Pré-Condição: Lista existir (Endereço ser valido)
+- Processo: Verifica se a lista está cheia.
+- Saída: -1 (Lista não existe), 0 (Lista não está cheia), 1 (Lista cheia)
+- Pós-condição: Sem pós-condição.
+*/
 int lista_cheia(Lista lst) {
     if (lst == NULL) {
         return -1; // Ponteiro nao esta apontando pra lista valida/existente, então declaramos como ERRO
@@ -56,6 +75,16 @@ int lista_cheia(Lista lst) {
     // Pode se fazer tirando da linha 37 ate 40, apenas fazendo: return(lst->fim == MAX)
 }
 
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: insere_elem;
+- Entrada: Endereço de uma lista e o elemento (string (vetor de char)) a ser inserido.
+- Pré-Condição: Lista existir (Endereço ser valido) e elemento ser um vetor de char.
+- Processo: Insere (de forma não ordenada) o elemento na lista fornecida.
+- Saída: 0 (Lista não existe ou Lista cheia), 1 (Elemento inserido com sucesso).
+- Pós-condição: O elemento foi inserido na lista de forma não ordenada.
+*/
 int insere_elem(Lista lst, char elem[]){ //Insere o(s) elemento(s) de forma ordenada
 
     if (lst == NULL || lista_cheia(lst) == 1) //Possuimos 10 palavras
@@ -68,6 +97,17 @@ int insere_elem(Lista lst, char elem[]){ //Insere o(s) elemento(s) de forma orde
     lst->fim++; //Avança o fim
     return 1; //Sucesso
 }
+
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: remove_elem;
+- Entrada: Endereço de uma lista e o elemento (string (vetor de char)) a ser removido.
+-  Pré-Condição: Lista existir (Endereço ser valido) e elemento ser (string (vetor de char)).
+- Processo: Remove o elemento na lista fornecida.
+- Saída: 0 (Lista não existe ou lista vazia, ou elemento não presente na lista), 1 (Elemento removido com sucesso).
+- Pós-condição: O elemento foi removido na lista.
+*/
 
 int remove_elem(Lista lst, char elem[]){
     if(lst == NULL || lista_vazia(lst) == 1){
@@ -112,6 +152,16 @@ int remove_elem(Lista lst, char elem[]){
 
 }
 
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: apaga_lista
+- Entrada: Endereço do endereço de uma lista
+- Pré-Condição: endereço ser válido (primeiro endereço “ponteiro de ponteiro”)
+- Processo: liberar a instancia da lista e apagar o seu endereço
+- Saída: 1 (sucesso) ou 0 (falha)
+- Pós-condição: instancia da lista liberada.
+*/
 
 int apaga_lista(Lista *end_lst){
     if(end_lst == NULL) //Se o ponteiro não aponta pra lista
@@ -122,6 +172,17 @@ int apaga_lista(Lista *end_lst){
 
     return 1;
 }
+
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: esvazia_lista
+- Entrada: Endereço de uma lista
+- Pré-Condição: Lista existir (Endereço ser valido)
+- Processo: Colocar a lista no estado de vazia
+- Saída: 1 (sucesso) ou 0 (falha)
+- Pós-condição: a instancia da lista no estado de vazia
+*/
 
 int esvazia_lista(Lista lst){
      if(lst == NULL ){
@@ -137,6 +198,18 @@ int esvazia_lista(Lista lst){
 
 
 // [CASA] fim = 1
+
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: get_elem_pos
+- Entrada: Endereço de uma lista, posição a obter o elemento e uma variavel para receber a informação da dita posição.
+-  Pré-Condição: Lista existir (Endereço ser valido).
+- Processo: Através da posição fornecida, busca-se na lista o elemento correspondente aquela posição e o retorna atraves da variavel fornecida.
+- Saída: 1 (sucesso) ou 0 (falha)
+- Pós-condição: A variavel recebe o valor do elemento presente na posição fornecida.
+*/
+
 int get_elem_pos(Lista lst, int pos, char *ponteiro){
     int i;
         // pos = Posição do elemento na lista (começa com 1)
@@ -154,10 +227,24 @@ int get_elem_pos(Lista lst, int pos, char *ponteiro){
 }
 
 
-// INCREMENTOS DA QUESTÃO 2:
+// _______________________________________________________________________________________________________________
+
+// Operações especiais:
+// _______________________________________________________________________________________________________________
 
 
-//Remover todas: remove todas as strings da lista que começam com um dado caractere.
+// _______________________________________________________________________________________________________________
+
+
+/*
+Operação: remove_todas
+- Entrada: Endereço de uma lista e a letra (char).
+-  Pré-Condição: Lista existir (Endereço ser valido).
+- Processo: Percorre toda a lista e remove(se existir) as “palavras” presentes na lista que iniciam com a letra fornecida.
+- Saída: 1 (sucesso) ou 0 (falha).
+- Pós-condição: A lista agora não provém de palavras com a letra fornecida.*/
+
+
 int remove_todas(Lista lst, char letra){ // C
 
 if(lst == NULL || lista_vazia(lst) == 1) //ponteiro nulo ou lista vazia
@@ -178,8 +265,18 @@ char palavra[15]; // Guardar a palavra a ser removida.
 return 1;
 }
 
-//Remover maior: remove e retorna a maior string da lista.
-//No caso de empate, deve-se remover a primeira ocorrência encontrada.
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: remove_maior
+- Entrada: Endereço de uma lista.
+- Pré-Condição: Lista existir (Endereço ser valido).
+- Processo: Percorre toda a lista e remove a maior “palavra” da lista.
+- Saída: 1 (sucesso) ou 0 (falha).
+- Pós-condição: A lista agora não provém da maior palavra verificada.
+*/
+
+
 int remove_maior(Lista lst){
 if(lst == NULL || lista_vazia(lst) == 1) //ponteiro nulo ou lista vazia
     return 0;
@@ -211,7 +308,15 @@ if(lst == NULL || lista_vazia(lst) == 1) //ponteiro nulo ou lista vazia
         return 1;
 }
 
-//Tamanho: retorna o número de elementos da lista.
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: tamanho_lista
+- Entrada: Endereço de uma lista e uma variavel para receber o tamanho da lista.
+- Pré-Condição: Lista existir (Endereço ser valido).
+- Processo: Percorre toda a lista e contabiliza o tamanho da mesma.
+- Saída: 1 (sucesso) ou 0 (falha)
+- Pós-condição: A lista foi contabilizada e seu tamanho foi atribuido para a variavel vinda de argumento.*/
 
 int tamanho_lista(Lista lst, int *tamanho){
 
@@ -224,17 +329,21 @@ int tamanho_lista(Lista lst, int *tamanho){
     return 1;
 }
 
+// _______________________________________________________________________________________________________________
 
-//Concatenar: recebe duas listas (L1 e L2) e retorna uma nova lista L3 com os elementos de
-//L1 seguidos dos elementos de L2. As listas originais não devem ser alteradas.
 
-// l1[ZUMBIDO] l2[CARRO]
-// l3 [CASA CARRO]
+/*
+Operação: concatena_listas
+- Entrada: Endereço de duas listas a serem intercaladas.
+- Pré-Condição: Listas existirem (Endereço ser valido).
+- Processo: Recebe duas listas (L1 e L2) e retorna uma nova lista L3 com os elementos de L1 seguidos dos elementos de L2. As listas originais não devem ser alteradas.
+- Saída: NULL(Caso alguma das listas fornecidas não existe) ou ponteiro que referencia o local onde foi criada a terceira lista.
+- Pós-condição: Sem pós-condição.*/
 
 Lista concatena_listas(Lista l1, Lista l2){
     int i,j;
     if(l1 == NULL || l2 == NULL)
-    return 0; //Uma das duas listas não existe, logo, não podemos seguir
+    return NULL; //Uma das duas listas não existe, logo, não podemos seguir
 
 
     int vetor[MAX*2][WORD]; // Vetor com o dobro de palavras
@@ -307,7 +416,16 @@ Lista concatena_listas(Lista l1, Lista l2){
 
    return l3;
 }
+// _______________________________________________________________________________________________________________
 
+/*
+Operação: libera
+- Entrada: Endereço de uma lista
+- Pré-Condição: Lista existir (Endereço ser valido)
+- Processo: Retira a alocação (Libera) de uma determinada lista.
+- Saída: Sem saida (VOID).
+- Pós-condição: A lista foi “liberada” da memoria.
+*/
 
 
 void libera(Lista x){
@@ -318,3 +436,4 @@ void libera(Lista x){
     }
 }
 
+// _______________________________________________________________________________________________________________
