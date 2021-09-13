@@ -1,26 +1,37 @@
-#include <stdio.h>
+#include <stddef.h>
+#include <stdlib.h>
 #include "ListaCiclo.h"
 
-/* BASICAS            *           PEDIDAS NO EXERCICIO
-1 - cria lista OK     *           - Inserir no inicio OK
-2-  lista vazia OK    *           - Inserir na posiçao OK
-3-  lista_cheia OK    *           - Remover no fim OK
-4-  insere_final OK   *           - Remover vogais  OK
-5-  remove_inicio OK  *
-6-  esvazia_lista OK  *
-7- apaga lista OK     *
-8- get elem pos OK    */
-
-struct no
-{
-    char info;
-    struct no * prox;
+struct no{
+    char info; // letra
+    struct no * prox; // Por ser dinamico, agora temos um ponteiro que "aponta" ao proximo nó
 };
 
+//_______________________________________________________________________________________________________________
+
+/*
+Operação: cria_lista
+- Entrada: Sem entrada.
+  Pré-Condição: Sem pré-condições.
+- Processo: Cria uma lista e retorna o endereço de uma lista apontando pra NULL.
+- Saída: NULL
+- Pós-condição: Sem pós-condição.
+*/
 
 Lista cria_lista() {
     return NULL;
 }
+
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: lista_vazia;
+- Entrada: Endereço de uma lista.
+- Pré-Condição: Sem pré-condições.
+- Processo: Verifica se a lista está vazia.
+- Saída: 0 (Lista não está vazia), 1 (Lista vazia)
+- Pós-condição: Sem pós-condição.
+*/
 
 int lista_vazia (Lista lst) {
     if (lst == NULL)  {
@@ -40,6 +51,16 @@ int lista_vazia (Lista lst) {
 //return 0;
 //}
 // _______________________________________________________________________________________________________________
+
+/*
+Operação: insere_final;
+- Entrada: Endereço do endereço de uma lista e o elemento (char) a ser inserido.
+- Pré-Condição: Lista existir (Endereço ser valido) e elemento ser um char.
+- Processo: Insere (ao final) o elemento na lista fornecida.
+- Saída: 0 (Lista não existe), 1 (Elemento inserido com sucesso).
+- Pós-condição: O elemento foi inserido na lista.
+*/
+
 
 int insere_final(Lista *lst, char elem){
 // Alocar um novo nó e preencher campo info
@@ -63,6 +84,18 @@ N->info = elem; // Insere o conteudo
  return 1;
 }
 
+// _______________________________________________________________________________________________________________
+
+
+/*
+Operação: remove_inicio;
+- Entrada: Endereço do endereço de uma lista e uma variavel para receber o valor excluido.
+- Pré-Condição: Lista existir (Endereço ser valido) e elemento ser um char.
+- Processo: Remove o primeiro nó.
+- Saída: 0 (Lista vazia ou elemento não presente na lista), 1 (Elemento removido com sucesso).
+- Pós-condição: O elemento foi removido na lista.
+*/
+
 int remove_inicio(Lista *lst, char *elem){
 
 // Se lista estiver vazia:
@@ -84,7 +117,17 @@ return 1; //Sucesso
 
 }
 
-// Esvazia
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: esvazia_lista
+- Entrada: Endereço do endereço de uma lista
+- Pré-Condição: Lista existir (Endereço ser valido)
+- Processo: Esvaziar a lista.
+- Saída: 1 (sucesso) ou 0 (falha)
+- Pós-condição: a instancia da lista no estado de vazia
+*/
+
 int esvazia_lista(Lista *lst){
     if((*lst) == NULL){ // Se o ponteiro estiver apontando NULL, a lista está vazia
         return 0;
@@ -108,6 +151,16 @@ int esvazia_lista(Lista *lst){
 }
 
 
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: apaga_lista
+- Entrada: Endereço do endereço de uma lista
+- Pré-Condição: endereço ser válido (primeiro endereço “ponteiro de ponteiro”)
+- Processo: liberar a instancia da lista e apagar o seu endereço
+- Saída: 1 (sucesso) ou 0 (falha)
+- Pós-condição: instancia da lista liberada.
+*/
 
 void apaga_lista(Lista *lst)
 {
@@ -121,6 +174,16 @@ void apaga_lista(Lista *lst)
         free(*lst);
         lst=NULL;
 }
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: get_elem_pos
+- Entrada: Endereço de uma lista, posição a obter o elemento.
+-  Pré-Condição: Lista existir (Endereço ser valido), e posição ser maior que 0.
+- Processo: Através da posição fornecida, busca-se na lista o elemento correspondente aquela posição e o retorna atraves da variavel fornecida.
+- Saída: Retorna a informação em char.
+- Pós-condição: sem pós condição
+*/
 
 
 char get_elem_pos(Lista lst, int pos)
@@ -141,9 +204,25 @@ char get_elem_pos(Lista lst, int pos)
     }
 }
 
+// _______________________________________________________________________________________________________________
+
+// Operações especiais:
+// _______________________________________________________________________________________________________________
 
 
-// EXTRAS
+// _______________________________________________________________________________________________________________
+
+
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: insere_inicio;
+- Entrada: Endereço do endereço de uma lista e o elemento (char) a ser inserido.
+- Pré-Condição: Lista existir (Endereço ser valido) e elemento ser um char.
+- Processo: Insere (ao inicio) o elemento na lista fornecida.
+- Saída: 0 (Lista não existe), 1 (Elemento inserido com sucesso).
+- Pós-condição: O elemento foi inserido na lista.
+*/
 
 int insere_inicio(Lista *lst, char elem){
 
@@ -167,6 +246,14 @@ int insere_inicio(Lista *lst, char elem){
     return 1;
 }
 
+/*
+Operação: insere_posicao;
+- Entrada: Endereço do endereço de uma lista , a posição a inserir e o elemento (char) a ser inserido.
+- Pré-Condição: Lista existir (Endereço ser valido), posição menor que o tamanho e elemento ser um char.
+- Processo: Insere (na posição) o elemento na lista fornecida.
+- Saída: 0 (Lista não existe), 1 (Elemento inserido com sucesso).
+- Pós-condição: O elemento foi inserido na lista.
+*/
 int insere_posicao(Lista *lst,int pos, char elem){
 
 
@@ -206,6 +293,17 @@ aux->info = elem; // Atribuimos ao info o elemento desejado.
 return 1; // Sucesso
 }
 
+
+/*
+
+Operação: remover_fim;
+- Entrada: Endereço do endereço de uma lista e uma variavel para receber o valor excluido.
+- Pré-Condição: Lista existir (Endereço ser valido) e elemento ser um char.
+- Processo: Remove o ultimo nó.
+- Saída: 0 (Lista vazia ou elemento não presente na lista), 1 (Elemento removido com sucesso).
+- Pós-condição: O elemento foi removido na lista.
+*/
+
 int remover_fim(Lista *lst,char *elem){
 
  // Se lista estiver vazia:
@@ -238,8 +336,16 @@ Lista aux = (*lst)->prox; //Faz aux apontar para o 1° nó
   return 1;
 }
 
-/*Remover vogais: remove todos os elementos da lista que são vogais.
+
+/*
+Operação: remove_vogais;
+- Entrada: Endereço do endereço de uma lista.
+- Pré-Condição: Lista existir (Endereço ser valido).
+- Processo: Remove todos os nós com vogais.
+- Saída: 0 (Lista vazia), 1 (Elementos removidos com sucesso).
+- Pós-condição: Os elementos foram removido na lista.
 */
+
 
 int remove_vogais(Lista *lst){
 
@@ -316,3 +422,23 @@ if ( (aux->info == 'A') ||  (aux->info == 'a') ||
          return 1;
 
 }
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: libera
+- Entrada: Endereço de uma lista
+- Pré-Condição: Lista existir (Endereço ser valido)
+- Processo: Retira a alocação (Libera) de uma determinada lista.
+- Saída: Sem saida (VOID).
+- Pós-condição: A lista foi “liberada” da memoria.
+*/
+
+void libera(Lista x){
+
+    if(x != NULL){
+        free(x);
+        x = NULL;
+    }
+}
+
+// _______________________________________________________________________________________________________________
