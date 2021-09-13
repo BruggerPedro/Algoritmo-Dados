@@ -1,22 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "ListaOrdenadaCab.h"
-/*
-Implementar o TAD listanão ordenada de números reais(float) usando alocaçãodinâmica/encadeada SEM cabeçalho.
-Além das operações vistas em sala, o TAD também deve contemplar:
- Tamanho: retorna o número de elementos da lista.
- Remover menor: remove e retornao menor número da lista. No caso de empate, deve-seremover a última ocorrência encontrada.
- Iguais: recebe duas listas ordenadas e verifica se elas são iguais.
- Intercalar: recebe duas listas ordenadas e retorna uma nova lista com os elementos dasduas listas de entrada intercalados.
-As listas originais não devem ser alteradas.
- */
+
+// Prototipo da função imprime_lista.
 void imprime_lista(Lista *);
 
 int main() {
-    int op, flag = 0, resp, flag2 = 0; //Flag contabiliza a quantidade de especificações da lista (0 - lista nao criada | 1 - Lista criada)
-    Lista l;
-    Lista l2;
-    Lista l3;
+
+    int op; // Variavel responsavel por receber a opção desejada do menu
+    int flag = 0,flag2 = 0; //Flag contabiliza a quantidade de especificações da lista (0 - lista nao criada | 1 - Lista criada)
+    int resp; // Variavel responsavel por selecionar se a operação será realizada na lista 1 ou lista 2
+    Lista l; Lista l2; Lista l3; // Declaração das "listas".
+
     do { // Programa
         do { //Menu
             //Obtem a opção do usuario
@@ -51,7 +46,7 @@ int main() {
         }
 
         switch (op) {
-            case 1: {
+            case 1: { // Cria uma lista
 
                 printf("\n Digite [1] para criar na lista 1 e [2] para criar na lista 2: \n");
                 scanf("%d", &resp);
@@ -72,7 +67,7 @@ int main() {
                 }
             }
 
-            case 2:{
+            case 2:{ // Esvaziar a lista:
                 printf("\n Digite [1] para esvaziar a lista 1 e [2] para esvaziar a lista 2: \n");
                 scanf("%d", &resp);
                 if (resp == 1) {
@@ -96,7 +91,7 @@ int main() {
                 }
             }
 
-            case 3:{
+            case 3:{ // Apagar
                 printf("\n Digite [1] para apagar a lista 1 e [2] para apagar a lista 2: \n");
                 scanf("%d", &resp);
                 if (resp == 1) {
@@ -114,7 +109,7 @@ int main() {
                     break;
                 }
             }
-            case 4:{
+            case 4:{ //Inserir elemento na lista
                 int n; //Elemento digitado
                 printf("\n Digite o elemento (int) a ser inserido na lista: ");
                 scanf("%d", &n);
@@ -142,7 +137,7 @@ int main() {
                 }
             }
 
-            case 5:{
+            case 5:{ // Remove um elemento na lista
                 int n;
                 printf("\n Digite o elemento (float) a ser excluido na lista: ");
                 scanf("%d", &n);
@@ -173,7 +168,7 @@ int main() {
                     break;
                 }
             }
-            case 6:{
+            case 6:{ // Tamanho
                 int tam1, tam2;
                 printf("\n Digite [1] para mostrar tamanho da lista 1 e [2] para mostrar oo tamanho da lista 2 e [3] para mostrar o tamanho de ambas as listas: \n");
                 scanf("%d", &resp);
@@ -204,7 +199,7 @@ int main() {
                 }
             }
 
-            case 7:{
+            case 7:{ // Remove por posição
 
                 int n;
                 printf("\n Digite a posição a ser excluido na lista: ");
@@ -236,14 +231,14 @@ int main() {
                     break;
                 }
                 }
-            case 8:{
+            case 8:{ // Inverter lista
                 l2 = inverter_lista(&l);
                 printf("\n A lista 2 (inversa) sera apresentada a seguir");
                 imprime_lista(l2);
                 break;
             }
 
-            case 9:{
+            case 9:{ // Imprimir
                 printf("\n Digite:\n");
                 printf("\n [1] para imprimir a lista 1.");
                 printf("\n [2] para imprimir a lista 2.");
@@ -267,7 +262,7 @@ int main() {
                 }
             }
 
-            case 10:{
+            case 10:{ //Intercala
                 l3 = intercala(&l, &l2);
                 imprime_lista(l3);
                 break;
@@ -284,6 +279,14 @@ int main() {
         return 0;
     }
 
+/*
+Operação: imprime_lista
+- Entrada: Endereço de uma lista
+-  Pré-Condição: Lista existir (Endereço ser valido)
+- Processo: Ao percorrer a lista, apresentamos sua informação na aplicação.
+- Saída: Por se tratar de um retorno VOID, a saida não existe.
+- Pós-condição: Sem pós-condição.
+*/
 
 void imprime_lista(Lista *l) {
     if (lista_vazia(l) == 1) {
