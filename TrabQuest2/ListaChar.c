@@ -1,5 +1,4 @@
 #include <stdlib.h>
-#include <string.h>
 #include "ListaChar.h"
 #define MAX 10
 #define WORD 15
