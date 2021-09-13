@@ -3,8 +3,8 @@
 
 /* BASICAS            *           PEDIDAS NO EXERCICIO
 1 - cria lista OK     *           - Inserir no inicio OK
-2-  lista vazia OK    *           - Inserir na posiçao
-3-  lista_cheia OK    *           - Remover no fim
+2-  lista vazia OK    *           - Inserir na posiçao OK
+3-  lista_cheia OK    *           - Remover no fim OK
 4-  insere_final OK   *           - Remover vogais
 5-  remove_inicio OK  *
 6-  esvazia_lista OK  *
@@ -206,9 +206,40 @@ aux->info = elem; // Atribuimos ao info o elemento desejado.
 return 1; // Sucesso
 }
 
-
 /*Remover no fim: remover o último elemento da lista, retornando seu valor para a
 aplicação.*/
+
+int remover_fim(Lista *lst,char *elem){
+
+ // Se lista estiver vazia:
+  if (lista_vazia(*lst) == 1)
+  return 0; // Falha
+
+
+Lista aux = (*lst)->prox; //Faz aux apontar para o 1° nó
+
+  if(*lst == (*lst)->prox){ // Apenas um nó
+    elem = aux->info; //Retorna valor do nó a ser removido
+    *lst = NULL; //Fazemos a lista apontar pra nada (Já que excluiremos o unico nó)
+    free(aux);
+    return 1;
+  }
+
+  // Existe  +1 nó:
+
+  while(aux->prox != (*lst)){ // Enquanto for diferente da "ultima posição"
+    aux = aux->prox;
+  }
+
+  // Estamos na "penultima" posição;
+  aux->prox = (*lst)->prox; // Aux aponta pra onde o "ultimo" apontava
+  (*lst) = aux;
+  aux = aux->prox; //Avançando aux pra ultima posição.
+
+  free(aux);
+
+  return 1;
+}
 
 /*Remover vogais: remove todos os elementos da lista que são vogais.
 */
