@@ -145,23 +145,24 @@ char get_elem_pos(Lista lst, int pos)
 
 // EXTRAS
 
-int insere_inicio(Lista *lst, char elem)
-{
-    Lista N = (Lista) malloc(sizeof(struct no));
+int insere_inicio(Lista *lst, char elem){
 
-    if (N == NULL) {
-            return 0;
-    }
+    Lista N = (Lista) malloc(sizeof(struct no)); // Aloca o novo nó
+
+    if (N == NULL) //Falha na alocação do nó
+    return 0;
+
     N->info = elem; // Insere o conteúdo (valor do elem)
-    if (lista_vazia(*lst) == 1)
-    {
+
+    if (lista_vazia(*lst) == 1){   // Se a lista estiver vazia
+
         N->prox = N; // Faz o novo nó apontar para ele mesmo
         *lst = N; // Faz a lista apontar para o novo nó, que é o primeiro
-    }
-    else
-    {
-        N->prox = (*lst)->prox; // Faz o novo nó apontar para o antigo nó
-        (*lst)->prox= N; // Faz o último nó apontar para o novo nó
+
+    }else{ // Existe ao menos um elemento na lista:
+
+        N->prox = (*lst)->prox; // Faz o novo nó apontar para antigo começo da lista
+        (*lst)->prox = N; // Faz o último nó apontar para o novo nó
     }
     return 1;
 }
