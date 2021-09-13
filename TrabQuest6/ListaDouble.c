@@ -1,38 +1,46 @@
 #include <stdio.h>
 #include "ListaDouble.h"
 
-/*Implementar o TAD lista não ordenada de números reais (double) usando alocação dinâmica
-com encadeamento duplo. Além das operações vistas em sala, o TAD deve contemplar:
- Remover todos: remove todas as ocorrências de um elemento da lista
- Remover maior: remove o maior elemento encontrado na lista, retornando seu valor. No
-caso de empate, deve-se remover a primeira ocorrência encontrada.
- Inserir na posição: insira o elemento em uma posição indicada. A operação deve verificar
-se a posição desejada é válida.
- Inverter: recebe uma lista L e retorna uma nova lista L2, formada pelos elementos de L na
-ordem inversa. A lista original não deve ser alterada
-*/
 
 /* BASICAS              *           PEDIDAS NO EXERCICIO
-1 - cria lista   OK     *           - Remover todos
-2-  lista vazia         *           - Remover maior OK
-3-  get elem pos OK     *           - Inserir na posição OK
-4-  apaga lista  OK     *           - Inverter EM ANDAMENTO
-5-                      *
-6-                      *
-7-                      *
-8-                      */
+1 - cria lista   ok     *           - Remover todos ok
+2-  lista vazia    ok               - Remover maior ok
+3 - Lista cheia    ok                - Inserir na posição ok
+4 - insere  ok          *           - Inverter OK
+5 - remove ok
+6 - esvazia ok
+7 - apaga lista  ok
+8 - get elem pos  ok    *
+                        *
+*/
 
-struct no
-{
-    int info;
+/*lista_cheia, insere, remove, esvazia_lista, apaga_lista, get_elem_pos*/
+
+struct no{
+    double info; // Elemento
     struct no *ant;
     struct no *prox;
 };
 
-Lista cria_lista()
-{
+Lista cria_lista(){
     return NULL;
 }
+
+int lista_vazia (Lista lst) {
+       if (lst == NULL)
+        return 1;
+       else
+        return 0;
+}
+// _______________________________________________________________________________________________________________
+
+/* Na teoria, não existe como "encher" uma lista dinamica, [exceto pela limitação de espaço na memoria])*/
+
+
+//int lista_cheia(Lista *li){
+//return 0;
+//}
+// _______________________________________________________________________________________________________________
 
 int insere_elemento(Lista *lst, int elem)
 {
@@ -59,45 +67,59 @@ int remove_elemento(Lista *lst, int elem)
             aux = aux->prox;
     if (aux->info != elem)
         return 0; // Elemento não está na lista
-    if (aux->prox != NULL)
-        (aux)->prox->ant = aux->ant;
-    if (aux->ant != NULL)
-        (aux)->ant->prox = aux->prox;
+
+    if (aux->prox != NULL) // Se o proximo elemento existir
+        (aux)->prox->ant = aux->ant;  // ant do proximo recebe o ant do aux
+
+    if (aux->ant != NULL) // Se o elemento anterior existir
+        (aux)->ant->prox = aux->prox; // proximo do anterior recebe o prox do aux
+
     if (aux == *lst) *lst = aux->prox;
     free(aux);
     return 1;
 }
 
-
-
-int remove_maior(Lista *lst, int *elem)
+void apaga_lista(Lista *lst)
 {
-    Lista maior;
-    if(lista_vazia(*lst)==1)
-        return 0;
-    if ((*lst)->prox == NULL)
-    {
+    Lista aux = *lst;
+    while ((*lst)->prox != NULL)//ENQUANTO o próximo elemento não for  último
+        {
+            (*lst) = (*lst)->prox; //Percorre a lista
+            free(aux);//Aumenta o contador
+            aux = *lst;
+        }
         free(*lst);
-        return 1;
+        lst=NULL;
+}
+
+int esvazia_lista(Lista *lst){
+
+    if(lst == NULL) { // Se o ponteiro estiver apontando NULL, a lista está vazia
+      return 0;
+      }
+
+    Lista aux = *lst; //Ponteiro auxiliar aponta para o começo da lista
+    Lista aux2 = NULL;
+
+
+    if( ((*lst)->prox == NULL) && (*lst)->ant == NULL){ // Verifica se é nó unico
+      (*lst) = NULL;
+      free(aux);
+      return 1; // Sucesso
     }
-    maior = *lst;
-    Lista aux = (*lst)->prox;
-    while (aux->prox != NULL)
-    {
-        if(aux->info>maior->info)
-            maior = aux;
-        aux=aux->prox;
+
+    while(aux->prox != NULL){
+    aux2 = aux->prox;
+    free(aux);
+    aux = aux2;
     }
-    if(aux->info>maior->info)
-            maior = aux;
-    if (maior->prox != NULL)
-        (maior)->prox->ant = maior->ant;
-    if (maior->ant != NULL)
-        (maior)->ant->prox = maior->prox;
-    if (maior == *lst) *lst = maior->prox;
-    *elem = maior->info;
-    free(maior);
-    return 1;
+
+    // Aux está no ultimo nó
+    (*lst) = NULL;
+      free(aux);
+
+    return 1; // Sucesso
+
 }
 
 int get_elem_pos(Lista lst, int pos)
@@ -118,57 +140,159 @@ int get_elem_pos(Lista lst, int pos)
     }
 }
 
-void apaga_lista(Lista *lst)
-{
-    Lista aux = *lst;
-    while ((*lst)->prox != NULL)//ENQUANTO o próximo elemento não for  último
-        {
-            (*lst) = (*lst)->prox; //Percorre a lista
-            free(aux);//Aumenta o contador
-            aux = *lst;
-        }
-        free(*lst);
-        lst=NULL;
+// Remover todos
+int remove_todos(Lista *lst, double *elem){
+
+if(lst == NULL) { // Se o ponteiro estiver apontando NULL, a lista está vazia
+      return 0;
 }
 
-Lista inverte(Lista* lst)
-{
-    Lista aux = *lst;
-    Lista lst2 = cria_lista();
-    while (aux->prox != NULL)//ENQUANTO existir prox elemento
-        {
-            aux = aux->prox; //Percorre a lista
+
+Lista aux = *lst;
+
+// Nó unico
+if( ((*lst)->prox == NULL) && (*lst)->ant == NULL){ // Verifica se é nó unico
+
+if(aux->info == elem){ // Elemento passado é exatamente o presente no nó
+   remove_elemento(*lst,elem);
+}else{ // Se o elemento for diferente
+ return 1;
+}
+}
+
+do{
+
+  if(aux->info != elem){ // Verificação, se a info do aux é diferente
+  aux = aux->prox; //Movimentar o aux
+}
+
+// Achou um nó com o elemento
+remove_elemento(*lst,elem);
+aux = aux->prox;
+
+}while (aux->prox != NULL) // Repete até entrar no ultimo nó
+
+// Ultimo nó
+if(aux->info == elem){ // Elemento passado é exatamente o presente no nó
+   remove_elemento(*lst,elem);
+   return 1;
+}else{ // Se o elemento for diferente
+ return 1;
+}
+
+
+int remove_maior(Lista *lst, double *elem){
+
+    if(lst == NULL || lista_vazia(*lst)== 1){
+        return 0;
+    }
+
+    Lista maior = NULL;
+
+    if ((*lst)->prox == NULL) // Verifica se existe apenas um nó
+    {
+        free(*lst);
+        return 1;
+    }
+
+    // +1 no
+
+    maior = *lst;
+    Lista aux = (*lst)->prox; //aux está a frente do ponteiro "maior"
+
+
+    while (aux->prox != NULL)
+    {
+        if(aux->info>maior->info)
+            maior = aux;
+        aux=aux->prox;
+    }
+
+    if(aux->info > maior->info)
+            maior = aux;
+    if (maior->prox != NULL)
+        (maior)->prox->ant = maior->ant;
+    if (maior->ant != NULL)
+        (maior)->ant->prox = maior->prox;
+    if (maior == *lst) *lst = maior->prox;
+
+    // Chegando aqui, temos o maior no (Ponteiro maior)
+    *elem = maior->info;
+
+    free(maior);
+    return 1;
+}
+
+int insere_posicao(Lista *lst, int pos, char elem){
+
+    if(lst == NULL){
+    return 0;
+    }
+
+   // Inserir na lista vazia
+    if (lista_vazia(*lst) == 1){   // Se a lista estiver vazia
+    return 0; // Quer inserir na posição de uma lista vazia
+    }
+
+   Lista aux = *lst;
+
+   // Inserir na lista com apenas 1 nó
+   if(aux->prox == NULL && aux->ant == NULL){
+    if(pos == 1){
+           insere_elemento(*lst,elem);
+        }else{
+         return 0; // Falha
         }
-    while  (aux->ant!=NULL)
-        {
-            Lista N = (Lista) malloc(sizeof(struct no));
-            if (N == NULL){
-                return NULL;
-            }
+   }
 
-            N->info = aux->info; // Insere o conteúdo (valor do elem)
-            N->ant = NULL; // Não tem antecessor do novo nó
-            N->prox = lst2; // Sucessor do novo nó recebe mesmo end. da lista
+   int tam = 1; // Recebe a quantidade de nós da lista
 
-            if (lista_vazia(lst2) == 0) // Se lista NÃO vazia
-            lst2->ant = N; // Faz o antecessor do 1o nó ser o novo nó
-            lst2 = N; // Faz a lista apontar para o novo nó
+   while(aux->prox != NULL){
+    tam++;
+   }
+   //Temos a quantidade de nós da lista
 
-            aux = aux->ant; //Percorre a lista
-        }
+   if(pos > tam){
+    return 0; //Quer inserir em uma posição que nao existe
+   }
 
-    Lista N = (Lista) malloc(sizeof(struct no));
-    if (N == NULL){
-       return NULL;
-      }
+   int cont = 1;
+   aux = aux->prox;
 
-    N->info = aux->info; // Insere o conteúdo (valor do elem)
-    N->ant = NULL; // Não tem antecessor do novo nó
-    N->prox = lst2; // Sucessor do novo nó recebe mesmo end. da lista
+   while(cont<pos){
+    cont++;
+    aux = aux->prox;
+   }
 
-    if (lista_vazia(lst2) == 0) // Se lista NÃO vazia
-    lst2->ant = N; // Faz o antecessor do 1o nó ser o novo nó
-    lst2 = N; // Faz a lista apontar para o novo nó
+   // Aux aponta para o nó a ser "Substituido"
+   aux->info = elem;
+   return 1;
+}
 
-    return lst2;
+
+Lista inverte(Lista* lst){
+    if(lst == NULL || lista_vazia(*lst)== 1){
+        return 0;
+    }
+
+    Lista *l2;
+     Lista aux = *lst;
+         // Se tiver um nó
+    if(aux->prox == NULL && aux->ant == NULL){ //Verificação se possui apenas um nó
+    insere_elemento(*l2,aux->info);
+    return l2;
+    }
+
+    // Temos +1 nó
+
+
+    while(aux->prox != NULL){
+        insere_elemento(*l2,aux->info);
+        aux = aux->prox;
+    }
+
+    // Aux está na ultima posição
+    insere_elemento(*l2,aux->info);
+    return l2;
+
 }
