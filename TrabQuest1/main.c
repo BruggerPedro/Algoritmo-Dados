@@ -2,18 +2,15 @@
 #include <stdlib.h>
 #include "ListaInt.h"
 
-/*Implementar o TAD listaordenada decrescente de números inteiros com no máximo 20 elementos, usando alocação estática/sequencial. Além das operações vistas em sala, o TAD também deve contemplar:
- Remover negativos: remove todos os elementos negativos da lista.
- Remover pares: remove todos os elementos pares da lista.
- Tamanho: retorna o número de elementos da lista.
- Intercalar: recebe duas listas ordenadas (L1 e L2) e retorna uma nova lista L3 formadapelos elementos de L1 e L2 intercalados, mantendo o critério de ordenação. As listas originais não devem ser alteradas.
-*/
-
+// Prototipo da função imprime_lista.
 void imprime_lista(Lista);
 
 int main(){
-int op, flag = 0,resp, flag2 = 0; //Flag contabiliza a quantidade de especificações da lista (0 - lista nao criada | 1 - Lista criada)
-Lista l; Lista l2; Lista l3;
+int op; // Variavel responsavel por receber a opção desejada do menu
+int flag = 0,flag2 = 0; //Flag contabiliza a quantidade de especificações da lista (0 - lista nao criada | 1 - Lista criada)
+int resp; // Variavel responsavel por selecionar se a operação será realizada na lista 1 ou lista 2
+Lista l; Lista l2; Lista l3; // Declaração das "listas".
+
     do{ // Programa
         do{ //Menu
             //Obtem a opção do usuario
@@ -27,19 +24,20 @@ Lista l; Lista l2; Lista l3;
             printf("\n [7] Remove negativos");
             printf("\n [8] Remove par");
             printf("\n [9] Intercala listas");
-            printf("\n [10] Sair do sistema");
+            printf("\n [10] Verificar o tamanho da lista:");
+            printf("\n [11] Sair do sistema");
             printf("\n\n Digite a opcao desejada: ");
             printf("\n\n------------------------------------------\n");
 
             scanf("%d", &op);
             setbuf(stdin, NULL);
 
-            if(op < 1 || op > 10)
+            if(op < 1 || op > 11)
             printf("\n *** Opcao digitada invalida! As opcoes disponiveis são:");
 
-        } while(op < 1 || op > 10);
+        } while(op < 1 || op > 11);
 
-        if (op == 10) break; //Sair do sistema
+        if (op == 11) break; //Sair do sistema
 
         else if(op != 1 && flag == 0) {
             printf("\n\n Antes de qualquer operacao, a lista 1 precisa ser CRIADA.");
@@ -50,19 +48,7 @@ Lista l; Lista l2; Lista l3;
 
 
         switch(op){
-        case 1: {
-/*
-                if(flag == 1) { // verifica se a lista já existe (Flag == 1)
-                  printf("\n Já existe uma instancia de lista.");
-                  break;
-                 }
-
-                if(flag2 == 1) { // verifica se a lista já existe (Flag == 1)
-                printf("\n Já existe uma instancia de lista.");
-                    break;
-                    }
-*/
-
+        case 1: { // Criar uma lista:
                 printf("\n Digite [1] para criar na lista 1 e [2] para criar na lista 2: \n");
                 scanf("%d", &resp);
 
@@ -92,7 +78,7 @@ Lista l; Lista l2; Lista l3;
                 }
         }
 
-        case 2:{
+        case 2:{ // Esvaziar a lista:
             printf("\n Digite [1] para esvaziar a lista 1 e [2] para esvaziar a lista 2: \n");
             scanf("%d", &resp);
             if (resp == 1){
@@ -119,7 +105,7 @@ Lista l; Lista l2; Lista l3;
             }
         }
 
-        case 3:{
+        case 3:{ // Apagar
             printf("\n Digite [1] para apagar na lista 1 e [2] para apagar na lista 2: \n");
             scanf("%d", &resp);
             if (resp == 1){
@@ -145,7 +131,8 @@ Lista l; Lista l2; Lista l3;
                         break;
                         }
                     }
-        case 4:{
+
+        case 4:{ //Inserir elemento na lista
             int n; //Elemento digitado
             printf("\n Digite o elemento (int) a ser inserido na lista: ");
             scanf("%d", &n);
@@ -175,7 +162,7 @@ Lista l; Lista l2; Lista l3;
                     }
         }
 
-        case 5:{
+        case 5:{    // Remove um elemento na lista
             int n;
              printf("\n Digite o elemento (int) a ser excluido na lista: ");
              scanf("%d", &n);
@@ -210,7 +197,8 @@ Lista l; Lista l2; Lista l3;
                 break;
                 }
         }
-        case 6:{
+
+        case 6:{ // Imprime a lista
              printf("\n Digite [1] para imprimir a lista 1 e [2] para imprimir a lista 2 e [3] para imprimir ambas as listas: \n");
              scanf("%d", &resp);
 
@@ -234,7 +222,7 @@ Lista l; Lista l2; Lista l3;
 
 
         }
-        case 7:{
+        case 7:{ // Remove os negativos
             printf("\n Digite [1] para remover negativos da lista 1 e [2] para remover negativos da lista 2: \n");
             scanf("%d", &resp);
 
@@ -250,7 +238,7 @@ Lista l; Lista l2; Lista l3;
                 break;
         }
         }
-        case 8:{
+        case 8:{ // Remove os pares
             printf("\n Digite [1] para remover pares da lista 1 e [2] para remover pares da lista 2: \n");
                 scanf("%d", &resp);
 
@@ -265,15 +253,34 @@ Lista l; Lista l2; Lista l3;
                  break;
                  }
         }
-        case 9:{
+
+        case 9:{ // Intercala as listas
            l3 =  intercala_listas(l,l2);
             imprime_lista(l3);
             break;
         }
 
+        case 10:{
+        int tamanho; // Variavel que receberá o tamanho da lista.
+        printf("\n Digite [1] para verificar o tamanho da lista 1 e [2] para verificar o tamanho da lista 2: \n");
+             scanf("%d", &resp);
+
+                if (resp == 1){
+                tamanho_lista(l,&tamanho);
+                break;
+                }
+                else if(resp == 2){
+                tamanho_lista(l,&tamanho);
+                break;
+            }else{
+               printf("\n Opcao invalida! Tente novamente");
+                break;
+            }
 
         }
-        }while(op != 10);
+
+        }
+        }while(op != 11);
 
         printf("\n\n\t\t FIM DE PROGRAMA! \n");
 
@@ -284,6 +291,17 @@ Lista l; Lista l2; Lista l3;
         return 0;
 }
 
+
+/*
+Operação: imprime_lista
+
+- Entrada: Endereço de uma lista
+-  Pré-Condição: Lista existir (Endereço ser valido)
+- Processo: Ao percorrer a lista, apresentamos sua informação na aplicação.
+- Saída: Por se tratar de um retorno VOID, a saida não existe.
+- Pós-condição: Sem pós-condição.
+
+*/
 
 void imprime_lista(Lista l){
     if(lista_vazia(l) == 1){
@@ -300,7 +318,6 @@ void imprime_lista(Lista l){
             break;
         }
         printf(" %d ",n);
-        //printf("O %d elemento da lista eh %d\n",i,n);
 
     }
     printf("} \n Existem %d elementos na lista. \n",i-1); // i-1 será pq o break está dentro do for.
