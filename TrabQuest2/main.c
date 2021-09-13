@@ -2,22 +2,16 @@
 #include <stdlib.h>
 #include "ListaChar.h"
 
-/*Implementar o TAD lista não ordenada de strings com no máximo 10 elementos, cada um
-com até 15 caracteres, usando alocação estática/sequencial. Além das operações vistas em sala,
-o TAD também deve contemplar:
- Remover todas: remove todas as strings da lista que começam com um dado caractere.
- Remover maior: remove e retorna a maior string da lista. No caso de empate, deve-se
-remover a primeira ocorrência encontrada.
- Tamanho: retorna o número de elementos da lista.
- Concatenar: recebe duas listas (L1 e L2) e retorna uma nova lista L3 com os elementos de
-L1 seguidos dos elementos de L2. As listas originais não devem ser alteradas.
-*/
-
+// Prototipo da função imprime_lista.
 void imprime_lista(Lista);
 
+
 int main(){
-int op, flag = 0,resp, flag2 = 0, tam=0; //Flag contabiliza a quantidade de especificações da lista (0 - lista nao criada | 1 - Lista criada)
-Lista l; Lista l2; Lista l3;
+int op; // Variavel responsavel por receber a opção desejada do menu
+int flag = 0,flag2 = 0; //Flag contabiliza a quantidade de especificações da lista (0 - lista nao criada | 1 - Lista criada)
+int resp; // Variavel responsavel por selecionar se a operação será realizada na lista 1 ou lista 2
+int tam = 0;  // Variavel que receberá o tamanho da lista.
+Lista l; Lista l2; Lista l3; // Declaração das "listas".
 
     do{ // Programa
         do{ //Menu
@@ -53,7 +47,7 @@ Lista l; Lista l2; Lista l3;
 
 
         switch(op){
-        case 1: {
+        case 1: { // Cria uma lista
                 printf("\n Digite:\n");
                 printf("\n [1] para criar na lista 1.");
                 printf("\n [2] para criar na lista 2.\n");
@@ -86,7 +80,7 @@ Lista l; Lista l2; Lista l3;
                 }
         }
 
-        case 2:{
+        case 2:{ // Esvaziar a lista:
             printf("\n Digite:\n");
             printf("\n [1] para esvaziar a lista 1.");
             printf("\n [2] para esvaziar a lista 2.\n");
@@ -115,7 +109,7 @@ Lista l; Lista l2; Lista l3;
             }
         }
 
-        case 3:{
+        case 3:{ // Apagar
             printf("\n Digite:\n");
             printf("\n [1] para apagar na lista 1.");
             printf("\n [2] para apagar na lista 2.\n");
@@ -143,7 +137,7 @@ Lista l; Lista l2; Lista l3;
                         break;
                         }
                     }
-        case 4:{
+        case 4:{ //Inserir elemento na lista
             char n[15]; //Elemento digitado
             printf("\n Digite o termo a ser inserido na lista: ");
             gets(n);
@@ -175,7 +169,7 @@ Lista l; Lista l2; Lista l3;
                     }
         }
 
-        case 5:{
+        case 5:{ // Remove um elemento na lista
             char n[15];
              printf("\n Digite o termo a ser excluido na lista: ");
              gets(n);
@@ -212,7 +206,7 @@ Lista l; Lista l2; Lista l3;
                 break;
                 }
         }
-        case 6:{
+        case 6:{ // Remove palavras começadas com a letra digitada
             char n; //Elemento digitado
             printf("\n Digite a letra (char) a ser removido na lista: ");
             scanf("%c",&n);
@@ -244,7 +238,7 @@ Lista l; Lista l2; Lista l3;
             }
         }
 
-        case 7:{
+        case 7:{ //Remove a maior palavra da lista
             printf("\n Digite:\n");
             printf("\n [1] para remover a maior palavra da lista 1.");
             printf("\n [2] para remover a maior palavra da lista 2.\n");
@@ -271,7 +265,7 @@ Lista l; Lista l2; Lista l3;
         }
 
 
-        case 8:{
+        case 8:{    // Tamanho da lista
             printf("\n Digite:\n");
             printf("\n [1] para verificar tamanho da lista 1.");
             printf("\n [2] para verificar tamanho da lista 2.\n");
@@ -299,7 +293,7 @@ Lista l; Lista l2; Lista l3;
 
         }
 
-        case 9:{
+        case 9:{ // Imprime a lista
              printf("\n Digite:\n");
              printf("\n [1] para imprimir a lista 1.");
              printf("\n [2] para imprimir a lista 2.");
@@ -326,7 +320,7 @@ Lista l; Lista l2; Lista l3;
             }
         }
 
-        case 10:{
+        case 10:{ //Concatenar
             l3 =  concatena_listas(l,l2);
 
             imprime_lista(l3);
@@ -345,6 +339,14 @@ Lista l; Lista l2; Lista l3;
         return 0;
 }
 
+/*
+Operação: imprime_lista
+- Entrada: Endereço de uma lista
+-  Pré-Condição: Lista existir (Endereço ser valido)
+- Processo: Ao percorrer a lista, apresentamos sua informação na aplicação.
+- Saída: Por se tratar de um retorno VOID, a saida não existe.
+- Pós-condição: Sem pós-condição.
+*/
 
 void imprime_lista(Lista l){
     if (l == NULL){
@@ -361,7 +363,6 @@ void imprime_lista(Lista l){
     printf("\n\t {");
     int i;
 
-    //char n[15]; //Vetor generico
 
 for(i=0;;i++){
     char n[15];// N representa o elemento presente na lista
@@ -370,9 +371,7 @@ for(i=0;;i++){
 }
     printf("%s,",n);
 
- //printf("O %d elemento da lista eh %d\n",i,n);
     }
     printf("} \n Existem %d elementos na lista. \n",i); // i-1 será pq o break está dentro do for.
 
 }
-
