@@ -3,22 +3,21 @@
 #include "ListaOrdenadaCab.h"
 
 struct no{
-int info; //Dado a guardar
-struct no * prox;
+int info; //Número
+struct no * prox; // Por ser dinamico, agora temos um ponteiro que "aponta" ao proximo nó
 };
 
-/* BASICAS               *         PEDIDAS NO EXERCICIO
-1 - cria_lista OK        *          9 - tamanho_lista OK
-2- lista_vazia OK        *          10 - remover_pos OK
-3- lista_cheia OK        *          11 - Inverter
-4- insere OK             *          12 - Intercala
-5- remove OK             *
-6- esvazia OK            *
-7- apaga_lista OK        *
-8- get_elem_pos OK       */
+//_______________________________________________________________________________________________________________
 
+/*
+Operação: cria_lista
+- Entrada: Sem entrada.
+  Pré-Condição: Sem pré-condições.
+- Processo: Cria uma lista e retorna o endereço de uma lista com a cabeça(HEAD) criado.
+- Saída: Ponteiro que referencia o local onde foi criada a lista(Podendo ser NULL quando mal-alocado).
+- Pós-condição: Sem pós-condição.
+*/
 
-// BASICAS:
 Lista cria_lista(){
     Lista cab;
     cab = (Lista) malloc(sizeof(struct no));
@@ -30,6 +29,17 @@ Lista cria_lista(){
     return cab; // Retorno já com a cabeça
 }
 
+//_______________________________________________________________________________________________________________
+
+/*
+Operação: lista_vazia;
+- Entrada: Endereço de uma lista.
+- Pré-Condição: Sem pré-condições.
+- Processo: Verifica se a lista está vazia.
+- Saída: 0 (Lista não está vazia), 1 (Lista vazia)
+- Pós-condição: Sem pós-condição.
+*/
+
 int lista_vazia(Lista lst){
     if(lst->prox == NULL)
         return 1; //Lista vazia
@@ -37,11 +47,24 @@ int lista_vazia(Lista lst){
         return 0; //Lista aponta pra algo, logo, não é vazia
 }
 
-int lista_cheia(Lista *li){
-return 0;
-}
-// lista_cheia (Na teoria, não existe como "encher" uma lista dinamica, [exceto pela limitação de espaço na memoria])
+// _______________________________________________________________________________________________________________
 
+/* Na teoria, não existe como "encher" uma lista dinamica, [exceto pela limitação de espaço na memoria])*/
+
+
+//int lista_cheia(Lista *li){
+//return 0;
+//}
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: insere_ord;
+- Entrada: Endereço do endereço de uma lista e o elemento (inteiro) a ser inserido.
+- Pré-Condição: Elemento ser um inteiro.
+- Processo: Insere (de forma ordenada) o elemento na lista fornecida.
+- Saída: 0 (Lista não existe), 1 (Elemento inserido com sucesso).
+- Pós-condição: O elemento foi inserido na lista de forma ordenada.
+*/
 
 int insere_ord(Lista *lst, int elem){
     // Aloca um novo nó
@@ -66,6 +89,16 @@ int insere_ord(Lista *lst, int elem){
     (*lst)->info++; //Utiliza o info do cabeçalho pra contador e o incrementa
     return 1; //Sucesso
 }
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: remove_ord;
+- Entrada: Endereço do endereço de uma lista e o elemento (inteiro) a ser removido.
+- Pré-Condição: Lista existir (existir nó além do HEAD) e elemento ser um inteiro.
+- Processo: Remove o elemento na lista fornecida e mantém ordenada.
+- Saída: 0 (Lista vazia ou elemento não presente na lista), 1 (Elemento removido com sucesso).
+- Pós-condição: O elemento foi removido na lista.
+*/
 
 int remove_ord(Lista *lst, int elem){
     if(lista_vazia(*lst) == 1) // Se lista for vazia
@@ -89,6 +122,16 @@ int remove_ord(Lista *lst, int elem){
     return 1;
 }
 
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: esvazia_lista
+- Entrada: Endereço do endereço de uma lista
+- Pré-Condição: Lista existir (existir nó além do HEAD).
+- Processo: Esvaziar a lista.
+- Saída: 1 (sucesso) ou 0 (falha)
+- Pós-condição: a instancia da lista no estado de vazia
+*/
 
 int esvazia_lista(Lista *lst){
 
@@ -110,6 +153,16 @@ int esvazia_lista(Lista *lst){
 
 }
 
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: apaga_lista
+- Entrada: Endereço do endereço de uma lista
+- Pré-Condição: Lista existir (existir nó além do HEAD).
+- Processo: liberar a instancia da lista e apagar o seu endereço
+- Saída: 1 (sucesso) ou 0 (falha)
+- Pós-condição: instancia da lista liberada.
+*/
 void apaga_lista(Lista *lst){
 
     if((*lst)->prox != NULL){ //Se for igual a null, a lista já está excluida
@@ -128,6 +181,16 @@ void apaga_lista(Lista *lst){
         // liberamos tambem o lst (responsavel por apontar a primeira posição na lista)
     }
 }
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: get_elem_pos
+- Entrada: Endereço de uma lista, posição a obter o elemento e uma variavel para receber a informação da dita posição.
+-  Pré-Condição: Lista existir (existir nó além do HEAD), a lista não estar vazia e posição ser maior que 0.
+- Processo: Através da posição fornecida, busca-se na lista o elemento correspondente aquela posição e o retorna atraves da variavel fornecida.
+- Saída: 1 (sucesso) ou 0 (falha)
+- Pós-condição: A variavel recebe o valor do elemento presente na posição fornecida.
+*/
 
 int get_elem_pos(Lista *lst, int pos, float *elem){
     // pos < 1 porque a pos=0 Seria o head
@@ -139,9 +202,25 @@ int get_elem_pos(Lista *lst, int pos, float *elem){
     return 1; //Sucesso
 }
 
+// _______________________________________________________________________________________________________________
+
+// Operações especiais:
+// _______________________________________________________________________________________________________________
 
 
-// Incrementos extras:
+// _______________________________________________________________________________________________________________
+
+
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: tamanho_lista
+- Entrada: Endereço do endereço de uma lista e uma variavel para receber o tamanho da lista.
+- Pré-Condição: Lista existir (existir nó além do HEAD).
+- Processo: Percorre toda a lista e contabiliza o tamanho da mesma.
+- Saída: 1 (sucesso) ou 0 (falha)
+- Pós-condição: A lista foi contabilizada e seu tamanho foi atribuido para a variavel vinda de argumento.*/
+
 
 int tamanho_lista(Lista *lst, int *tam){
 
@@ -169,14 +248,15 @@ int tamanho_lista(Lista *lst, int *tam){
     return 1;
 
 }
+// _______________________________________________________________________________________________________________
 
 /*
-int tamanho_lista(Lista *lst, int *tam){
-    if((*lst)->prox == NULL)   // Se o ponteiro->prox estiver null, a lista tá vazia
-        return 0;
-
-    return((*lst)->info); // O info da cabeça já armazena o tamanho da lista.
-}
+Operação: remove_elem;
+- Entrada: Endereço do endereço de uma lista, a posção a ser excluida e uma variavel pra receber o valor excluido.
+- Pré-Condição: Lista existir (existir nó além do HEAD) e posição existir na lista.
+- Processo: Remove o elemento presente na posição fornecida e oferece o valor presente no mesmo.
+- Saída: 0 (Lista vazia ou posição não presente na lista), 1 (Elemento removido com sucesso).
+- Pós-condição: O elemento foi removido na lista.
 */
 
 
@@ -220,9 +300,20 @@ if(contador == pos){
 return 1;
 }
 
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: inverter_lista
+- Entrada: Endereço do endereço da lista a ser sua inversa.
+- Pré-Condição: Lista existir (existir nó além do HEAD).
+- Processo: Recebe uma lista L e retorna uma nova lista L2, formada pelos elementos de L na
+ordem inversa.
+- Saída: NULL(Caso a lista fornecidas não existe) ou ponteiro que referencia o local onde foi criada a lista.
+- Pós-condição: Sem pós-condição.*/
+
 Lista inverter_lista(Lista *l1){
         if((*l1)->prox == NULL )   // Se o ponteiro->prox estiver null, a lista tá vazia
-        return 0;
+        return NULL;
 
 Lista l2 = cria_lista(); // Cria a l2 (lista inversa)
 
@@ -244,10 +335,19 @@ return l2;
 
 }
 
-// Intercala: Recebe duas listas e retorna l3 ordenada.
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: intercala_listas
+- Entrada: Endereço do endereço de duas listas a serem intercaladas.
+- Pré-Condição: Listas existirem (existir nó além do HEAD).
+- Processo: Recebe duas listas e retorna uma terceira, formada pelos elementos das duas listas intercalados (Sem alteração nas duas listas).
+- Saída: NULL(Caso alguma das listas fornecidas não existe) ou ponteiro que referencia o local onde foi criada a terceira lista.
+- Pós-condição: Sem pós-condição.*/
+
 Lista intercala(Lista *l1,Lista *l2){
     if((*l1)->prox == NULL || (*l2)->prox == NULL)   // Se o ponteiro->prox estiver null, a lista tá vazia
-    return 0;
+    return NULL;
 
     Lista l3 = cria_lista(); // Cria a terceira lista
 
@@ -280,7 +380,38 @@ return l3;
 
 }
 
-// Funções extras:
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: libera
+- Entrada: Endereço de uma lista
+- Pré-Condição: Lista existir (Endereço ser valido)
+- Processo: Retira a alocação (Libera) de uma determinada lista.
+- Saída: Sem saida (VOID).
+- Pós-condição: A lista foi “liberada” da memoria.
+*/
+
+void libera(Lista x){
+
+    if(x != NULL){
+        free(x);
+        x = NULL;
+    }
+}
+// _______________________________________________________________________________________________________________
+
+
+// Função insere_elem [EXTRA] Não definida no .h por ser "escondida" do aplicativo:
+
+// _______________________________________________________________________________________________________________
+/*
+Operação: insere_elem;
+- Entrada: Endereço do endereço de uma lista e o elemento (inteiro) a ser inserido.
+- Pré-Condição: Elemento ser um inteiro.
+- Processo: Insere (de forma não ordenada) o elemento na lista fornecida.
+- Saída: 0 (Lista não existe), 1 (Elemento inserido com sucesso).
+- Pós-condição: O elemento foi inserido na lista de forma não ordenada.
+*/
 
 int insere_elem(Lista *lst, int elem)
 {
@@ -303,10 +434,4 @@ int insere_elem(Lista *lst, int elem)
  return 1;
 }
 
-void libera(Lista x){
-
-    if(x != NULL){
-        free(x);
-        x = NULL;
-    }
-}
+// _______________________________________________________________________________________________________________
