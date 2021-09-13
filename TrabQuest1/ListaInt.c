@@ -1,21 +1,23 @@
 #include <stdlib.h>
 #include "ListaInt.h"
 #define MAX 20
-/*Implementar o TAD lista ordenada decrescente de números inteiros com no máximo 20 elementos, usando alocação estática/sequencial. Além das operações vistas em sala, o TAD também deve contemplar:
- Remover negativos: remove todos os elementos negativos da lista.
- Remover pares: remove todos os elementos pares da lista.
- Tamanho: retorna o número de elementos da lista.
- Intercalar: recebe duas listas ordenadas (L1 e L2) e retorna uma nova lista L3 formadapelos elementos de L1 e L2 intercalados, mantendo o critério de ordenação. As listas originais não devem ser alteradas.
-*/
 
 struct lista {
     int no[MAX];// Nó que vai ser limitado por MAX[20] posições(definido pelo programador).
     int fim; // O fim vai indicar qual é a próxima posição disponível.
 };
 
+// _______________________________________________________________________________________________________________
 
+/*
+Operação: cria_lista
 
-// Mesmo sendo Lista estática, precisamos alocar a estrutura.
+- Entrada: Sem entrada.
+  Pré-Condição: Sem pré-condições.
+- Processo: Alocação e criação da lista e de seu ponteiro.
+- Saída: Ponteiro que referencia o local onde foi criada a lista(Podendo ser NULL quando mal-alocado).
+- Pós-condição: Sem pós-condição.
+*/
 
 Lista cria_lista() { // Alocar uma instancia da estrutura lista(malloc).
 
@@ -28,6 +30,17 @@ Lista cria_lista() { // Alocar uma instancia da estrutura lista(malloc).
     return lst; // Retornamos o endereço de ponteiro(lst).
 }
 
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: lista_vazia;
+
+- Entrada: Endereço de uma lista.
+- Pré-Condição: Lista existir (Endereço ser valido)
+- Processo: Verifica se a lista está vazia.
+- Saída: -1 (Lista não existe), 0 (Lista não está vazia), 1 (Lista vazia)
+- Pós-condição: Sem pós-condição.
+*/
 int lista_vazia(Lista lst) {
     if (lst == NULL) {
         return -1; // Ponteiro nao esta apontando pra lista valida/existente, entao declaramos como ERRO
@@ -38,6 +51,17 @@ int lista_vazia(Lista lst) {
         return 0; // Ha elementos dentro da lista, portanto nao esta vazia
 }
 
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: lista_cheia
+
+- Entrada: Endereço de uma lista.
+- Pré-Condição: Lista existir (Endereço ser valido)
+- Processo: Verifica se a lista está cheia.
+- Saída: -1 (Lista não existe), 0 (Lista não está cheia), 1 (Lista cheia)
+- Pós-condição: Sem pós-condição.
+*/
 int lista_cheia(Lista lst) {
     if (lst == NULL) {
         return -1; // Ponteiro nao esta apontando pra lista valida/existente, então declaramos como ERRO
@@ -51,6 +75,17 @@ int lista_cheia(Lista lst) {
     // Pode se fazer tirando da linha 37 ate 40, apenas fazendo: return(lst->fim == MAX)
 }
 
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: insere_elem;
+
+- Entrada: Endereço de uma lista e o elemento (inteiro) a ser inserido.
+- Pré-Condição: Lista existir (Endereço ser valido) e elemento ser um inteiro.
+- Processo: Insere (de forma ordenada) o elemento na lista fornecida.
+- Saída: 0 (Lista não existe ou Lista cheia), 1 (Elemento inserido com sucesso).
+- Pós-condição: O elemento foi inserido na lista de forma ordenada.
+*/
 int insere_elem(Lista lst, int elem){ //Insere o(s) elemento(s) de forma ordenada
 
     if (lst == NULL || lista_cheia(lst) == 1)
@@ -71,6 +106,18 @@ int insere_elem(Lista lst, int elem){ //Insere o(s) elemento(s) de forma ordenad
     lst->fim++; //Avança o fim
     return 1; //Sucesso
 }
+
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: remove_elem;
+
+- Entrada: Endereço de uma lista e o elemento (inteiro) a ser removido.
+-  Pré-Condição: Lista existir (Endereço ser valido) e elemento ser um inteiro.
+- Processo: Remove o elemento na lista fornecida. Após a remoção, a lista mantém-se ordenada.
+- Saída: 0 (Lista não existe ou lista vazia, ou elemento não presente na lista), 1 (Elemento removido com sucesso).
+- Pós-condição: O elemento foi removido na lista de forma ordenada.
+*/
 
 int remove_elem(Lista lst, int elem){
     if(lst == NULL || lista_vazia(lst) == 1 || elem > lst->no[0] || elem < lst->no[lst->fim-1]){
@@ -101,6 +148,16 @@ int remove_elem(Lista lst, int elem){
         return 1; // Sucesso
 }
 
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: apaga_lista
+- Entrada: Endereço do endereço de uma lista
+- Pré-Condição: endereço ser válido (primeiro endereço “ponteiro de ponteiro”)
+- Processo: liberar a instancia da lista e apagar o seu endereço
+- Saída: 1 (sucesso) ou 0 (falha)
+- Pós-condição: instancia da lista liberada.
+*/
 
 int apaga_lista(Lista *end_lst){
     if(end_lst == NULL) //Se o ponteiro não aponta pra lista
@@ -112,6 +169,18 @@ int apaga_lista(Lista *end_lst){
     return 1;
 }
 
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: esvazia_lista
+
+- Entrada: Endereço de uma lista
+- Pré-Condição: Lista existir (Endereço ser valido)
+- Processo: Colocar a lista no estado de vazia
+- Saída: 1 (sucesso) ou 0 (falha)
+- Pós-condição: a instancia da lista no estado de vazia
+*/
+
 int esvazia_lista(Lista lst){
      if(lst == NULL ){
         return 0;
@@ -119,6 +188,19 @@ int esvazia_lista(Lista lst){
     lst->fim = 0;
     return 1;
 }
+
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: get_elem_pos
+
+- Entrada: Endereço de uma lista, posição a obter o elemento e uma variavel para receber a informação da dita posição.
+-  Pré-Condição: Lista existir (Endereço ser valido).
+- Processo: Através da posição fornecida, busca-se na lista o elemento correspondente aquela posição e o retorna atraves da variavel fornecida.
+- Saída: 1 (sucesso) ou 0 (falha)
+- Pós-condição: A variavel recebe o valor do elemento presente na posição fornecida.
+
+*/
 
 int get_elem_pos(Lista lst, int pos, int *elem){
         // pos = Posição do elemento na lista (começa com 1)
@@ -128,7 +210,23 @@ int get_elem_pos(Lista lst, int pos, int *elem){
     return 1; //Sucesso
 }
 
-//INCREMENTOS A +
+// _______________________________________________________________________________________________________________
+
+// Operações especiais:
+// _______________________________________________________________________________________________________________
+
+
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: remove_negativos
+
+- Entrada: Endereço de uma lista
+-  Pré-Condição: Lista existir (Endereço ser valido)
+- Processo: Percorre toda a lista e remove(se existir) os numeros negativos presentes na mesma (mantendo sua ordenação).
+- Saída: 1 (sucesso) ou 0 (falha)
+- Pós-condição: A lista agora não provém de elementos negativos.
+*/
 
 int remove_negativos(Lista x){ // Definimos a Lista como x para que não haja erro de interpretação do que estamos instanciando
 
@@ -148,6 +246,18 @@ int remove_negativos(Lista x){ // Definimos a Lista como x para que não haja er
 
 }
 
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: remove_pares
+
+
+- Entrada: Endereço de uma lista
+-  Pré-Condição: Lista existir (Endereço ser valido)
+- Processo: Percorre toda a lista e remove(se existir) os numeros pares presentes na mesma (mantendo sua ordenação).
+- Saída: 1 (sucesso) ou 0 (falha)
+- Pós-condição: A lista agora não provém de elementos pares.*/
+
 int remove_pares(Lista x){
 
     int i;
@@ -165,6 +275,16 @@ int remove_pares(Lista x){
     return 1;
 
 }
+// _______________________________________________________________________________________________________________
+
+
+/*
+Operação: tamanho_lista
+- Entrada: Endereço de uma lista e uma variavel para receber o tamanho da lista.
+-  Pré-Condição: Lista existir (Endereço ser valido).
+- Processo: Percorre toda a lista e contabiliza o tamanho da mesma.
+- Saída: 1 (sucesso) ou 0 (falha)
+- Pós-condição: A lista foi contabilizada e seu tamanho foi atribuido para a variavel vinda de argumento.*/
 
 int tamanho_lista(Lista x, int *tamanho){
 
@@ -177,10 +297,21 @@ int tamanho_lista(Lista x, int *tamanho){
 
 }
 
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: intercala_listas
+- Entrada: Endereço de duas listas a serem intercaladas.
+- Pré-Condição: Listas existirem (Endereço ser valido).
+- Processo: Recebe duas listas ordenadas e retorna uma terceira, formada pelos elementos das duas listas intercalados, mantendo sua ordenação. (Sem alteração nas duas listas).
+- Saída: NULL(Caso alguma das listas fornecidas não existe) ou ponteiro que referencia o local onde foi criada a terceira lista.
+- Pós-condição: Sem pós-condição.
+*/
+
 Lista intercala_listas(Lista l1, Lista l2){
 
     if(l1 == NULL || l2 == NULL)
-    return 0; //Uma das duas listas não existe, logo, não podemos seguir
+    return NULL; //Uma das duas listas não existe, logo, não podemos seguir
 
     int vetor[MAX*2];
 
@@ -233,6 +364,16 @@ Lista intercala_listas(Lista l1, Lista l2){
    return l3;
 }
 
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: libera
+- Entrada: Endereço de uma lista
+- Pré-Condição: Lista existir (Endereço ser valido)
+- Processo: Retira a alocação (Libera) de uma determinada lista.
+- Saída: Sem saida (VOID).
+- Pós-condição: A lista foi “liberada” da memoria.
+*/
 
 void libera(Lista x){
 
@@ -241,3 +382,4 @@ void libera(Lista x){
         x = NULL;
     }
 }
+// _______________________________________________________________________________________________________________
