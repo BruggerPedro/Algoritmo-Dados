@@ -14,7 +14,7 @@ ordem inversa. A lista original não deve ser alterada
 
 /* BASICAS              *           PEDIDAS NO EXERCICIO
 1 - cria lista   OK     *           - Remover todos
-2-  lista vazia  OK     *           - Remover maior OK
+2-  lista vazia         *           - Remover maior OK
 3-  get elem pos OK     *           - Inserir na posição OK
 4-  apaga lista  OK     *           - Inverter EM ANDAMENTO
 5-                      *
