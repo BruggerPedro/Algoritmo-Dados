@@ -2,6 +2,7 @@
 #define LISTACICLO_H_INCLUDED
 
 typedef struct no * Lista;
+
 Lista cria_lista();
 int lista_vazia (Lista lst);
 int insere_inicio(Lista *lst, char elem);
