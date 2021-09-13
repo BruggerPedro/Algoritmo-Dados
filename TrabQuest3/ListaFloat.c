@@ -1,37 +1,38 @@
 #include <stddef.h>
 #include<stdlib.h>
 #include "ListaFloat.h"
-/*
-Implementar o TAD lista não ordenada de números reais (float) usando alocação
-dinâmica/encadeada SEM cabeçalho. Além das operações vistas em sala, o TAD também
-deve contemplar:
- Tamanho: retorna o número de elementos da lista.
- Remover menor: remove e retorna o menor número da lista. No caso de empate, deve-se
-remover a última ocorrência encontrada.
- Iguais: recebe duas listas ordenadas e verifica se elas são iguais.
- Intercalar: recebe duas listas ordenadas e retorna uma nova lista com os elementos das
-duas listas de entrada intercalados. As listas originais não devem ser alteradas.
-*/
+
 struct no{
 	float info; //Número
-	struct no *prox;
+	struct no *prox; // Por ser dinamico, agora temos um ponteiro que "aponta" ao proximo nó
 };
-/* BASICAS                    *         PEDIDAS NO EXERCICIO
-1 - cria_lista OK             *         1 - tamanho OK
-2- lista_vazia OK             *         2 - remover menor OK
-3- lista_cheia OK             *         3 - iguais OK
-4- insere OK                  *         4 - intercalar OK
-5- remove OK                  *
-6- esvazia OK                 *
-7- apaga_lista OK             *
-8- get_elem_pos   OK            */
 
 
-// BASICAS:
+//_______________________________________________________________________________________________________________
+
+/*
+Operação: cria_lista
+- Entrada: Sem entrada.
+  Pré-Condição: Sem pré-condições.
+- Processo: Cria uma lista e retorna o endereço de uma lista apontando pra NULL.
+- Saída: NULL
+- Pós-condição: Sem pós-condição.
+*/
 
 Lista cria_lista(){
-return NULL; //Cria uma lista e retorna o endereço de uma lista apontando pra NULL
+return NULL;
 }
+
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: lista_vazia;
+- Entrada: Endereço de uma lista.
+- Pré-Condição: Sem pré-condições.
+- Processo: Verifica se a lista está vazia.
+- Saída: 0 (Lista não está vazia), 1 (Lista vazia)
+- Pós-condição: Sem pós-condição.
+*/
 
 int lista_vazia(Lista lst){
     if(lst == NULL)
@@ -40,10 +41,25 @@ int lista_vazia(Lista lst){
         return 0; //Lista aponta pra algo, logo, não é vazia
 }
 
-int lista_cheia(Lista *li){
-return 0;
-}
-// lista_cheia (Na teoria, não existe como "encher" uma lista dinamica, [exceto pela limitação de espaço na memoria])
+// _______________________________________________________________________________________________________________
+
+/* Na teoria, não existe como "encher" uma lista dinamica, [exceto pela limitação de espaço na memoria])*/
+
+
+//int lista_cheia(Lista *li){
+//return 0;
+//}
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: insere_elem;
+- Entrada: Endereço do endereço de uma lista e o elemento (float) a ser inserido.
+- Pré-Condição: Lista existir (Endereço ser valido) e elemento ser um float.
+- Processo: Insere (de forma não ordenada) o elemento na lista fornecida.
+- Saída: 0 (Lista não existe), 1 (Elemento inserido com sucesso).
+- Pós-condição: O elemento foi inserido na lista de forma não ordenada.
+*/
+
 
 int insere_elem(Lista *lst, float elem){
     // Aloca um novo nó
@@ -57,6 +73,18 @@ int insere_elem(Lista *lst, float elem){
     *lst = N;       // Faz a lista apontar para o novo nó
     return 1;       // Inserido
 }
+
+// _______________________________________________________________________________________________________________
+
+
+/*
+Operação: remove_elem;
+- Entrada: Endereço do endereço de uma lista e o elemento (float) a ser removido.
+- Pré-Condição: Lista existir (Endereço ser valido) e elemento ser um float.
+- Processo: Remove o elemento na lista fornecida.
+- Saída: 0 (Lista vazia ou elemento não presente na lista), 1 (Elemento removido com sucesso).
+- Pós-condição: O elemento foi removido na lista.
+*/
 
 int remove_elem(Lista *lst, float elem){
     if(lista_vazia(*lst) == 1) //Se lista estiver vazia
@@ -80,6 +108,19 @@ int remove_elem(Lista *lst, float elem){
     return 1;
 }
 
+// _______________________________________________________________________________________________________________
+
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: esvazia_lista
+- Entrada: Endereço do endereço de uma lista
+- Pré-Condição: Lista existir (Endereço ser valido)
+- Processo: Esvaziar a lista.
+- Saída: 1 (sucesso) ou 0 (falha)
+- Pós-condição: a instancia da lista no estado de vazia
+*/
+
 int esvazia_lista(Lista *lst){
 
     if(lst == NULL) { // Se o ponteiro estiver apontando NULL, a lista está vazia
@@ -99,6 +140,16 @@ int esvazia_lista(Lista *lst){
 
 }
 
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: apaga_lista
+- Entrada: Endereço do endereço de uma lista
+- Pré-Condição: endereço ser válido (primeiro endereço “ponteiro de ponteiro”)
+- Processo: liberar a instancia da lista e apagar o seu endereço
+- Saída: 1 (sucesso) ou 0 (falha)
+- Pós-condição: instancia da lista liberada.
+*/
 void apaga_lista(Lista *lst){
 
     if(lst != NULL){ //Se for igual a null, a lista já está excluida
@@ -118,7 +169,16 @@ void apaga_lista(Lista *lst){
     }
 }
 
+// _______________________________________________________________________________________________________________
 
+/*
+Operação: get_elem_pos
+- Entrada: Endereço de uma lista, posição a obter o elemento e uma variavel para receber a informação da dita posição.
+-  Pré-Condição: Lista existir (Endereço ser valido), a lista não estar vazia e posição ser maior que 0.
+- Processo: Através da posição fornecida, busca-se na lista o elemento correspondente aquela posição e o retorna atraves da variavel fornecida.
+- Saída: 1 (sucesso) ou 0 (falha)
+- Pós-condição: A variavel recebe o valor do elemento presente na posição fornecida.
+*/
 
 int get_elem_pos(Lista lst, int pos, float *elem){
 
@@ -131,8 +191,24 @@ int get_elem_pos(Lista lst, int pos, float *elem){
 }
 
 
-// INCREMENTOS EXTRAS:
+// _______________________________________________________________________________________________________________
 
+// Operações especiais:
+// _______________________________________________________________________________________________________________
+
+
+// _______________________________________________________________________________________________________________
+
+
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: tamanho_lista
+- Entrada: Endereço do endereço de uma lista e uma variavel para receber o tamanho da lista.
+- Pré-Condição: Lista existir (Endereço ser valido).
+- Processo: Percorre toda a lista e contabiliza o tamanho da mesma.
+- Saída: 1 (sucesso) ou 0 (falha)
+- Pós-condição: A lista foi contabilizada e seu tamanho foi atribuido para a variavel vinda de argumento.*/
 
 int tamanho_lista(Lista *lst, int *tam){
 
@@ -160,6 +236,17 @@ int tamanho_lista(Lista *lst, int *tam){
     return 1;
 
 }
+
+// _______________________________________________________________________________________________________________
+
+/*
+
+Operação: remove_menor
+- Entrada:  Endereço do endereço de uma lista e uma variavel para receber o menor elemento da lista.
+- Pré-Condição: Lista existir (Endereço ser valido) e lista não ser vazia.
+- Processo: Percorre toda a lista e remove o menor valor da lista.
+- Saída: 1 (sucesso) ou 0 (falha).
+- Pós-condição: A lista agora não provém do menor valor verificado.*/
 
 
 int remove_menor(Lista *lst, float *menor){
@@ -212,6 +299,17 @@ int remove_menor(Lista *lst, float *menor){
     }
 }
 
+
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: listas_iguais
+- Entrada: Endereço do endereço de duas listas a serem intercaladas.
+- Pré-Condição: Listas existirem (Endereço ser valido).
+- Processo: Recebe duas listas ordenadas e verifica se elas são iguais.
+- Saída: -1 (Caso uma das listas não existirem), 0 (Se são diferentes), 1 (Se são iguais).
+- Pós-condição: Sem pós-condição.*/
+
 int listas_iguais(Lista *l1, Lista *l2){
 
     if(l1 == NULL || l2 == NULL) {// Se o ponteiro estiver apontando NULL, uma das listas está vazia
@@ -257,7 +355,15 @@ int listas_iguais(Lista *l1, Lista *l2){
 
 }
 
-// INTERCALAR: CRIA UMA TERCEIRA LISTA COM AS DUAS INTERCALADAS
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: intercala_listas
+- Entrada: Endereço do endereço de duas listas a serem intercaladas.
+- Pré-Condição: Listas existirem (Endereço ser valido).
+- Processo: Recebe duas listas e retorna uma terceira, formada pelos elementos das duas listas intercalados (Sem alteração nas duas listas).
+- Saída: NULL(Caso alguma das listas fornecidas não existe) ou ponteiro que referencia o local onde foi criada a terceira lista.
+- Pós-condição: Sem pós-condição.*/
 
 Lista intercala_listas(Lista *l1, Lista *l2){
 
@@ -320,6 +426,17 @@ if(l1 == NULL || l2 == NULL) {// Se o ponteiro estiver apontando NULL, uma das l
     return l3; // Retorna a lista criada
 
 }
+
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: libera
+- Entrada: Endereço de uma lista
+- Pré-Condição: Lista existir (Endereço ser valido)
+- Processo: Retira a alocação (Libera) de uma determinada lista.
+- Saída: Sem saida (VOID).
+- Pós-condição: A lista foi “liberada” da memoria.
+*/
 
 void libera(Lista x){
 
