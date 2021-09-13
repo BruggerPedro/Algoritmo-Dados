@@ -5,7 +5,7 @@
 1 - cria lista OK     *           - Inserir no inicio OK
 2-  lista vazia OK    *           - Inserir na posiçao OK
 3-  lista_cheia OK    *           - Remover no fim OK
-4-  insere_final OK   *           - Remover vogais
+4-  insere_final OK   *           - Remover vogais  OK
 5-  remove_inicio OK  *
 6-  esvazia_lista OK  *
 7- apaga lista OK     *
@@ -206,9 +206,6 @@ aux->info = elem; // Atribuimos ao info o elemento desejado.
 return 1; // Sucesso
 }
 
-/*Remover no fim: remover o último elemento da lista, retornando seu valor para a
-aplicação.*/
-
 int remover_fim(Lista *lst,char *elem){
 
  // Se lista estiver vazia:
@@ -243,3 +240,79 @@ Lista aux = (*lst)->prox; //Faz aux apontar para o 1° nó
 
 /*Remover vogais: remove todos os elementos da lista que são vogais.
 */
+
+int remove_vogais(Lista *lst){
+
+  // Se lista estiver vazia:
+  if (lista_vazia(*lst) == 1)
+  return 0; // Falha
+
+  Lista aux = (*lst)->prox; //Faz aux apontar para o 1° nó
+  Lista aux2 = NULL; // Aux2
+
+
+  char letra; //Só pra armazenar temporariamente a letra.
+
+  if(*lst == (*lst)->prox){ // Apenas um nó
+    if ( (aux->info == 'A') ||  (aux->info == 'a') ||
+         (aux->info == 'E') ||  (aux->info == 'e') ||
+         (aux->info == 'I') ||  (aux->info == 'i') ||
+         (aux->info == 'O') ||  (aux->info == 'o') ||
+         (aux->info == 'U') ||  (aux->info == 'u') ){
+
+          remove_inicio(*lst,&letra); // Sabendo que só existe um registro, podemos usar a função remove_inicio
+         return 1;
+         }else{
+         return 1; // O char da lista não é vogal, logo, não precisa ser removido
+         }
+}
+
+
+// Existe +1 nó:
+
+while(aux != (*lst)){ // Enquanto for diferente da "ultima posição"
+
+ if ( (aux->info == 'A') ||  (aux->info == 'a') ||
+         (aux->info == 'E') ||  (aux->info == 'e') ||
+         (aux->info == 'I') ||  (aux->info == 'i') ||
+         (aux->info == 'O') ||  (aux->info == 'o') ||
+         (aux->info == 'U') ||  (aux->info == 'u') ){
+
+    if(aux == (*lst)->prox){ // Se for no primeiro elemento da lista
+     remove_inicio(*lst,&letra); // Sabendo que é o primeiro nó podemos usar a função remove_inicio
+     aux = aux->prox;
+    }
+
+    else{ // Não for a primeira posição
+
+    aux2 = (*lst)->prox; // aux2 aponta ao inicio
+
+    while(aux2->prox != aux || aux2 != aux){ // Percorre até achar a posição a ser removida
+        aux2 = aux2->prox;
+    }
+
+    aux2->prox = aux->prox; // aux2 aponta pra onde aux apontava
+    free(aux); //Exclui o nó
+    aux = aux->prox;
+
+    }
+
+ }else{ // Se aux não for vogal
+     aux = aux->prox;
+ }
+
+}
+// Estamos na "ultima" posição;
+if ( (aux->info == 'A') ||  (aux->info == 'a') ||
+         (aux->info == 'E') ||  (aux->info == 'e') ||
+         (aux->info == 'I') ||  (aux->info == 'i') ||
+         (aux->info == 'O') ||  (aux->info == 'o') ||
+         (aux->info == 'U') ||  (aux->info == 'u') ){
+
+         remover_fim(*lst,&letra); // Sabendo que é o ultimo nó, podemos usar a função
+
+         }
+         // Caso ultimo nó não seja vogal, não mexemos nele.
+         return 1;
+
+}
