@@ -296,3 +296,24 @@ Lista inverte(Lista* lst){
     return l2;
 
 }
+
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: libera
+- Entrada: Endereço de uma lista
+- Pré-Condição: Lista existir (Endereço ser valido)
+- Processo: Retira a alocação (Libera) de uma determinada lista.
+- Saída: Sem saida (VOID).
+- Pós-condição: A lista foi “liberada” da memoria.
+*/
+
+void libera(Lista x){
+
+    if(x != NULL){
+        free(x);
+        x = NULL;
+    }
+}
+
+// _______________________________________________________________________________________________________________
