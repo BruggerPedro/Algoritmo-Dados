@@ -12,7 +12,7 @@ int insere_final(Lista *lst, char elem);
 int remove_inicio(Lista *lst, char *elem);
 int esvazia_lista(Lista *lst);
 void apaga_lista(Lista *lst);
-char get_elem_pos(Lista lst, int pos);
+int get_elem_pos(Lista lst, int pos, char *elem);
 
 // Operações complementares:
 int insere_inicio(Lista *lst, char elem);
@@ -20,5 +20,5 @@ int insere_posicao(Lista *lst,int pos, char elem);
 int remover_fim(Lista *lst,char *elem);
 int remove_vogais(Lista *lst);
 void libera(Lista x);
-
+int tamanho_lista(Lista *lst, int *tam);
 #endif // LISTACICLO_H_INCLUDED
