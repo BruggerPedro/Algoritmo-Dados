@@ -13,7 +13,7 @@ Além das operações vistas em sala, o TAD também devecontemplar:
 
 
 // Prototipo da função imprime_lista.
-void imprime_lista(Lista *);
+void imprime_lista(Lista );
 
 int main() {
 
@@ -352,7 +352,7 @@ Operação: imprime_lista
 - Pós-condição: Sem pós-condição.
 */
 
-void imprime_lista(Lista *l) {
+void imprime_lista(Lista l) {
     if (lista_vazia(l) == 1) {
         printf("\n Lista VAZIA! ");
         return;
@@ -364,11 +364,13 @@ void imprime_lista(Lista *l) {
     int i;
     int tam;
     tamanho_lista(&l,&tam);
+    char n;
 
     for (i=1;i<=tam; i++) { //Não sei quantos elementos tem na lista
-        int n; // N representa o elemento presente na lista
-        get_elem_pos(&l, i);
-        printf(" %d ",n);
+        // N representa o elemento presente na lista
+
+        get_elem_pos(l, i, &n);
+        printf("%c",n);
         //printf("O %d elemento da lista eh %d\n",i,n);
 
     }
