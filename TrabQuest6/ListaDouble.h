@@ -20,6 +20,6 @@ int remove_maior(Lista *lst, double *elem);
 int insere_posicao(Lista *lst, int pos, double elem);
 Lista inverte(Lista* lst);
 void libera(Lista x);
-
+int tamanho_lista(Lista *lst, int *tam);
 
 #endif //LISTADOUBLE_H_INCLUDED
