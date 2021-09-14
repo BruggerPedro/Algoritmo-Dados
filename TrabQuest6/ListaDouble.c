@@ -1,4 +1,5 @@
-#include <stdio.h>
+#include <stddef.h>
+#include <stdlib.h>
 #include "ListaDouble.h"
 
 
@@ -240,7 +241,7 @@ Lista aux = *lst;
 if( ((*lst)->prox == NULL) && (*lst)->ant == NULL){ // Verifica se é nó unico
 
 if(aux->info == elem){ // Elemento passado é exatamente o presente no nó
-   remove_elemento(*lst,elem);
+   remove_elemento(&lst,elem);
 }else{ // Se o elemento for diferente
  return 1;
 }
@@ -256,7 +257,7 @@ do{
 remove_elemento(*lst,elem);
 aux = aux->prox;
 
-}while (aux->prox != NULL) // Repete até entrar no ultimo nó
+}while (aux->prox != NULL); // Repete até entrar no ultimo nó
 
 // Ultimo nó
 if(aux->info == elem){ // Elemento passado é exatamente o presente no nó
