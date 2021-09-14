@@ -2,29 +2,38 @@
 #include "ListaDouble.h"
 
 
-/* BASICAS              *           PEDIDAS NO EXERCICIO
-1 - cria lista   ok     *           - Remover todos ok
-2-  lista vazia    ok               - Remover maior ok
-3 - Lista cheia    ok                - Inserir na posição ok
-4 - insere  ok          *           - Inverter OK
-5 - remove ok
-6 - esvazia ok
-7 - apaga lista  ok
-8 - get elem pos  ok    *
-                        *
-*/
-
-/*lista_cheia, insere, remove, esvazia_lista, apaga_lista, get_elem_pos*/
-
 struct no{
-    double info; // Elemento
-    struct no *ant;
-    struct no *prox;
+    double info; // Elemento a ser inserido
+    struct no *ant; // Por ser dinamico, agora temos um ponteiro que "aponta" ao nó anterior
+    struct no *prox; // Por ser dinamico, agora temos um ponteiro que "aponta" ao proximo nó
 };
+
+//_______________________________________________________________________________________________________________
+
+/*
+Operação: cria_lista
+- Entrada: Sem entrada.
+  Pré-Condição: Sem pré-condições.
+- Processo: Cria uma lista e retorna o endereço de uma lista apontando pra NULL.
+- Saída: NULL
+- Pós-condição: Sem pós-condição.
+*/
 
 Lista cria_lista(){
     return NULL;
 }
+
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: lista_vazia;
+- Entrada: Endereço de uma lista.
+- Pré-Condição: Sem pré-condições.
+- Processo: Verifica se a lista está vazia.
+- Saída: 0 (Lista não está vazia), 1 (Lista vazia)
+- Pós-condição: Sem pós-condição.
+*/
+
 
 int lista_vazia (Lista lst) {
        if (lst == NULL)
@@ -42,7 +51,18 @@ int lista_vazia (Lista lst) {
 //}
 // _______________________________________________________________________________________________________________
 
-int insere_elemento(Lista *lst, int elem)
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: insere_elem;
+- Entrada: Endereço do endereço de uma lista e o elemento (double) a ser inserido.
+- Pré-Condição: Lista existir (Endereço ser valido) e elemento ser um double.
+- Processo: Insere (de forma não ordenada) o elemento na lista fornecida.
+- Saída: 0 (Lista não existe), 1 (Elemento inserido com sucesso).
+- Pós-condição: O elemento foi inserido na lista de forma não ordenada.
+*/
+
+int insere_elemento(Lista *lst, double elem)
 {
     // Aloca um novo nó e preenche campo info
     Lista N = (Lista) malloc(sizeof(struct no));
@@ -58,7 +78,15 @@ int insere_elemento(Lista *lst, int elem)
     return 1;
 }
 
-int remove_elemento(Lista *lst, int elem)
+/*
+Operação: remove_elem;
+- Entrada: Endereço do endereço de uma lista e o elemento (double) a ser removido.
+- Pré-Condição: Lista existir (Endereço ser valido) e elemento ser um double.
+- Processo: Remove o elemento na lista fornecida.
+- Saída: 0 (Lista vazia ou elemento não presente na lista), 1 (Elemento removido com sucesso).
+- Pós-condição: O elemento foi removido na lista.
+*/
+int remove_elemento(Lista *lst, double elem)
 {
     if (lista_vazia(*lst)==1) // Trata lista vazia
             return 0;
@@ -79,6 +107,17 @@ int remove_elemento(Lista *lst, int elem)
     return 1;
 }
 
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: apaga_lista
+- Entrada: Endereço do endereço de uma lista
+- Pré-Condição: endereço ser válido (primeiro endereço “ponteiro de ponteiro”)
+- Processo: liberar a instancia da lista e apagar o seu endereço
+- Saída: 1 (sucesso) ou 0 (falha)
+- Pós-condição: instancia da lista liberada.
+*/
+
 void apaga_lista(Lista *lst)
 {
     Lista aux = *lst;
@@ -91,6 +130,17 @@ void apaga_lista(Lista *lst)
         free(*lst);
         lst=NULL;
 }
+
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: esvazia_lista
+- Entrada: Endereço do endereço de uma lista
+- Pré-Condição: Lista existir (Endereço ser valido)
+- Processo: Esvaziar a lista.
+- Saída: 1 (sucesso) ou 0 (falha)
+- Pós-condição: a instancia da lista no estado de vazia
+*/
 
 int esvazia_lista(Lista *lst){
 
@@ -122,6 +172,17 @@ int esvazia_lista(Lista *lst){
 
 }
 
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: get_elem_pos
+- Entrada: Endereço de uma lista, posição a obter o elemento e uma variavel para receber a informação da dita posição.
+-  Pré-Condição: Lista existir (Endereço ser valido), a lista não estar vazia e posição ser maior que 0.
+- Processo: Através da posição fornecida, busca-se na lista o elemento correspondente aquela posição e o retorna atraves da variavel fornecida.
+- Saída: 1 (sucesso) ou 0 (falha)
+- Pós-condição: A variavel recebe o valor do elemento presente na posição fornecida.
+*/
+
 int get_elem_pos(Lista lst, int pos)
 {
     if (lst == NULL)
@@ -140,7 +201,32 @@ int get_elem_pos(Lista lst, int pos)
     }
 }
 
-// Remover todos
+
+// _______________________________________________________________________________________________________________
+
+// Operações especiais:
+// _______________________________________________________________________________________________________________
+
+
+// _______________________________________________________________________________________________________________
+
+
+// _______________________________________________________________________________________________________________
+
+
+
+// _______________________________________________________________________________________________________________
+
+
+/*
+Operação: remove_todos;
+- Entrada: Endereço do endereço de uma lista e o elemento (double) a ser removido.
+- Pré-Condição: Lista existir (Endereço ser valido) e elemento ser um double.
+- Processo: Remove todas as ocorrencias do elemento na lista.
+- Saída: 0 (Lista vazia), 1 (Elemento removido com sucesso).
+- Pós-condição: O elemento foi removido na lista.
+*/
+
 int remove_todos(Lista *lst, double *elem){
 
 if(lst == NULL) { // Se o ponteiro estiver apontando NULL, a lista está vazia
@@ -179,6 +265,21 @@ if(aux->info == elem){ // Elemento passado é exatamente o presente no nó
 }else{ // Se o elemento for diferente
  return 1;
 }
+}
+// _______________________________________________________________________________________________________________
+
+
+// _______________________________________________________________________________________________________________
+
+
+/*
+Operação: remove_todos;
+- Entrada: Endereço do endereço de uma lista e o elemento (double) a ser removido.
+- Pré-Condição: Lista existir (Endereço ser valido) e elemento ser um double.
+- Processo: Remove o maior elemento da lista.
+- Saída: 0 (Lista vazia), 1 (Elemento removido com sucesso).
+- Pós-condição: O elemento foi removido na lista.
+*/
 
 
 int remove_maior(Lista *lst, double *elem){
@@ -223,7 +324,18 @@ int remove_maior(Lista *lst, double *elem){
     return 1;
 }
 
-int insere_posicao(Lista *lst, int pos, char elem){
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: insere_posicao;
+- Entrada: Endereço do endereço de uma lista, a posicao, e o elemento (double) a ser inserido.
+- Pré-Condição: Lista existir (Endereço ser valido), ter a posição na lista  e elemento ser um float.
+- Processo: Insere na posição fornecida o elemento na lista.
+- Saída: 0 (Lista não existe ou lista vazia), 1 (Elemento inserido com sucesso).
+- Pós-condição: O elemento foi inserido na lista na posição fornecida.
+*/
+
+int insere_posicao(Lista *lst, int pos, double elem){
 
     if(lst == NULL){
     return 0;
@@ -269,10 +381,21 @@ int insere_posicao(Lista *lst, int pos, char elem){
    return 1;
 }
 
+// _______________________________________________________________________________________________________________
+
+/*
+Operação: inverte;
+- Entrada: Endereço do endereço de uma lista.
+- Pré-Condição: Lista existir (Endereço ser valido).
+- Processo: Recebe uma lista L e retorna uma nova lista L2, formada pelos elementos de L na
+ordem inversa.
+- Saída:  NULL(Caso a listas fornecida não existe) ou ponteiro que referencia o local onde foi criada a lista.
+- Pós-condição: Sem pós-condição.
+*/
 
 Lista inverte(Lista* lst){
     if(lst == NULL || lista_vazia(*lst)== 1){
-        return 0;
+        return NULL;
     }
 
     Lista *l2;
