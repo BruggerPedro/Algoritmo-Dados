@@ -240,8 +240,8 @@ Lista aux = *lst;
 // Nó unico
 if( ((*lst)->prox == NULL) && (*lst)->ant == NULL){ // Verifica se é nó unico
 
-if(aux->info == elem){ // Elemento passado é exatamente o presente no nó
-   remove_elemento(&lst,elem);
+if(aux->info == *elem){ // Elemento passado é exatamente o presente no nó
+  remove_elemento(&lst,*elem);
 }else{ // Se o elemento for diferente
  return 1;
 }
@@ -249,19 +249,19 @@ if(aux->info == elem){ // Elemento passado é exatamente o presente no nó
 
 do{
 
-  if(aux->info != elem){ // Verificação, se a info do aux é diferente
+  if(aux->info != *elem){ // Verificação, se a info do aux é diferente
   aux = aux->prox; //Movimentar o aux
 }
 
 // Achou um nó com o elemento
-remove_elemento(*lst,elem);
+remove_elemento(&lst,*elem);
 aux = aux->prox;
 
 }while (aux->prox != NULL); // Repete até entrar no ultimo nó
 
 // Ultimo nó
-if(aux->info == elem){ // Elemento passado é exatamente o presente no nó
-   remove_elemento(*lst,elem);
+if(aux->info == *elem){ // Elemento passado é exatamente o presente no nó
+   remove_elemento(&lst,*elem);
    return 1;
 }else{ // Se o elemento for diferente
  return 1;
@@ -441,3 +441,24 @@ void libera(Lista x){
 }
 
 // _______________________________________________________________________________________________________________
+// _______________________________________________________________________________________________________________
+
+int tamanho_lista(Lista *lst, int *tam){
+if (lista_vazia(*lst) == 1){   // Se a lista estiver vazia
+ tam = 0;
+ return 0; // Quer inserir na posição de uma lista vazia
+}
+int tamanho = 0; //Contador de nós da lista.
+Lista aux = (*lst)->prox; //Faz aux apontar para o 1° nó
+
+
+while(aux != (*lst)){ // Enquanto ponteiro for != de NULL
+  tamanho++;
+  aux = aux->prox;
+}
+// chegando aqui, o aux tá na ultima posição, logo, só incrementamos mais uma vez.
+tamanho++;
+
+tam = tamanho;
+return 1;
+}
