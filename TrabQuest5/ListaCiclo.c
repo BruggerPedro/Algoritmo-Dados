@@ -186,21 +186,27 @@ Operação: get_elem_pos
 */
 
 
-char get_elem_pos(Lista lst, int pos)
-{
-    if (lst == NULL)
+int get_elem_pos(Lista lst, int pos, char *elem){
+
+
+    if (lst == NULL){
         return 0;
-    else
-    {
-        Lista aux = lst->prox;
-        for(int i = 1; i<pos; i++)
-            {
-                if(aux->prox != lst || i==pos-1)
-                    aux=aux->prox;
-                else
-                    return 0;
-            }
-        return aux->info;
+   } else{
+         Lista aux = lst->prox; //Aux aponta para o primeiro nó
+         if(pos == 1){
+          *elem = aux->info;
+         }
+
+         int contador = 1;
+
+         while(contador<pos){
+           aux = aux->prox;
+           contador++;
+         }
+
+         // Aux aponta para o nó desejado
+        *elem = aux->info;
+
     }
 }
 
@@ -442,3 +448,24 @@ void libera(Lista x){
 }
 
 // _______________________________________________________________________________________________________________
+
+int tamanho_lista(Lista *lst, int *tam){
+if (lista_vazia(*lst) == 1){   // Se a lista estiver vazia
+ tam = 0;
+ return 0; // Quer inserir na posição de uma lista vazia
+}
+int tamanho = 0; //Contador de nós da lista.
+Lista aux = (*lst)->prox; //Faz aux apontar para o 1° nó
+
+
+while(aux != (*lst)){ // Enquanto ponteiro for != de NULL
+  tamanho++;
+  aux = aux->prox;
+}
+// chegando aqui, o aux tá na ultima posição, logo, só incrementamos mais uma vez.
+tamanho++;
+
+tam = tamanho;
+return 1;
+}
+
