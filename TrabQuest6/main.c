@@ -34,7 +34,7 @@ int main() {
             printf("\n [4] Inserir um elemento na lista");
             printf("\n [5] Remover um elemento na lista");
             printf("\n [6] Remove todas as ocorrências de um elemento da lista ");
-            printf("\n [7] insira o elemento em uma posição indicada. ");
+            printf("\n [7] Insira o elemento em uma posição indicada. ");
             printf("\n [8] Remove o maior elemento da lista.");
             printf("\n [9] Inverte a lista");
             printf("\n [10] Imprimir a lista");
@@ -120,13 +120,13 @@ int main() {
             case 6:{ // Remove todas as ocorrências de um elemento da lista
 
                 double n; //Elemento digitado
-                printf("\n Digite o elemento (float) a ser inserido na lista: ");
+                printf("\n Digite o elemento (float) a ser excluido na lista: ");
                 scanf("%f", &n);
 
                     if ((remove_todos(&l, &n)) == 0)
-                        printf("\n Falha ao inserir no inicio da lista 1 ");
+                        printf("\n Falha ao excluir os elementos da lista 1 ");
                     else
-                        printf("\n O elemento %f foi inserido com sucesso no inicio da lista 1",n);
+                        printf("\n Os elemento %f foram excluido com sucesso da lista 1",n);
                     break;
 
                     }
@@ -159,7 +159,7 @@ int main() {
                         printf("\n A lista nao existe! Nao foi possivel remover no fim!. ");
                         break;
                     } else {
-                        printf("\n O elemento %f foi removido com sucesso!.", n);
+                        printf("\n Os elementos %f foram removido com sucesso!.", n);
                         break;
                     }
 
@@ -180,7 +180,7 @@ int main() {
             case 10:{ // Imprimir
 
 
-                    imprime_lista(l); // Interface não é feita no TAD.
+                    imprime_lista(&l); // Interface não é feita no TAD.
                     break;
 
                     }
@@ -218,12 +218,13 @@ void imprime_lista(Lista *l) {
 
     int i;
     int tam;
+    double n;
     tamanho_lista(&l,&tam);
 
     for (i=1;i<=tam; i++) { //Não sei quantos elementos tem na lista
         int n; // N representa o elemento presente na lista
         get_elem_pos(&l, i);
-        printf(" %d ",n);
+        printf(" %f ",n);
         //printf("O %d elemento da lista eh %d\n",i,n);
 
     }
